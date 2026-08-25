@@ -9,26 +9,7 @@ import { SITE_TITLE } from '../consts';
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Recipes</HeaderLink>
-			<HeaderLink href="/about" class="nav-flag-link">
-				<svg class="flag-icon" viewBox="0 0 900 600" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
-					<!-- Background tricolor: White, Blue, Red -->
-					<rect width="900" height="600" fill="#EE1C25"/>
-					<rect width="900" height="400" fill="#0B4EA2"/>
-					<rect width="900" height="200" fill="#FFFFFF"/>
-					<!-- Slovak Coat of Arms -->
-					<g transform="translate(180, 75) scale(0.6)">
-						<path d="M 0 0 C 400 0 400 350 200 600 C 0 350 0 0 0 0 Z" fill="#EE1C25" stroke="#FFFFFF" stroke-width="24"/>
-						<!-- Three blue mountains -->
-						<path d="M 50 480 C 100 400 150 400 200 480 C 250 400 300 400 350 480 L 350 560 C 200 600 200 600 50 560 Z" fill="#0B4EA2"/>
-						<path d="M 120 440 C 160 340 240 340 280 440 Z" fill="#0B4EA2"/>
-						<!-- Double cross -->
-						<path d="M 185 140 H 215 V 450 H 185 Z" fill="#FFFFFF"/>
-						<path d="M 140 200 H 260 V 225 H 140 Z" fill="#FFFFFF"/>
-						<path d="M 115 280 H 285 V 305 H 115 Z" fill="#FFFFFF"/>
-					</g>
-				</svg>
-				<span>About</span>
-			</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 	</nav>
 </header>
@@ -79,17 +60,5 @@ import { SITE_TITLE } from '../consts';
 	nav a.active {
 		color: #1A1917;
 		border-bottom-color: var(--accent-green, #23372B);
-	}
-	.nav-flag-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.45rem;
-	}
-	.flag-icon {
-		border-radius: 2px;
-		box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
-		display: inline-block;
-		vertical-align: middle;
-		flex-shrink: 0;
 	}
 </style>
