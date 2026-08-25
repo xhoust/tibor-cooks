@@ -5,7 +5,14 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<div class="brand">
+			<a href="/" class="brand-link">
+				<span class="brand-title">{SITE_TITLE}</span>
+				<span class="brand-tagline">CULINARY ARCHIVE &bull; D.C.</span>
+			</a>
+		</div>
+
+		<!-- Tactile Pill Track -->
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Recipes</HeaderLink>
@@ -17,22 +24,9 @@ import { SITE_TITLE } from '../consts';
 <style>
 	header {
 		margin: 0;
-		padding: 0 1em;
-		background: var(--bg-main, #FDFBF7);
-		border-bottom: 1px solid var(--border-subtle, #EAE6DE);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.1em;
-		font-family: var(--font-serif, Georgia, serif);
-		letter-spacing: -0.01em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-		color: #1A1917;
-		font-weight: 600;
+		padding: 0 1.5rem;
+		background: #FDFBF7;
+		border-bottom: 1px solid #EAE6DE;
 	}
 	nav {
 		max-width: 1080px;
@@ -40,25 +34,74 @@ import { SITE_TITLE } from '../consts';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 1.25em 0;
+		padding: 1.25rem 0;
 	}
-	.internal-links {
+	.brand-link {
 		display: flex;
-		align-items: center;
-		gap: 1.5em;
-	}
-	nav a {
-		padding: 0.25em 0;
-		color: var(--text-muted, #5A554E);
-		border-bottom: 2px solid transparent;
+		flex-direction: column;
 		text-decoration: none;
-		font-size: 0.92rem;
-		font-weight: 500;
-		transition: color 0.2s ease, border-color 0.2s ease;
+		line-height: 1.1;
+		gap: 0.35rem;
 	}
-	nav a:hover,
-	nav a.active {
+	.brand-title {
+		font-family: Georgia, serif;
+		font-size: 1.35rem;
+		font-weight: 700;
+		letter-spacing: -0.01em;
 		color: #1A1917;
-		border-bottom-color: var(--accent-green, #23372B);
+	}
+	.brand-tagline {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.65rem;
+		letter-spacing: 0.12em;
+		color: #8C827A;
+		font-weight: 600;
+	}
+
+	/* Tactile Segmented Track */
+	.internal-links {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		background: #EFECE4;
+		padding: 0.3rem 0.35rem;
+		border-radius: 8px;
+		border: 1px solid #DFD9CE;
+		box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.06);
+	}
+
+	/* Tactile Button Links */
+	.internal-links :global(a) {
+		padding: 0.45rem 1rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.82rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: #5A554E;
+		text-decoration: none;
+		border-radius: 5px;
+		border: 1px solid transparent;
+		transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+		user-select: none;
+	}
+
+	.internal-links :global(a:hover) {
+		color: #1A1917;
+		background: rgba(255, 255, 255, 0.5);
+	}
+
+	/* Active Pressed Pill Card */
+	.internal-links :global(a.active) {
+		color: #1A1917 !important;
+		background: #FFFFFF !important;
+		border-color: #D3CCC0 !important;
+		box-shadow: 
+			0 1px 0 rgba(255, 255, 255, 0.9) inset,
+			0 2px 4px rgba(0, 0, 0, 0.06) !important;
+	}
+
+	/* Click Feedback */
+	.internal-links :global(a:active) {
+		transform: translateY(1px);
 	}
 </style>
