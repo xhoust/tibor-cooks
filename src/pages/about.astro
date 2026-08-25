@@ -4,14 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
 
-const milestones = [
-	{ year: '1991', title: 'Born in Slovakia', desc: 'Central European roots.' },
-	{ year: '2007', title: 'Moved to Ireland', desc: '18 formative years.' },
-	{ year: '2020', title: 'Culinary Career', desc: 'Entering the craft.' },
-	{ year: '2025', title: 'Michelin Star', desc: 'The Morrison Room under Adam Nevin.' },
-	{ year: '2026', title: 'Resident Chef', desc: 'Embassy in D.C.' },
-];
-
 const galleryImages = [
 	{ src: '/reel/01.webp', caption: 'Rolling šúľance with embassy staff' },
 	{ src: '/reel/02.webp', caption: 'Fresh lúpačky with poppy seeds' },
@@ -31,13 +23,13 @@ const galleryImages = [
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`About | ${SITE_TITLE}`} description="Culinary background, personal journey, and contact information for Tibor Markovič." />
+		<BaseHead title={`About | ${SITE_TITLE}`} description="Culinary background, technical philosophy, and contact information for Tibor Markovič." />
 	</head>
 	<body>
 		<Header />
 		<main class="about-container">
 			<section class="about-header">
-				<span class="eyebrow">Biography &amp; Background</span>
+				<span class="eyebrow">Biography &amp; Specifications</span>
 				<h1>Tibor Markovič</h1>
 				<p class="role-lead">Resident Chef &bull; Embassy of the Slovak Republic, Washington, D.C.</p>
 			</section>
@@ -45,18 +37,18 @@ const galleryImages = [
 			<section class="about-grid">
 				<div class="bio-prose">
 					<p>
-						Tibor Cooks is a personal recipe journal and digital notebook. It bridges classical fine-dining standards with traditional Slovak comfort food and family recipes passed down over generations.
+						Tibor Cooks is a dedicated digital culinary archive and working formulation ledger. It bridges classical fine-dining kitchen standards with traditional Slovak and Central European gastronomy.
 					</p>
 					<p>
-						With a professional foundation forged in Ireland—including classical brigade service at <strong>The Morrison Room</strong>—my approach centers on respecting the craft, ingredient integrity, and sharing dishes that bring genuine joy to the table.
+						With a professional foundation shaped in Ireland—including classical brigade service at <strong>The Morrison Room</strong>—my approach centers on rigorous technical discipline, ingredient integrity, and precise, repeatable metric documentation.
 					</p>
 					<p>
-						Currently serving as Resident Chef at the Embassy of the Slovak Republic in Washington, D.C., these pages share recipes cooked for diplomatic service alongside the nostalgic dishes I love making at home.
+						Currently serving as Resident Chef at the Embassy of the Slovak Republic in Washington, D.C., these records document standardized kitchen formulations for diplomatic service, regional preservation, and modern culinary execution.
 					</p>
 
 					<div class="contact-card">
-						<h3>Professional Inquiries &amp; Say Hello</h3>
-						<p>Open for culinary questions, embassy event inquiries, or collaborations.</p>
+						<h3>Professional Inquiries &amp; Contact</h3>
+						<p>Open for culinary consultations, diplomatic event specifications, and recipe inquiries.</p>
 						<div class="contact-links">
 							<a href="mailto:hello@tiborcooks.com" class="btn-contact">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -84,35 +76,11 @@ const galleryImages = [
 				</div>
 			</section>
 
-			<!-- Horizontal Roadmap Strip directly above the Brigade Photo -->
-			<section class="roadmap-section">
-				<div class="timeline-title-row">
-					<h2>Culinary Roadmap</h2>
-					<span class="timeline-sub">Milestones &amp; Journey</span>
-				</div>
-				<div class="horizontal-timeline">
-					{
-						milestones.map((m) => (
-							<div class="timeline-node">
-								<div class="node-header">
-									<span class="timeline-year">{m.year}</span>
-									<span class="node-dot"></span>
-								</div>
-								<div class="node-body">
-									<h3>{m.title}</h3>
-									<p>{m.desc}</p>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</section>
-
 			<section class="foundation-feature">
 				<div class="wide-photo-card">
 					<img src="/reel/12.webp" alt="The Morrison Room Kitchen Brigade" class="team-photo" />
 					<div class="wide-caption">
-						<span>The Morrison Room Brigade</span> &bull; <em>The kitchen and the team that made me into the chef I am today.</em>
+						<span>The Morrison Room Brigade</span> &bull; <em>Classical fine dining foundation & brigade discipline</em>
 					</div>
 				</div>
 			</section>
@@ -179,7 +147,7 @@ const galleryImages = [
 				grid-template-columns: 1.2fr 1fr;
 				gap: 3.5rem;
 				align-items: start;
-				margin-bottom: 3.5rem;
+				margin-bottom: 4.5rem;
 			}
 			.bio-prose p {
 				font-size: 1.05rem;
@@ -261,93 +229,6 @@ const galleryImages = [
 				background: #EAE6DE;
 				color: #1A1917;
 			}
-
-			/* Roadmap Styles */
-			.roadmap-section {
-				padding: 3rem 0 3.5rem 0;
-				border-top: 1px solid var(--border-card);
-				margin-bottom: 2rem;
-			}
-			.timeline-title-row {
-				display: flex;
-				justify-content: space-between;
-				align-items: baseline;
-				margin-bottom: 2rem;
-				flex-wrap: wrap;
-				gap: 0.5rem;
-			}
-			.timeline-title-row h2 {
-				font-size: 1.75rem;
-				margin: 0;
-			}
-			.timeline-sub {
-				font-family: var(--font-mono);
-				font-size: 0.76rem;
-				color: var(--accent-copper);
-				letter-spacing: 0.06em;
-				text-transform: uppercase;
-			}
-			.horizontal-timeline {
-				display: grid;
-				grid-template-columns: repeat(5, 1fr);
-				gap: 1.25rem;
-				position: relative;
-			}
-			.timeline-node {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-			}
-			.node-header {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				margin-bottom: 1rem;
-			}
-			.node-header::after {
-				content: '';
-				position: absolute;
-				top: 38px;
-				left: 6px;
-				right: -1.25rem;
-				height: 1px;
-				background: var(--border-card);
-				z-index: 0;
-			}
-			.timeline-node:last-child .node-header::after {
-				display: none;
-			}
-			.timeline-year {
-				font-family: var(--font-mono);
-				font-size: 0.85rem;
-				font-weight: 700;
-				color: var(--accent-copper);
-				margin-bottom: 0.6rem;
-			}
-			.node-dot {
-				width: 13px;
-				height: 13px;
-				border-radius: 50%;
-				background: var(--accent-green);
-				border: 2px solid var(--bg-main);
-				box-shadow: 0 0 0 1px var(--border-card);
-				z-index: 1;
-			}
-			.node-body h3 {
-				font-size: 0.95rem;
-				margin: 0 0 0.25rem 0;
-				color: #1A1917;
-				font-weight: 600;
-				line-height: 1.3;
-			}
-			.node-body p {
-				font-size: 0.82rem;
-				color: var(--text-muted);
-				line-height: 1.45;
-				margin: 0;
-			}
-
 			.foundation-feature {
 				margin-bottom: 4.5rem;
 			}
@@ -454,13 +335,6 @@ const galleryImages = [
 				}
 				h1 {
 					font-size: 2.4rem;
-				}
-				.horizontal-timeline {
-					grid-template-columns: 1fr;
-					gap: 1.75rem;
-				}
-				.node-header::after {
-					display: none;
 				}
 			}
 		</style>
