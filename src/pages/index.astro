@@ -5,37 +5,31 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 
-const allPosts = await getCollection('blog');
-const posts = allPosts.sort((a, b) => {
-	const dateA = a.data.pubDate ? new Date(a.data.pubDate).valueOf() : 0;
-	const dateB = b.data.pubDate ? new Date(b.data.pubDate).valueOf() : 0;
-	return dateB - dateA;
-});
+const posts = (await getCollection('blog')).sort(
+	(a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
+);
 
-const featuredPosts = posts.slice(0, 3);
-
-// Highlighted blog posts / stories
-const featuredStories = [
+const journalEntries = [
 	{
+		tag: 'LIFE IN D.C.',
+		num: 'Entry 01',
 		title: 'Settling Into Washington, D.C.',
-		desc: 'First impressions, adjusting from Ireland to the District, and building a routine on embassy grounds.',
-		date: 'Dispatch 01',
-		tag: 'Life in D.C.',
-		link: '/blog',
+		excerpt: 'First impressions, adjusting from European kitchens to the District, and building a routine on embassy grounds.',
+		href: '/journal',
 	},
 	{
+		tag: 'TRAVEL',
+		num: 'Entry 02',
 		title: 'Road Trip Across the American West',
-		desc: 'Traveling through Utah, Arizona, and California—national parks, open highways, and roadside diners.',
-		date: 'Dispatch 02',
-		tag: 'Travel',
-		link: '/blog',
+		excerpt: 'Traveling through Utah, Arizona, and California—national parks, open highways, and roadside diners.',
+		href: '/journal',
 	},
 	{
+		tag: 'EMBASSY KITCHEN',
+		num: 'Entry 03',
 		title: 'Friday Staff Lunches at the Embassy',
-		desc: 'Bringing the team together over rotating Central European menus, prep workflow, and staff favorites.',
-		date: 'Dispatch 03',
-		tag: 'Embassy Kitchen',
-		link: '/blog',
+		excerpt: 'Bringing the team together over rotating Central European menus, prep workflow, and staff favorites.',
+		href: '/journal',
 	},
 ];
 ---
@@ -43,416 +37,480 @@ const featuredStories = [
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`${SITE_TITLE} | Heritage Recipes & Journal`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main class="home-container">
-			<!-- Hero Statement with Portrait -->
+		<main>
+			<!-- Two-Column Editorial Hero -->
 			<section class="hero-section">
-				<div class="hero-grid">
-					<div class="hero-content">
-						<span class="eyebrow">Washington, D.C. &bull; Kitchen Notes &amp; Stories</span>
-						<h1 class="hero-title">A taste of home, straight from D.C.</h1>
-						<p class="hero-description">
-							A collection of traditional Slovak recipes I grew up with—taught by the great cooks in my family and fueled by nostalgia—alongside personal global favorites, embassy kitchen notes, and bits of life across the USA.
-						</p>
-						<div class="hero-actions">
-							<a href="/blog" class="btn-primary">Browse Recipes</a>
-							<a href="/about" class="btn-secondary">About Me &amp; Gallery</a>
-						</div>
+				<div class="hero-left">
+					<span class="eyebrow">WASHINGTON, D.C. &bull; KITCHEN NOTES & STORIES</span>
+					<h1 class="hero-title">A taste of home, straight from D.C.</h1>
+					<p class="hero-lead">
+						A collection of traditional Slovak recipes I grew up with—taught by the great cooks in my family and fueled by nostalgia—alongside personal global favorites, embassy kitchen notes, and bits of life across the USA.
+					</p>
+					<div class="hero-actions">
+						<a href="/blog" class="btn btn-primary">Browse Recipes</a>
+						<a href="/about" class="btn btn-secondary">About Me & Gallery</a>
 					</div>
-					<div class="hero-image-wrap">
-						<div class="hero-image-card">
-							<img src="/reel/tibor.webp" alt="Tibor Markovič" />
-							<div class="hero-badge">Resident Chef &bull; Embassy of Slovakia</div>
+				</div>
+
+				<div class="hero-right">
+					<div class="portrait-card">
+						<div class="portrait-img-wrap">
+							<img src="/reel/tibor.webp" alt="Tibor Markovič - Resident Chef" width="440" height="520" />
+						</div>
+						<div class="portrait-caption">
+							<span>Resident Chef &bull; Embassy of Slovakia</span>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Latest Blog Posts & Dispatches Section -->
-			<section class="stories-section">
+			<hr class="section-divider" />
+
+			<!-- Latest Stories / Journal Section -->
+			<section class="journal-section">
 				<div class="section-header">
 					<div>
-						<span class="eyebrow">Dispatches &amp; Journal</span>
-						<h2>Latest Stories</h2>
+						<span class="eyebrow">JOURNAL &amp; FIELD NOTES</span>
+						<h2 class="section-title">Latest Stories</h2>
 					</div>
-					<a href="/blog" class="link-all">View All Entries &rarr;</a>
+					<a href="/journal" class="view-all-link">View All Entries &rarr;</a>
 				</div>
 
-				<div class="stories-grid">
+				<div class="journal-grid">
 					{
-						featuredStories.map((story) => (
-							<a href={story.link} class="story-card">
-								<div class="story-header">
-									<span class="story-tag">{story.tag}</span>
-									<span class="story-date">{story.date}</span>
+						journalEntries.map((item) => (
+							<article class="journal-preview-card">
+								<div class="journal-meta">
+									<span class="journal-tag">{item.tag}</span>
+									<span class="journal-num">{item.num}</span>
 								</div>
-								<h3>{story.title}</h3>
-								<p>{story.desc}</p>
-								<span class="story-link-text">Read Dispatch &rarr;</span>
-							</a>
+								<h3 class="journal-card-title">{item.title}</h3>
+								<p class="journal-excerpt">{item.excerpt}</p>
+								<a href={item.href} class="card-action-link">Read Entry &rarr;</a>
+							</article>
 						))
 					}
 				</div>
 			</section>
+
+			<hr class="section-divider" />
 
 			<!-- Featured Recipes Section -->
-			<section class="featured-section">
+			<section class="recipes-section">
 				<div class="section-header">
 					<div>
-						<span class="eyebrow">Handpicked Selection</span>
-						<h2>Featured Recipes</h2>
+						<span class="eyebrow">HANDPICKED SELECTION</span>
+						<h2 class="section-title">Featured Recipes</h2>
 					</div>
-					<a href="/blog" class="link-all">View All Recipes &rarr;</a>
+					<a href="/blog" class="view-all-link">View All Recipes &rarr;</a>
 				</div>
 
-				<div class="featured-grid">
+				<div class="recipes-grid">
 					{
-						featuredPosts.map((post) => (
-							<a href={`/blog/${post.id}/`} class="recipe-card">
-								{post.data.heroImage ? (
-									<div class="card-image-wrap">
-										<img src={post.data.heroImage} alt={post.data.title} loading="lazy" />
+						posts.slice(0, 3).map((post) => (
+							<article class="recipe-two-tone-card">
+								<a href={`/blog/${post.id}/`} class="recipe-card-link">
+									<div class="card-top-banner">
+										<span class="recipe-badge">RECIPE</span>
 									</div>
-								) : (
-									<div class="card-placeholder-wrap">
-										<span class="card-badge-inline">Recipe</span>
+									<div class="card-body-content">
+										<h3 class="recipe-heading">{post.data.title}</h3>
+										{post.data.description && <p class="recipe-text">{post.data.description}</p>}
+										<span class="card-action-link">View Recipe &rarr;</span>
 									</div>
-								)}
-								<div class="card-body">
-									<h3>{post.data.title}</h3>
-									<p class="card-desc">{post.data.description}</p>
-									<span class="card-meta">View Recipe &rarr;</span>
-								</div>
-							</a>
+								</a>
+							</article>
 						))
 					}
 				</div>
 			</section>
 
-			<!-- Contact Banner -->
-			<section class="cta-banner">
-				<div class="cta-inner">
-					<h2>Inquiries &amp; Say Hello</h2>
-					<p>For questions about recipes, collaborations, or catering inquiries.</p>
-					<a href="mailto:hello@tiborcooks.com" class="btn-primary">hello@tiborcooks.com</a>
-				</div>
+			<!-- Inquiries & Contact Banner -->
+			<section class="inquiries-card">
+				<h2>Inquiries & Say Hello</h2>
+				<p>For questions about recipes, collaborations, or catering inquiries.</p>
+				<a href="mailto:hello@tiborcooks.com" class="btn btn-email">hello@tiborcooks.com</a>
 			</section>
 		</main>
 		<Footer />
 
 		<style>
-			.home-container {
+			main {
 				max-width: 1080px;
 				margin: 0 auto;
-				padding: 4rem 2rem 5rem 2rem;
+				padding: 3rem 1.5rem 6rem 1.5rem;
 			}
-			.hero-section {
-				padding: 2.5rem 0 4rem 0;
-				border-bottom: 1px solid var(--border-card);
-			}
-			.hero-grid {
-				display: grid;
-				grid-template-columns: 1.25fr 0.85fr;
-				gap: 3.5rem;
-				align-items: center;
-			}
+
 			.eyebrow {
-				font-family: var(--font-mono);
-				font-size: 0.74rem;
+				display: block;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.72rem;
 				letter-spacing: 0.12em;
 				text-transform: uppercase;
-				color: var(--accent-green);
+				color: #7A746B;
 				font-weight: 600;
-				display: block;
-				margin-bottom: 0.8rem;
+				margin-bottom: 0.85rem;
+			}
+
+			/* Hero Section */
+			.hero-section {
+				display: grid;
+				grid-template-columns: 1.35fr 0.65fr;
+				gap: 3rem;
+				align-items: center;
+				padding: 1.5rem 0 3.5rem 0;
 			}
 			.hero-title {
-				font-size: 3.1rem;
-				font-weight: 500;
-				letter-spacing: -0.025em;
-				line-height: 1.15;
-				margin: 0 0 1.25rem 0;
+				font-family: Georgia, serif;
+				font-size: 3.4rem;
+				line-height: 1.1;
+				font-weight: 700;
+				margin: 0 0 1.5rem 0;
 				color: #1A1917;
+				letter-spacing: -0.025em;
 			}
-			.hero-description {
-				font-size: 1.1rem;
+			.hero-lead {
+				font-size: 1.12rem;
 				line-height: 1.65;
-				color: #4A463F;
+				color: #5A554E;
 				margin: 0 0 2rem 0;
 			}
 			.hero-actions {
 				display: flex;
-				gap: 1rem;
-				flex-wrap: wrap;
+				gap: 0.85rem;
+				align-items: center;
 			}
-			.hero-image-wrap {
-				display: flex;
+
+			/* Tactile Buttons */
+			.btn {
+				display: inline-flex;
+				align-items: center;
 				justify-content: center;
+				padding: 0.65rem 1.35rem;
+				border-radius: 6px;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-weight: 600;
+				font-size: 0.88rem;
+				letter-spacing: 0.02em;
+				text-decoration: none;
+				user-select: none;
+				transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 			}
-			.hero-image-card {
-				position: relative;
+
+			.btn:active {
+				transform: translateY(1px);
+				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+			}
+
+			.btn-primary {
+				background: #23372B;
+				color: #FDFBF7;
+				border: 1px solid #1A2A21;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.15) inset,
+					0 2px 4px rgba(35, 55, 43, 0.18),
+					0 1px 2px rgba(0, 0, 0, 0.08);
+			}
+			.btn-primary:hover {
+				background: #1B2C22;
+				border-color: #121E18;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.2) inset,
+					0 4px 10px rgba(35, 55, 43, 0.25);
+			}
+
+			.btn-secondary {
+				background: #FFFFFF;
+				color: #1A1917;
+				border: 1px solid #D3CCC0;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 4px rgba(0, 0, 0, 0.05);
+			}
+			.btn-secondary:hover {
+				background: #F9F7F2;
+				border-color: #BEB6A8;
+				color: #000000;
+			}
+
+			/* Portrait Card */
+			.hero-right {
+				display: flex;
+				justify-content: flex-end;
+			}
+			.portrait-card {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
 				border-radius: 8px;
 				overflow: hidden;
-				border: 1px solid var(--border-card);
-				background: var(--card-bg);
-				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 4px 14px rgba(0, 0, 0, 0.04);
+				max-width: 280px;
 				width: 100%;
-				max-width: 340px;
 			}
-			.hero-image-card img {
+			.portrait-img-wrap {
 				width: 100%;
-				height: 380px;
+				aspect-ratio: 4 / 4.6;
+				overflow: hidden;
+				background: #F4F1EA;
+			}
+			.portrait-img-wrap img {
+				width: 100%;
+				height: 100%;
 				object-fit: cover;
 				display: block;
 			}
-			.hero-badge {
-				padding: 0.75rem 1rem;
-				font-family: var(--font-mono);
-				font-size: 0.72rem;
-				color: var(--text-muted);
-				background: #FDFBF7;
-				border-top: 1px solid var(--border-subtle);
+			.portrait-caption {
+				padding: 0.65rem 0.85rem;
 				text-align: center;
-				letter-spacing: 0.02em;
-			}
-			.btn-primary {
-				display: inline-flex;
-				align-items: center;
-				background: var(--accent-green);
-				color: #FDFBF7;
-				padding: 0.75rem 1.4rem;
-				border-radius: 4px;
-				font-size: 0.9rem;
-				font-weight: 600;
-				text-decoration: none;
-				transition: background 0.2s ease, transform 0.2s ease;
-			}
-			.btn-primary:hover {
-				background: #1B2921;
-				transform: translateY(-2px);
-			}
-			.btn-secondary {
-				display: inline-flex;
-				align-items: center;
-				background: transparent;
-				color: #2C2A26;
-				border: 1px solid var(--border-card);
-				padding: 0.75rem 1.4rem;
-				border-radius: 4px;
-				font-size: 0.9rem;
-				font-weight: 600;
-				text-decoration: none;
-				transition: background 0.2s ease, transform 0.2s ease;
-			}
-			.btn-secondary:hover {
-				background: #EAE6DE;
-				transform: translateY(-2px);
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.68rem;
+				color: #7A746B;
+				letter-spacing: 0.04em;
+				border-top: 1px solid #EAE6DE;
+				background: #FCFAF6;
 			}
 
-			/* Stories / Blog Section */
-			.stories-section {
-				padding: 4rem 0 3.5rem 0;
-				border-bottom: 1px solid var(--border-card);
+			.section-divider {
+				border: 0;
+				height: 1px;
+				background: #EAE6DE;
+				margin: 3.5rem 0 3.5rem 0;
 			}
+
+			/* Section Headers */
 			.section-header {
 				display: flex;
 				justify-content: space-between;
 				align-items: flex-end;
 				margin-bottom: 2rem;
 			}
-			.section-header h2 {
-				font-size: 2rem;
+			.section-title {
+				font-family: Georgia, serif;
+				font-size: 2.1rem;
 				margin: 0;
-			}
-			.link-all {
-				font-family: var(--font-mono);
-				font-size: 0.82rem;
-				color: var(--accent-green);
-				font-weight: 600;
-				text-decoration: none;
-			}
-			.link-all:hover {
-				text-decoration: underline;
-			}
-			.stories-grid {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 1.5rem;
-			}
-			.story-card {
-				background: #F6F3EC;
-				border: 1px solid var(--border-card);
-				border-radius: 6px;
-				padding: 1.75rem 1.5rem;
-				text-decoration: none;
-				color: inherit;
-				display: flex;
-				flex-direction: column;
-				transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-			}
-			.story-card:hover {
-				transform: translateY(-4px);
-				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-				border-color: var(--accent-green);
-			}
-			.story-header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 1rem;
-			}
-			.story-tag {
-				font-family: var(--font-mono);
-				font-size: 0.7rem;
-				font-weight: 600;
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
-				color: var(--accent-green);
-			}
-			.story-date {
-				font-family: var(--font-mono);
-				font-size: 0.72rem;
-				color: var(--text-muted);
-			}
-			.story-card h3 {
-				font-size: 1.25rem;
-				margin: 0 0 0.6rem 0;
-				line-height: 1.3;
 				color: #1A1917;
+				font-weight: 700;
+				letter-spacing: -0.015em;
 			}
-			.story-card p {
-				font-size: 0.9rem;
-				color: var(--text-muted);
-				line-height: 1.6;
-				margin: 0 0 1.25rem 0;
-				flex-grow: 1;
-			}
-			.story-link-text {
-				font-family: var(--font-mono);
-				font-size: 0.78rem;
-				color: var(--accent-copper);
+			.view-all-link {
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.82rem;
+				color: #1A1917;
+				text-decoration: none;
 				font-weight: 600;
+			}
+			.view-all-link:hover {
+				color: #B24C24;
 			}
 
-			/* Featured Recipes Section */
-			.featured-section {
-				padding: 4rem 0;
+			/* Journal Grid */
+			.journal-section {
+				margin-bottom: 2rem;
 			}
-			.featured-grid {
+			.journal-grid {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 				gap: 1.5rem;
 			}
-			.recipe-card {
-				background: var(--card-bg);
-				border: 1px solid var(--border-card);
-				border-radius: 6px;
+			.journal-preview-card {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
+				border-radius: 8px;
+				padding: 1.75rem 1.6rem;
+				display: flex;
+				flex-direction: column;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
+			}
+			.journal-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1.25rem;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.72rem;
+			}
+			.journal-tag {
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				font-weight: 700;
+				color: #2C2A26;
+			}
+			.journal-num {
+				color: #8C827A;
+			}
+			.journal-card-title {
+				font-family: Georgia, serif;
+				font-size: 1.35rem;
+				line-height: 1.25;
+				font-weight: 700;
+				margin: 0 0 0.85rem 0;
+				color: #1A1917;
+			}
+			.journal-excerpt {
+				font-size: 0.92rem;
+				line-height: 1.6;
+				color: #5A554E;
+				margin: 0 0 1.5rem 0;
+				flex-grow: 1;
+			}
+
+			/* Action Links */
+			.card-action-link {
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.82rem;
+				color: #B24C24;
+				text-decoration: none;
+				font-weight: 600;
+				display: inline-block;
+			}
+			.card-action-link:hover {
+				text-decoration: underline;
+			}
+
+			/* Two-Tone Recipe Cards */
+			.recipes-section {
+				margin-bottom: 5rem;
+			}
+			.recipes-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+			}
+			.recipe-two-tone-card {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
+				border-radius: 8px;
 				overflow: hidden;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			.recipe-two-tone-card:hover {
+				transform: translateY(-2px);
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 6px 18px rgba(0, 0, 0, 0.06);
+			}
+			.recipe-card-link {
 				text-decoration: none;
 				color: inherit;
 				display: flex;
 				flex-direction: column;
-				transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-			}
-			.recipe-card:hover {
-				transform: translateY(-4px);
-				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-				border-color: var(--accent-green);
-			}
-			.card-image-wrap {
-				position: relative;
-				width: 100%;
-				height: 190px;
-				background: #EAE6DE;
-				overflow: hidden;
-			}
-			.card-image-wrap img {
-				width: 100%;
 				height: 100%;
-				object-fit: cover;
-				display: block;
 			}
-			.card-placeholder-wrap {
-				height: 85px;
-				background: linear-gradient(135deg, #F0ECE1 0%, #E2DDD2 100%);
-				border-bottom: 1px solid var(--border-subtle);
-				padding: 1.25rem;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
+			.card-top-banner {
+				background: #E8E2D7;
+				padding: 1.25rem 1.6rem;
+				border-bottom: 1px solid #DFD9CE;
 			}
-			.card-badge-inline {
-				background: var(--accent-green);
+			.recipe-badge {
+				display: inline-block;
+				background: #23372B;
 				color: #FDFBF7;
-				font-family: var(--font-mono);
-				font-size: 0.68rem;
-				padding: 0.28rem 0.6rem;
-				border-radius: 3px;
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
-				font-weight: 600;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.65rem;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				padding: 0.3rem 0.55rem;
+				border-radius: 4px;
+				border: 1px solid #1B2C22;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
 			}
-			.card-body {
-				padding: 1.5rem 1.25rem;
+			.card-body-content {
+				padding: 1.75rem 1.6rem;
 				display: flex;
 				flex-direction: column;
 				flex-grow: 1;
 			}
-			.card-body h3 {
-				font-size: 1.2rem;
-				margin: 0 0 0.5rem 0;
-				line-height: 1.3;
+			.recipe-heading {
+				font-family: Georgia, serif;
+				font-size: 1.35rem;
+				line-height: 1.25;
+				font-weight: 700;
+				margin: 0 0 0.85rem 0;
+				color: #1A1917;
 			}
-			.card-desc {
-				font-size: 0.88rem;
-				color: var(--text-muted);
+			.recipe-text {
+				font-size: 0.92rem;
 				line-height: 1.55;
-				margin: 0 0 1.25rem 0;
+				color: #5A554E;
+				margin: 0 0 1.5rem 0;
 				flex-grow: 1;
 			}
-			.card-meta {
-				font-family: var(--font-mono);
-				font-size: 0.75rem;
-				color: var(--accent-copper);
-				font-weight: 600;
-			}
-			.cta-banner {
-				margin-top: 2rem;
-				padding: 3rem 2rem;
-				background: #EAE6DE;
+
+			/* Inquiries Bottom Card */
+			.inquiries-card {
+				background: #EBE7DF;
+				border: 1px solid #D8D2C4;
 				border-radius: 8px;
-				border: 1px solid var(--border-card);
+				padding: 3.5rem 2rem;
 				text-align: center;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.7) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
 			}
-			.cta-inner {
-				max-width: 550px;
-				margin: 0 auto;
+			.inquiries-card h2 {
+				font-family: Georgia, serif;
+				font-size: 2.2rem;
+				font-weight: 700;
+				margin: 0 0 0.75rem 0;
+				color: #1A1917;
+				letter-spacing: -0.015em;
 			}
-			.cta-inner h2 {
-				font-size: 1.85rem;
-				margin: 0 0 0.6rem 0;
+			.inquiries-card p {
+				font-size: 1rem;
+				color: #5A554E;
+				margin: 0 0 1.75rem 0;
 			}
-			.cta-inner p {
-				color: var(--text-muted);
-				font-size: 0.95rem;
-				margin-bottom: 1.5rem;
+			.btn-email {
+				background: #23372B;
+				color: #FDFBF7;
+				padding: 0.7rem 1.6rem;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.88rem;
+				border: 1px solid #1A2A21;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.15) inset,
+					0 2px 4px rgba(35, 55, 43, 0.2);
 			}
-			@media (max-width: 860px) {
-				.hero-grid {
+			.btn-email:hover {
+				background: #1B2C22;
+				border-color: #121E18;
+			}
+
+			@media (max-width: 900px) {
+				.hero-section {
 					grid-template-columns: 1fr;
 					gap: 2.5rem;
 				}
-				.hero-title {
-					font-size: 2.3rem;
+				.hero-right {
+					justify-content: flex-start;
 				}
-				.stories-grid, .featured-grid {
+				.portrait-card {
+					max-width: 280px;
+				}
+				.journal-grid,
+				.recipes-grid {
 					grid-template-columns: 1fr;
 				}
-				.home-container {
-					padding: 2.5rem 1.25rem;
+			}
+
+			@media (max-width: 600px) {
+				.hero-title {
+					font-size: 2.4rem;
+				}
+				.hero-actions {
+					flex-direction: column;
+					align-items: stretch;
 				}
 			}
 		</style>

@@ -29,7 +29,7 @@ const galleryImages = [
 		<Header />
 		<main class="about-container">
 			<section class="about-header">
-				<span class="eyebrow">Biography &amp; Specifications</span>
+				<span class="eyebrow">Bio</span>
 				<h1>Tibor Markovič</h1>
 				<p class="role-lead">Resident Chef &bull; Embassy of the Slovak Republic, Washington, D.C.</p>
 			</section>
@@ -80,7 +80,7 @@ const galleryImages = [
 				<div class="wide-photo-card">
 					<img src="/reel/12.webp" alt="The Morrison Room Kitchen Brigade" class="team-photo" />
 					<div class="wide-caption">
-						<span>The Morrison Room Brigade</span> &bull; <em>Classical fine dining foundation & brigade discipline</em>
+						<span>The Morrison Room Brigade</span> &bull; <em>Classical fine dining foundation &amp; brigade discipline</em>
 					</div>
 				</div>
 			</section>
@@ -115,17 +115,17 @@ const galleryImages = [
 			}
 			.about-header {
 				margin-bottom: 3rem;
-				border-bottom: 1px solid var(--border-card);
+				border-bottom: 1px solid var(--border-card, #DFD9CE);
 				padding-bottom: 2rem;
 			}
 			.eyebrow {
-				font-family: var(--font-mono);
+				display: block;
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				font-size: 0.72rem;
 				letter-spacing: 0.14em;
 				text-transform: uppercase;
-				color: var(--accent-green);
+				color: var(--accent-green, #23372B);
 				font-weight: 600;
-				display: block;
 				margin-bottom: 0.8rem;
 			}
 			h1 {
@@ -136,10 +136,10 @@ const galleryImages = [
 				line-height: 1.1;
 			}
 			.role-lead {
-				font-family: var(--font-serif);
+				font-family: var(--font-serif, Georgia, serif);
 				font-style: italic;
 				font-size: 1.25rem;
-				color: var(--accent-copper);
+				color: var(--accent-copper, #B24C24);
 				margin: 0;
 			}
 			.about-grid {
@@ -159,8 +159,8 @@ const galleryImages = [
 				color: #1A1917;
 			}
 			.portrait-card {
-				background: var(--card-bg);
-				border: 1px solid var(--border-card);
+				background: var(--card-bg, #FFFFFF);
+				border: 1px solid var(--border-card, #DFD9CE);
 				border-radius: 8px;
 				overflow: hidden;
 				box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
@@ -173,10 +173,10 @@ const galleryImages = [
 			}
 			.photo-caption {
 				padding: 0.85rem 1.1rem;
-				font-family: var(--font-mono);
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				font-size: 0.76rem;
-				color: var(--text-muted);
-				border-top: 1px solid var(--border-subtle);
+				color: var(--text-muted, #7A746B);
+				border-top: 1px solid var(--border-subtle, #EAE6DE);
 			}
 			.photo-caption span {
 				font-weight: 600;
@@ -186,7 +186,7 @@ const galleryImages = [
 				margin-top: 2.5rem;
 				padding: 1.75rem;
 				background: #F4F1EA;
-				border: 1px solid var(--border-card);
+				border: 1px solid var(--border-card, #DFD9CE);
 				border-radius: 8px;
 			}
 			.contact-card h3 {
@@ -195,7 +195,7 @@ const galleryImages = [
 			}
 			.contact-card p {
 				font-size: 0.9rem;
-				color: var(--text-muted);
+				color: var(--text-muted, #7A746B);
 				margin-bottom: 1.25rem;
 			}
 			.contact-links {
@@ -203,38 +203,68 @@ const galleryImages = [
 				gap: 0.75rem;
 				flex-wrap: wrap;
 			}
+
+			/* Tactile Buttons */
 			.btn-contact {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.5rem;
-				background: var(--accent-green);
-				color: #FDFBF7;
 				padding: 0.65rem 1.15rem;
-				border-radius: 4px;
-				font-size: 0.85rem;
+				border-radius: 6px;
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+				font-size: 0.82rem;
 				font-weight: 600;
+				letter-spacing: 0.02em;
 				text-decoration: none;
-				transition: background 0.2s ease, transform 0.2s ease;
+				user-select: none;
+				background: var(--accent-green, #23372B);
+				color: #FDFBF7;
+				border: 1px solid #1A2A21;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.15) inset,
+					0 2px 4px rgba(35, 55, 43, 0.18),
+					0 1px 2px rgba(0, 0, 0, 0.08);
+				transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 			}
 			.btn-contact:hover {
-				background: #1B2921;
-				transform: translateY(-2px);
+				background: #1B2C22;
+				border-color: #121E18;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.2) inset,
+					0 4px 10px rgba(35, 55, 43, 0.25);
 			}
+			.btn-contact:active {
+				transform: translateY(1px);
+				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+			}
+
 			.btn-outline {
-				background: transparent;
+				background: #FFFFFF;
 				color: #2C2A26;
-				border: 1px solid var(--border-card);
+				border: 1px solid #D3CCC0;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 4px rgba(0, 0, 0, 0.05);
 			}
 			.btn-outline:hover {
-				background: #EAE6DE;
+				background: #F9F7F2;
+				border-color: #BEB6A8;
 				color: #1A1917;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 3px 6px rgba(0, 0, 0, 0.08);
 			}
+			.btn-outline:active {
+				transform: translateY(1px);
+				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+			}
+
 			.foundation-feature {
 				margin-bottom: 4.5rem;
 			}
 			.wide-photo-card {
-				background: var(--card-bg);
-				border: 1px solid var(--border-card);
+				background: var(--card-bg, #FFFFFF);
+				border: 1px solid var(--border-card, #DFD9CE);
 				border-radius: 8px;
 				overflow: hidden;
 				box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
@@ -251,17 +281,17 @@ const galleryImages = [
 			}
 			.wide-caption {
 				padding: 0.9rem 1.25rem;
-				font-family: var(--font-mono);
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				font-size: 0.78rem;
-				color: var(--text-muted);
-				border-top: 1px solid var(--border-subtle);
+				color: var(--text-muted, #7A746B);
+				border-top: 1px solid var(--border-subtle, #EAE6DE);
 			}
 			.wide-caption span {
 				font-weight: 600;
 				color: #2C2A26;
 			}
 			.archive-gallery {
-				border-top: 1px solid var(--border-card);
+				border-top: 1px solid var(--border-card, #DFD9CE);
 				padding-top: 3.5rem;
 			}
 			.gallery-title-row {
@@ -277,9 +307,9 @@ const galleryImages = [
 				margin: 0;
 			}
 			.gallery-sub {
-				font-family: var(--font-mono);
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				font-size: 0.76rem;
-				color: var(--accent-copper);
+				color: var(--accent-copper, #B24C24);
 				letter-spacing: 0.06em;
 				text-transform: uppercase;
 			}
@@ -294,7 +324,7 @@ const galleryImages = [
 				overflow: hidden;
 				aspect-ratio: 4/5;
 				background: #EAE6DE;
-				border: 1px solid var(--border-card);
+				border: 1px solid var(--border-card, #DFD9CE);
 				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 			}
 			.gallery-card img {
@@ -313,7 +343,7 @@ const galleryImages = [
 				background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
 				color: #FFF;
 				font-size: 0.78rem;
-				font-family: var(--font-mono);
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				opacity: 0;
 				transform: translateY(6px);
 				transition: opacity 0.3s ease, transform 0.3s ease;

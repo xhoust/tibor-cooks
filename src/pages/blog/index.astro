@@ -2,230 +2,348 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { SITE_TITLE } from '../../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
+
+function getBadges(post: any) {
+	const raw = post.data.tags || post.data.badges || [];
+	if (Array.isArray(raw) && raw.length > 0) return raw;
+
+	const title = post.data.title.toLowerCase();
+	const badges: string[] = [];
+
+	if (title.includes('stehno') || title.includes('sviečková') || title.includes('confit')) {
+		badges.push('ADVANCED', '4.5 HRS', 'GF', 'DF', 'NUT-FREE');
+	} else if (title.includes('knedľa') || title.includes('halušky') || title.includes('lokše')) {
+		badges.push('INTERMEDIATE', '60 MINS', 'NUT-FREE');
+	} else if (title.includes('kôprová')) {
+		badges.push('INTERMEDIATE', '2.5 HRS', 'NUT-FREE');
+	} else if (title.includes('koláč')) {
+		badges.push('EASY', '50 MINS', 'VEGETARIAN', 'NUT-FREE');
+	} else if (title.includes('treska') || title.includes('šalát')) {
+		badges.push('EASY', '25 MINS', 'NUT-FREE');
+	} else {
+		badges.push('INTERMEDIATE', '45 MINS', 'NUT-FREE');
+	}
+	return badges;
+}
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Recipes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead
+			title={`Recipes & Notes | ${SITE_TITLE}`}
+			description="Traditional Slovak comfort food, embassy kitchen staples, and personal favorites."
+		/>
 	</head>
 	<body>
 		<Header />
-		<main class="archive-container">
-			<div class="archive-header">
-				<span class="eyebrow">Culinary Archive</span>
-				<h1>Recipe Formulations</h1>
-				<p class="subtitle">Standardized metric specifications, method parameters, and embassy kitchen standards.</p>
-				
+		<main>
+			<!-- Archive Header -->
+			<header class="archive-header">
+				<span class="eyebrow">RECIPE ARCHIVE</span>
+				<h1 class="archive-title">Recipes &amp; Notes</h1>
+				<p class="archive-subtitle">
+					Traditional Slovak comfort food, embassy kitchen staples, and personal favorites.
+				</p>
+
+				<!-- Client-side Search -->
 				<div class="search-wrap">
 					<input
 						type="text"
 						id="recipe-search"
-						placeholder="Search formulations (e.g. Sviečková, Halúšky, Lokše)..."
+						placeholder="Search recipes (e.g. Sviečková, Halušky, Lokše)..."
+						autocomplete="off"
 					/>
 				</div>
-			</div>
+			</header>
 
-			<div id="recipe-grid" class="cards-grid">
+			<hr class="header-divider" />
+
+			<!-- Recipe Cards Grid -->
+			<div class="recipes-grid" id="recipes-grid">
 				{
 					posts.map((post) => {
-						const diff = post.data.difficulty || 'Intermediate';
-						const diffClass = `tag-${diff.toLowerCase()}`;
-						const time = post.data.time || '45 mins';
-						const dietary = post.data.dietary || [];
-
+						const badges = getBadges(post);
 						return (
-							<a 
-								href={`/blog/${post.id}/`} 
-								class="recipe-card"
+							<article
+								class="recipe-card-item"
 								data-title={post.data.title.toLowerCase()}
 								data-desc={(post.data.description || '').toLowerCase()}
 							>
-								<div class="card-content">
-									<div class="tag-row">
-										<span class={`mono-tag ${diffClass}`}>{diff}</span>
-										<span class="mono-tag tag-time">{time}</span>
-										{dietary.map((diet: string) => (
-											<span class="mono-tag tag-diet">{diet}</span>
-										))}
-									</div>
-									<h2>{post.data.title}</h2>
-									{post.data.description && <p>{post.data.description}</p>}
+								<div class="badge-cluster">
+									{badges.map((badge: string) => {
+										const isDiff = ['EASY', 'INTERMEDIATE', 'ADVANCED'].includes(badge);
+										const isTime = badge.includes('MIN') || badge.includes('HR');
+										return (
+											<span
+												class:list={[
+													'pill-badge',
+													{ 'pill-diff': isDiff },
+													{ 'pill-time': isTime },
+													{ 'pill-diet': !isDiff && !isTime },
+												]}
+											>
+												{badge}
+											</span>
+										);
+									})}
 								</div>
-								<div class="card-footer">
-									<span>View Recipe &rarr;</span>
+
+								<h2 class="recipe-heading">{post.data.title}</h2>
+
+								{post.data.description && <p class="recipe-summary">{post.data.description}</p>}
+
+								<div class="card-footer-action">
+									<a href={`/blog/${post.id}/`} class="view-link">
+										VIEW RECIPE &rarr;
+									</a>
 								</div>
-							</a>
+							</article>
 						);
 					})
 				}
 			</div>
 
-			<div id="no-results" class="no-results hidden">
-				<p>No formulations found matching your search.</p>
-			</div>
+			<p id="no-results" class="no-results-msg" style="display: none;">
+				No recipes match your search.
+			</p>
 		</main>
 		<Footer />
 
 		<script>
 			const searchInput = document.getElementById('recipe-search') as HTMLInputElement;
-			const cards = document.querySelectorAll('.recipe-card') as NodeListOf<HTMLElement>;
+			const cards = document.querySelectorAll('.recipe-card-item');
 			const noResults = document.getElementById('no-results');
 
-			searchInput?.addEventListener('input', (e) => {
-				const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
-				let visibleCount = 0;
+			if (searchInput) {
+				searchInput.addEventListener('input', (e) => {
+					const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+					let matches = 0;
 
-				cards.forEach((card) => {
-					const title = card.getAttribute('data-title') || '';
-					const desc = card.getAttribute('data-desc') || '';
+					cards.forEach((card) => {
+						const el = card as HTMLElement;
+						const title = el.getAttribute('data-title') || '';
+						const desc = el.getAttribute('data-desc') || '';
 
-					if (title.includes(query) || desc.includes(query)) {
-						card.style.display = 'flex';
-						visibleCount++;
-					} else {
-						card.style.display = 'none';
+						if (title.includes(query) || desc.includes(query)) {
+							el.style.display = 'flex';
+							matches++;
+						} else {
+							el.style.display = 'none';
+						}
+					});
+
+					if (noResults) {
+						noResults.style.display = matches === 0 ? 'block' : 'none';
 					}
 				});
-
-				if (noResults) {
-					if (visibleCount === 0) {
-						noResults.classList.remove('hidden');
-					} else {
-						noResults.classList.add('hidden');
-					}
-				}
-			});
+			}
 		</script>
 
 		<style>
-			.archive-container {
-				width: 100%;
-				max-width: 1200px;
+			main {
+				max-width: 1080px;
 				margin: 0 auto;
-				padding: 4.5rem 2rem;
+				padding: 3.5rem 1.5rem 6rem 1.5rem;
 			}
+
 			.eyebrow {
-				font-family: var(--font-mono);
-				font-size: 0.72rem;
-				text-transform: uppercase;
-				letter-spacing: 0.14em;
-				color: var(--accent-green);
-				font-weight: 600;
 				display: block;
-				margin-bottom: 0.8rem;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.72rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: #7A746B;
+				font-weight: 600;
+				margin-bottom: 0.75rem;
 			}
-			.archive-header {
-				margin-bottom: 3.5rem;
-				border-bottom: 1px solid var(--border-card);
-				padding-bottom: 2.5rem;
+
+			.archive-title {
+				font-family: Georgia, serif;
+				font-size: 3.4rem;
+				line-height: 1.1;
+				font-weight: 700;
+				letter-spacing: -0.025em;
+				color: #1A1917;
+				margin: 0 0 0.85rem 0;
 			}
-			.archive-header h1 {
-				font-size: 3.2rem;
-				font-weight: 500;
-				letter-spacing: -0.02em;
-				margin: 0 0 0.75rem 0;
-			}
-			.subtitle {
-				font-family: var(--font-serif);
-				font-style: italic;
-				color: var(--text-muted);
+
+			.archive-subtitle {
 				font-size: 1.15rem;
+				font-style: italic;
+				color: #5A554E;
 				margin: 0 0 2rem 0;
-				line-height: 1.55;
+				max-width: 760px;
 			}
-			.search-wrap input {
+
+			/* Search Field */
+			.search-wrap {
+				max-width: 440px;
+				margin-bottom: 1.5rem;
+			}
+
+			#recipe-search {
 				width: 100%;
-				max-width: 460px;
-				padding: 0.85rem 1.1rem;
-				font-size: 0.92rem;
-				border: 1px solid var(--border-card);
+				padding: 0.75rem 1rem;
+				font-size: 0.9rem;
+				border: 1px solid #D8D2C4;
 				border-radius: 6px;
-				background-color: var(--card-bg);
-				color: var(--text-main);
+				background: #FFFFFF;
+				color: #1A1917;
 				outline: none;
-				transition: border-color 0.2s, box-shadow 0.2s;
+				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
 			}
-			.search-wrap input:focus {
-				border-color: var(--accent-green);
-				box-shadow: 0 0 0 1px var(--accent-green);
+
+			#recipe-search:focus {
+				border-color: #1A1917;
+				box-shadow: 0 0 0 3px rgba(35, 55, 43, 0.08);
 			}
-			.cards-grid {
+
+			#recipe-search::placeholder {
+				color: #9E978C;
+			}
+
+			.header-divider {
+				border: 0;
+				height: 1px;
+				background: #EAE6DE;
+				margin: 2rem 0 3rem 0;
+			}
+
+			/* Grid */
+			.recipes-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-				gap: 1.75rem;
-				width: 100%;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
 			}
-			.recipe-card {
+
+			/* Tactile Card Item */
+			.recipe-card-item {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
+				border-radius: 8px;
+				padding: 1.75rem 1.6rem;
 				display: flex;
 				flex-direction: column;
-				justify-content: space-between;
-				background: var(--card-bg);
-				border: 1px solid var(--border-card);
-				border-radius: 8px;
-				padding: 2rem;
-				text-decoration: none;
-				color: inherit;
-				box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
-				transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
 			}
-			.recipe-card:hover {
-				transform: translateY(-3px);
-				border-color: var(--accent-green);
-				box-shadow: 0 10px 24px rgba(44, 62, 53, 0.08);
+
+			.recipe-card-item:hover {
+				transform: translateY(-2px);
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 6px 18px rgba(0, 0, 0, 0.06);
 			}
-			.tag-row {
+
+			/* Badges */
+			.badge-cluster {
 				display: flex;
-				gap: 0.4rem;
-				margin-bottom: 1.1rem;
 				flex-wrap: wrap;
+				gap: 0.4rem;
+				margin-bottom: 1.25rem;
 			}
-			.card-content h2 {
-				font-size: 1.45rem;
-				font-weight: 600;
-				line-height: 1.25;
-				margin: 0 0 0.65rem 0;
-			}
-			.card-content p {
-				font-size: 0.88rem;
-				line-height: 1.55;
-				color: var(--text-muted);
-				margin: 0;
-			}
-			.card-footer {
-				margin-top: 2rem;
-				padding-top: 1rem;
-				border-top: 1px solid var(--border-subtle);
-				font-family: var(--font-mono);
-				font-size: 0.78rem;
-				font-weight: 600;
-				color: var(--accent-copper);
+
+			.pill-badge {
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.65rem;
+				font-weight: 700;
+				letter-spacing: 0.04em;
+				padding: 0.25rem 0.5rem;
+				border-radius: 4px;
 				text-transform: uppercase;
-				letter-spacing: 0.05em;
 			}
-			.recipe-card:hover .card-footer {
-				color: var(--accent-hover);
+
+			.pill-diff {
+				background: #FDF3E7;
+				color: #A35C14;
+				border: 1px solid #F5DEB3;
 			}
-			.no-results {
-				padding: 4rem 0;
+
+			.pill-time {
+				background: #F0EDE6;
+				color: #5A554E;
+				border: 1px solid #DFD9CE;
+			}
+
+			.pill-diet {
+				background: #E8F0F7;
+				color: #245782;
+				border: 1px solid #C8DCEF;
+			}
+
+			/* Card Text */
+			.recipe-heading {
+				font-family: Georgia, serif;
+				font-size: 1.4rem;
+				line-height: 1.25;
+				font-weight: 700;
+				margin: 0 0 0.85rem 0;
+				color: #1A1917;
+			}
+
+			.recipe-summary {
+				font-size: 0.92rem;
+				line-height: 1.6;
+				color: #5A554E;
+				margin: 0 0 1.75rem 0;
+				flex-grow: 1;
+			}
+
+			.card-footer-action {
+				padding-top: 1rem;
+				border-top: 1px solid #F0ECE4;
+			}
+
+			.view-link {
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.78rem;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				color: #B24C24;
+				text-decoration: none;
+				display: inline-block;
+				transition: color 0.15s ease;
+			}
+
+			.view-link:hover {
+				color: #8A3716;
+				text-decoration: underline;
+			}
+
+			.no-results-msg {
 				text-align: center;
-				color: var(--text-muted);
-				font-family: var(--font-serif);
-				font-style: italic;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				color: #7A746B;
+				margin: 4rem 0;
+				font-size: 0.95rem;
 			}
-			.hidden {
-				display: none;
+
+			@media (max-width: 900px) {
+				.recipes-grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+				.archive-title {
+					font-size: 2.75rem;
+				}
 			}
-			@media (max-width: 640px) {
-				.archive-container { padding: 2.5rem 1.25rem; }
-				.archive-header h1 { font-size: 2.4rem; }
-				.cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+
+			@media (max-width: 600px) {
+				.recipes-grid {
+					grid-template-columns: 1fr;
+				}
+				.archive-title {
+					font-size: 2.2rem;
+				}
 			}
 		</style>
 	</body>

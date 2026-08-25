@@ -12,10 +12,11 @@ import { SITE_TITLE } from '../consts';
 			</a>
 		</div>
 
-		<!-- Tactile Pill Track -->
+		<!-- Tactile Pill Navigation Track -->
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Recipes</HeaderLink>
+			<HeaderLink href="/journal">Journal</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 	</nav>
@@ -72,7 +73,7 @@ import { SITE_TITLE } from '../consts';
 
 	/* Tactile Button Links */
 	.internal-links :global(a) {
-		padding: 0.45rem 1rem;
+		padding: 0.45rem 0.95rem;
 		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 		font-size: 0.82rem;
 		font-weight: 600;
@@ -100,8 +101,19 @@ import { SITE_TITLE } from '../consts';
 			0 2px 4px rgba(0, 0, 0, 0.06) !important;
 	}
 
-	/* Click Feedback */
 	.internal-links :global(a:active) {
 		transform: translateY(1px);
+	}
+
+	@media (max-width: 650px) {
+		nav {
+			flex-direction: column;
+			gap: 1rem;
+			align-items: flex-start;
+		}
+		.internal-links {
+			width: 100%;
+			justify-content: space-between;
+		}
 	}
 </style>
