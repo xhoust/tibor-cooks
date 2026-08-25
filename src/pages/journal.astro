@@ -1,0 +1,209 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const entries = [
+	{
+		tag: 'LIFE IN D.C.',
+		title: 'Settling Into Washington, D.C.',
+		excerpt: 'First impressions, adjusting from European kitchens to the District, and building a daily routine on embassy grounds.',
+		readingTime: '4 min read',
+		status: 'Drafting today'
+	},
+	{
+		tag: 'TRAVEL & FIELD',
+		title: 'Road Trip Across the American West',
+		excerpt: 'Traveling through Utah, Arizona, Nevada, and California—national parks, desert highways, roadside diners, and ingredient sourcing.',
+		readingTime: '6 min read',
+		status: 'Drafting today'
+	},
+	{
+		tag: 'EMBASSY KITCHEN',
+		title: 'Friday Staff Lunches at the Embassy',
+		excerpt: 'Bringing colleagues together over rotating Central European staples, workflow logistics, and comforting staff meals.',
+		readingTime: '5 min read',
+		status: 'Drafting today'
+	}
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Journal | ${SITE_TITLE}`}
+			description="Personal journal entries, travel logs, and kitchen notes from Washington, D.C."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="journal-container">
+			<header class="journal-header">
+				<span class="eyebrow">PERSONAL JOURNAL &amp; FIELD NOTES</span>
+				<h1 class="page-title">Journal</h1>
+				<p class="journal-subtitle">
+					Stories on settling in the District, cross-country road trips, and notes from behind the diplomatic stove.
+				</p>
+			</header>
+
+			<hr class="header-divider" />
+
+			<div class="journal-feed">
+				{
+					entries.map((post) => (
+						<article class="journal-card">
+							<div class="card-meta">
+								<span class="tag-badge">{post.tag}</span>
+							</div>
+
+							<h2 class="entry-title">{post.title}</h2>
+							<p class="entry-text">{post.excerpt}</p>
+
+							<div class="card-footer">
+								<span class="reading-time">{post.readingTime}</span>
+								<span class="status-pill">{post.status}</span>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</main>
+		<Footer />
+
+		<style>
+			.journal-container {
+				max-width: 860px;
+				margin: 0 auto;
+				padding: 3.5rem 1.5rem 6rem 1.5rem;
+			}
+
+			.eyebrow {
+				display: block;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.72rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: #7A746B;
+				font-weight: 600;
+				margin-bottom: 0.75rem;
+			}
+
+			.page-title {
+				font-family: Georgia, serif;
+				font-size: 3.4rem;
+				line-height: 1.1;
+				font-weight: 700;
+				letter-spacing: -0.025em;
+				color: #1A1917;
+				margin: 0 0 0.85rem 0;
+			}
+
+			.journal-subtitle {
+				font-size: 1.15rem;
+				font-style: italic;
+				color: #5A554E;
+				margin: 0;
+				line-height: 1.6;
+			}
+
+			.header-divider {
+				border: 0;
+				height: 1px;
+				background: #EAE6DE;
+				margin: 2.5rem 0 3rem 0;
+			}
+
+			.journal-feed {
+				display: flex;
+				flex-direction: column;
+				gap: 1.75rem;
+			}
+
+			.journal-card {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
+				border-radius: 8px;
+				padding: 2.25rem 2rem;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.journal-card:hover {
+				transform: translateY(-2px);
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 6px 18px rgba(0, 0, 0, 0.06);
+			}
+
+			.card-meta {
+				display: flex;
+				align-items: center;
+				margin-bottom: 1.25rem;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.72rem;
+			}
+
+			.tag-badge {
+				background: #F4F1EA;
+				color: #23372B;
+				padding: 0.25rem 0.55rem;
+				border-radius: 4px;
+				font-weight: 700;
+				border: 1px solid #DFD9CE;
+				letter-spacing: 0.04em;
+			}
+
+			.entry-title {
+				font-family: Georgia, serif;
+				font-size: 1.75rem;
+				line-height: 1.25;
+				font-weight: 700;
+				color: #1A1917;
+				margin: 0 0 0.85rem 0;
+			}
+
+			.entry-text {
+				font-size: 1.02rem;
+				line-height: 1.65;
+				color: #4A453E;
+				margin: 0 0 1.5rem 0;
+			}
+
+			.card-footer {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-top: 1.25rem;
+				border-top: 1px solid #F0ECE4;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.78rem;
+			}
+
+			.reading-time {
+				color: #8C827A;
+			}
+
+			.status-pill {
+				background: #FDF3E7;
+				color: #B24C24;
+				border: 1px solid #F5DEB3;
+				padding: 0.25rem 0.6rem;
+				border-radius: 4px;
+				font-weight: 600;
+			}
+
+			@media (max-width: 600px) {
+				.page-title {
+					font-size: 2.4rem;
+				}
+				.journal-card {
+					padding: 1.5rem;
+				}
+			}
+		</style>
+	</body>
+</html>
