@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map((recipe) => ({
+    params: { slug: recipe.slug || recipe.id },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const { Content } = await recipe.render();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{recipe.data.title} | Tibor Cooks</title>
+  </head>
+  <body class="bg-[#FBFBFA] text-[#1A1A1A] font-sans antialiased p-8">
+    <div class="max-w-3xl mx-auto">
+      <span class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">{recipe.data.category}</span>
+      <h1 class="text-3xl font-bold mt-2">{recipe.data.title}</h1>
+      <p class="text-lg text-neutral-600 italic">{recipe.data.englishTitle}</p>
+      
+      <div class="border-t border-b border-neutral-300 py-3 my-6 flex gap-4 text-xs font-mono">
+        <span>Yield: {recipe.data.yield}</span>
+        <span>•</span>
+        <span>Prep: {recipe.data.prepTime}</span>
+        <span>•</span>
+        <span>Cook: {recipe.data.cookTime}</span>
+      </div>
+
+      <div class="prose prose-neutral">
+        <Content />
+      </div>
+    </div>
+  </body>
+</html>

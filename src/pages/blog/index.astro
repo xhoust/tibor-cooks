@@ -1,0 +1,50 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Recipes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-[#FBFBFA] text-[#1A1A1A]">
+		<Header />
+		<main class="max-w-4xl mx-auto px-6 py-12">
+			<section class="mb-10">
+				<h1 class="text-3xl font-serif font-bold tracking-tight mb-2">Recipe Archive</h1>
+				<p class="text-neutral-600 text-sm">Classic Central European gastronomy, embassy formulations, and kitchen notes.</p>
+			</section>
+
+			<ul class="divide-y divide-neutral-200">
+				{
+					posts.map((post) => (
+						<li class="py-6 group">
+							<a href={`/blog/${post.id || post.slug}/`} class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 no-underline">
+								<div>
+									<h2 class="text-xl font-serif font-bold text-neutral-900 group-hover:text-neutral-600 transition-colors">
+										{post.data.title}
+									</h2>
+									{post.data.description && (
+										<p class="text-neutral-600 text-sm italic mt-1">{post.data.description}</p>
+									)}
+								</div>
+								<span class="text-xs font-mono text-neutral-400 shrink-0">
+									{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>

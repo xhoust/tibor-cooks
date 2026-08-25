@@ -1,0 +1,35 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-[#FBFBFA] text-[#1A1A1A]">
+		<Header />
+		<main class="max-w-3xl mx-auto px-6 py-16">
+			<section class="space-y-6">
+				<h1 class="text-4xl sm:text-5xl font-serif font-bold tracking-tight text-neutral-900">
+					Tibor Markovič
+				</h1>
+				<p class="text-lg text-neutral-700 leading-relaxed font-serif">
+					Culinary archive, Central European formulations, and kitchen notes. Standardized metric ratios, method parameters, and pantry adaptations.
+				</p>
+				<div class="pt-4">
+					<a
+						href="/blog"
+						class="inline-block bg-neutral-900 text-white text-sm font-medium px-5 py-3 rounded hover:bg-neutral-800 transition-colors"
+					>
+						Explore Recipes &rarr;
+					</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
