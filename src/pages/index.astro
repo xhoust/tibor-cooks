@@ -5,9 +5,39 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 
-const featuredPosts = (await getCollection('blog'))
-	.sort((a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0))
-	.slice(0, 6);
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => {
+	const dateA = a.data.pubDate ? new Date(a.data.pubDate).valueOf() : 0;
+	const dateB = b.data.pubDate ? new Date(b.data.pubDate).valueOf() : 0;
+	return dateB - dateA;
+});
+
+const featuredPosts = posts.slice(0, 3);
+
+// Highlighted blog posts / stories
+const featuredStories = [
+	{
+		title: 'Settling Into Washington, D.C.',
+		desc: 'First impressions, adjusting from Ireland to the District, and building a routine on embassy grounds.',
+		date: 'Dispatch 01',
+		tag: 'Life in D.C.',
+		link: '/blog',
+	},
+	{
+		title: 'Road Trip Across the American West',
+		desc: 'Traveling through Utah, Arizona, and California—national parks, open highways, and roadside diners.',
+		date: 'Dispatch 02',
+		tag: 'Travel',
+		link: '/blog',
+	},
+	{
+		title: 'Friday Staff Lunches at the Embassy',
+		desc: 'Bringing the team together over rotating Central European menus, prep workflow, and staff favorites.',
+		date: 'Dispatch 03',
+		tag: 'Embassy Kitchen',
+		link: '/blog',
+	},
+];
 ---
 
 <!doctype html>
@@ -18,48 +48,96 @@ const featuredPosts = (await getCollection('blog'))
 	<body>
 		<Header />
 		<main class="home-container">
+			<!-- Hero Statement with Portrait -->
 			<section class="hero-section">
-				<span class="eyebrow">Washington, D.C. &bull; Resident Chef</span>
-				<h1>Tibor Markovič</h1>
-				<p class="bio">
-					Standardized Central European recipes, diplomatic service formulations, and kitchen specifications.
-				</p>
+				<div class="hero-grid">
+					<div class="hero-content">
+						<span class="eyebrow">Washington, D.C. &bull; Kitchen Notes &amp; Stories</span>
+						<h1 class="hero-title">A taste of home, straight from D.C.</h1>
+						<p class="hero-description">
+							A collection of traditional Slovak recipes I grew up with—taught by the great cooks in my family and fueled by nostalgia—alongside personal global favorites, embassy kitchen notes, and bits of life across the USA.
+						</p>
+						<div class="hero-actions">
+							<a href="/blog" class="btn-primary">Browse Recipes</a>
+							<a href="/about" class="btn-secondary">About Me &amp; Gallery</a>
+						</div>
+					</div>
+					<div class="hero-image-wrap">
+						<div class="hero-image-card">
+							<img src="/reel/tibor.webp" alt="Tibor Markovič" />
+							<div class="hero-badge">Resident Chef &bull; Embassy of Slovakia</div>
+						</div>
+					</div>
+				</div>
 			</section>
 
-			<section class="showcase-section">
-				<div class="section-title-row">
-					<h2>Featured Formulations</h2>
-					<a href="/blog" class="view-all-link">View all recipes &rarr;</a>
+			<!-- Latest Blog Posts & Dispatches Section -->
+			<section class="stories-section">
+				<div class="section-header">
+					<div>
+						<span class="eyebrow">Dispatches &amp; Journal</span>
+						<h2>Latest Stories</h2>
+					</div>
+					<a href="/blog" class="link-all">View All Entries &rarr;</a>
 				</div>
 
-				<div class="cards-grid">
+				<div class="stories-grid">
 					{
-						featuredPosts.map((post) => {
-							const diff = post.data.difficulty || 'Intermediate';
-							const diffClass = `tag-${diff.toLowerCase()}`;
-							const time = post.data.time || '45 mins';
-							const dietary = post.data.dietary || [];
-
-							return (
-								<a href={`/blog/${post.id}/`} class="recipe-card">
-									<div class="card-content">
-										<div class="tag-row">
-											<span class={`mono-tag ${diffClass}`}>{diff}</span>
-											<span class="mono-tag tag-time">{time}</span>
-											{dietary.map((diet: string) => (
-												<span class="mono-tag tag-diet">{diet}</span>
-											))}
-										</div>
-										<h3>{post.data.title}</h3>
-										{post.data.description && <p>{post.data.description}</p>}
-									</div>
-									<div class="card-footer">
-										<span>View Recipe &rarr;</span>
-									</div>
-								</a>
-							);
-						})
+						featuredStories.map((story) => (
+							<a href={story.link} class="story-card">
+								<div class="story-header">
+									<span class="story-tag">{story.tag}</span>
+									<span class="story-date">{story.date}</span>
+								</div>
+								<h3>{story.title}</h3>
+								<p>{story.desc}</p>
+								<span class="story-link-text">Read Dispatch &rarr;</span>
+							</a>
+						))
 					}
+				</div>
+			</section>
+
+			<!-- Featured Recipes Section -->
+			<section class="featured-section">
+				<div class="section-header">
+					<div>
+						<span class="eyebrow">Handpicked Selection</span>
+						<h2>Featured Recipes</h2>
+					</div>
+					<a href="/blog" class="link-all">View All Recipes &rarr;</a>
+				</div>
+
+				<div class="featured-grid">
+					{
+						featuredPosts.map((post) => (
+							<a href={`/blog/${post.id}/`} class="recipe-card">
+								{post.data.heroImage ? (
+									<div class="card-image-wrap">
+										<img src={post.data.heroImage} alt={post.data.title} loading="lazy" />
+									</div>
+								) : (
+									<div class="card-placeholder-wrap">
+										<span class="card-badge-inline">Recipe</span>
+									</div>
+								)}
+								<div class="card-body">
+									<h3>{post.data.title}</h3>
+									<p class="card-desc">{post.data.description}</p>
+									<span class="card-meta">View Recipe &rarr;</span>
+								</div>
+							</a>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Contact Banner -->
+			<section class="cta-banner">
+				<div class="cta-inner">
+					<h2>Inquiries &amp; Say Hello</h2>
+					<p>For questions about recipes, collaborations, or catering inquiries.</p>
+					<a href="mailto:hello@tiborcooks.com" class="btn-primary">hello@tiborcooks.com</a>
 				</div>
 			</section>
 		</main>
@@ -67,123 +145,315 @@ const featuredPosts = (await getCollection('blog'))
 
 		<style>
 			.home-container {
-				width: 100%;
-				max-width: 1200px;
+				max-width: 1080px;
 				margin: 0 auto;
-				padding: 4.5rem 2rem;
+				padding: 4rem 2rem 5rem 2rem;
 			}
 			.hero-section {
-				margin-bottom: 3.5rem;
+				padding: 2.5rem 0 4rem 0;
 				border-bottom: 1px solid var(--border-card);
-				padding-bottom: 2.75rem;
+			}
+			.hero-grid {
+				display: grid;
+				grid-template-columns: 1.25fr 0.85fr;
+				gap: 3.5rem;
+				align-items: center;
 			}
 			.eyebrow {
 				font-family: var(--font-mono);
-				font-size: 0.72rem;
-				letter-spacing: 0.14em;
+				font-size: 0.74rem;
+				letter-spacing: 0.12em;
 				text-transform: uppercase;
 				color: var(--accent-green);
 				font-weight: 600;
 				display: block;
 				margin-bottom: 0.8rem;
 			}
-			h1 {
-				font-size: 3.5rem;
+			.hero-title {
+				font-size: 3.1rem;
 				font-weight: 500;
-				letter-spacing: -0.02em;
-				margin: 0 0 0.85rem 0;
-				line-height: 1.1;
+				letter-spacing: -0.025em;
+				line-height: 1.15;
+				margin: 0 0 1.25rem 0;
+				color: #1A1917;
 			}
-			.bio {
-				font-family: var(--font-serif);
-				font-style: italic;
-				font-size: 1.25rem;
-				line-height: 1.6;
-				color: var(--text-muted);
-				max-width: 680px;
-				margin: 0;
+			.hero-description {
+				font-size: 1.1rem;
+				line-height: 1.65;
+				color: #4A463F;
+				margin: 0 0 2rem 0;
 			}
-			.section-title-row {
+			.hero-actions {
 				display: flex;
-				justify-content: space-between;
-				align-items: baseline;
-				margin-bottom: 2rem;
-			}
-			.section-title-row h2 {
-				font-size: 1.75rem;
-				font-weight: 600;
-				margin: 0;
-			}
-			.view-all-link {
-				font-size: 0.88rem;
-				font-weight: 600;
-				color: var(--accent-copper);
-				text-decoration: none;
-			}
-			.view-all-link:hover {
-				color: var(--accent-hover);
-				text-decoration: underline;
-			}
-			.cards-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-				gap: 1.75rem;
-			}
-			.recipe-card {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				background: var(--card-bg);
-				border: 1px solid var(--border-card);
-				border-radius: 8px;
-				padding: 2rem;
-				text-decoration: none;
-				color: inherit;
-				box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
-				transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-			}
-			.recipe-card:hover {
-				transform: translateY(-3px);
-				border-color: var(--accent-green);
-				box-shadow: 0 10px 24px rgba(44, 62, 53, 0.08);
-			}
-			.tag-row {
-				display: flex;
-				gap: 0.4rem;
-				margin-bottom: 1.1rem;
+				gap: 1rem;
 				flex-wrap: wrap;
 			}
-			.card-content h3 {
-				font-size: 1.45rem;
-				font-weight: 600;
-				line-height: 1.25;
-				margin: 0 0 0.65rem 0;
+			.hero-image-wrap {
+				display: flex;
+				justify-content: center;
 			}
-			.card-content p {
-				font-size: 0.88rem;
-				line-height: 1.55;
+			.hero-image-card {
+				position: relative;
+				border-radius: 8px;
+				overflow: hidden;
+				border: 1px solid var(--border-card);
+				background: var(--card-bg);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+				width: 100%;
+				max-width: 340px;
+			}
+			.hero-image-card img {
+				width: 100%;
+				height: 380px;
+				object-fit: cover;
+				display: block;
+			}
+			.hero-badge {
+				padding: 0.75rem 1rem;
+				font-family: var(--font-mono);
+				font-size: 0.72rem;
 				color: var(--text-muted);
+				background: #FDFBF7;
+				border-top: 1px solid var(--border-subtle);
+				text-align: center;
+				letter-spacing: 0.02em;
+			}
+			.btn-primary {
+				display: inline-flex;
+				align-items: center;
+				background: var(--accent-green);
+				color: #FDFBF7;
+				padding: 0.75rem 1.4rem;
+				border-radius: 4px;
+				font-size: 0.9rem;
+				font-weight: 600;
+				text-decoration: none;
+				transition: background 0.2s ease, transform 0.2s ease;
+			}
+			.btn-primary:hover {
+				background: #1B2921;
+				transform: translateY(-2px);
+			}
+			.btn-secondary {
+				display: inline-flex;
+				align-items: center;
+				background: transparent;
+				color: #2C2A26;
+				border: 1px solid var(--border-card);
+				padding: 0.75rem 1.4rem;
+				border-radius: 4px;
+				font-size: 0.9rem;
+				font-weight: 600;
+				text-decoration: none;
+				transition: background 0.2s ease, transform 0.2s ease;
+			}
+			.btn-secondary:hover {
+				background: #EAE6DE;
+				transform: translateY(-2px);
+			}
+
+			/* Stories / Blog Section */
+			.stories-section {
+				padding: 4rem 0 3.5rem 0;
+				border-bottom: 1px solid var(--border-card);
+			}
+			.section-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				margin-bottom: 2rem;
+			}
+			.section-header h2 {
+				font-size: 2rem;
 				margin: 0;
 			}
-			.card-footer {
-				margin-top: 2rem;
-				padding-top: 1rem;
-				border-top: 1px solid var(--border-subtle);
+			.link-all {
+				font-family: var(--font-mono);
+				font-size: 0.82rem;
+				color: var(--accent-green);
+				font-weight: 600;
+				text-decoration: none;
+			}
+			.link-all:hover {
+				text-decoration: underline;
+			}
+			.stories-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+			}
+			.story-card {
+				background: #F6F3EC;
+				border: 1px solid var(--border-card);
+				border-radius: 6px;
+				padding: 1.75rem 1.5rem;
+				text-decoration: none;
+				color: inherit;
+				display: flex;
+				flex-direction: column;
+				transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+			}
+			.story-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+				border-color: var(--accent-green);
+			}
+			.story-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1rem;
+			}
+			.story-tag {
+				font-family: var(--font-mono);
+				font-size: 0.7rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--accent-green);
+			}
+			.story-date {
+				font-family: var(--font-mono);
+				font-size: 0.72rem;
+				color: var(--text-muted);
+			}
+			.story-card h3 {
+				font-size: 1.25rem;
+				margin: 0 0 0.6rem 0;
+				line-height: 1.3;
+				color: #1A1917;
+			}
+			.story-card p {
+				font-size: 0.9rem;
+				color: var(--text-muted);
+				line-height: 1.6;
+				margin: 0 0 1.25rem 0;
+				flex-grow: 1;
+			}
+			.story-link-text {
 				font-family: var(--font-mono);
 				font-size: 0.78rem;
-				font-weight: 600;
 				color: var(--accent-copper);
+				font-weight: 600;
+			}
+
+			/* Featured Recipes Section */
+			.featured-section {
+				padding: 4rem 0;
+			}
+			.featured-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+			}
+			.recipe-card {
+				background: var(--card-bg);
+				border: 1px solid var(--border-card);
+				border-radius: 6px;
+				overflow: hidden;
+				text-decoration: none;
+				color: inherit;
+				display: flex;
+				flex-direction: column;
+				transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+			}
+			.recipe-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+				border-color: var(--accent-green);
+			}
+			.card-image-wrap {
+				position: relative;
+				width: 100%;
+				height: 190px;
+				background: #EAE6DE;
+				overflow: hidden;
+			}
+			.card-image-wrap img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.card-placeholder-wrap {
+				height: 85px;
+				background: linear-gradient(135deg, #F0ECE1 0%, #E2DDD2 100%);
+				border-bottom: 1px solid var(--border-subtle);
+				padding: 1.25rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+			.card-badge-inline {
+				background: var(--accent-green);
+				color: #FDFBF7;
+				font-family: var(--font-mono);
+				font-size: 0.68rem;
+				padding: 0.28rem 0.6rem;
+				border-radius: 3px;
 				text-transform: uppercase;
-				letter-spacing: 0.05em;
+				letter-spacing: 0.08em;
+				font-weight: 600;
 			}
-			.recipe-card:hover .card-footer {
-				color: var(--accent-hover);
+			.card-body {
+				padding: 1.5rem 1.25rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
 			}
-			@media (max-width: 640px) {
-				.home-container { padding: 2.5rem 1.25rem; }
-				h1 { font-size: 2.4rem; }
-				.bio { font-size: 1.05rem; }
-				.cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+			.card-body h3 {
+				font-size: 1.2rem;
+				margin: 0 0 0.5rem 0;
+				line-height: 1.3;
+			}
+			.card-desc {
+				font-size: 0.88rem;
+				color: var(--text-muted);
+				line-height: 1.55;
+				margin: 0 0 1.25rem 0;
+				flex-grow: 1;
+			}
+			.card-meta {
+				font-family: var(--font-mono);
+				font-size: 0.75rem;
+				color: var(--accent-copper);
+				font-weight: 600;
+			}
+			.cta-banner {
+				margin-top: 2rem;
+				padding: 3rem 2rem;
+				background: #EAE6DE;
+				border-radius: 8px;
+				border: 1px solid var(--border-card);
+				text-align: center;
+			}
+			.cta-inner {
+				max-width: 550px;
+				margin: 0 auto;
+			}
+			.cta-inner h2 {
+				font-size: 1.85rem;
+				margin: 0 0 0.6rem 0;
+			}
+			.cta-inner p {
+				color: var(--text-muted);
+				font-size: 0.95rem;
+				margin-bottom: 1.5rem;
+			}
+			@media (max-width: 860px) {
+				.hero-grid {
+					grid-template-columns: 1fr;
+					gap: 2.5rem;
+				}
+				.hero-title {
+					font-size: 2.3rem;
+				}
+				.stories-grid, .featured-grid {
+					grid-template-columns: 1fr;
+				}
+				.home-container {
+					padding: 2.5rem 1.25rem;
+				}
 			}
 		</style>
 	</body>

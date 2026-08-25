@@ -1,0 +1,101 @@
+---
+const reelImages = [
+	{ src: '/reel/01.webp', alt: 'Pastry dough rolling and shaping' },
+	{ src: '/reel/02.webp', alt: 'Freshly baked traditional slovak rozky' },
+	{ src: '/reel/03.webp', alt: 'Embassy reception catering spread' },
+	{ src: '/reel/04.webp', alt: 'Plating beef with steamed dumpling bread' },
+	{ src: '/reel/05.webp', alt: 'Steak tartare canapes on porcelain' },
+	{ src: '/reel/06.webp', alt: 'Confit duck leg with braised red cabbage' },
+	{ src: '/reel/07.webp', alt: 'Plated dessert with berry reduction' },
+	{ src: '/reel/08.webp', alt: 'Tray of savory filled pastries' },
+	{ src: '/reel/09.webp', alt: 'Fine dining savory canapes' },
+	{ src: '/reel/10.webp', alt: 'Searing protein in stainless saute pans' },
+	{ src: '/reel/11.webp', alt: 'Crispy fried potato pancakes' },
+	{ src: '/reel/12.jpg',  alt: 'The Morrison Room kitchen team' },
+];
+---
+
+<div class="reel-strip" aria-hidden="true">
+	<div class="reel-track">
+		{reelImages.concat(reelImages).map((img) => (
+			<div class="reel-card">
+				<img src={img.src} alt={img.alt} loading="lazy" />
+			</div>
+		))}
+	</div>
+</div>
+
+<style>
+	.reel-strip {
+		position: relative;
+		width: 100vw;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
+		overflow: hidden;
+		padding: 0.5rem 0 1.5rem 0;
+	}
+
+	.reel-track {
+		display: flex;
+		gap: 1rem;
+		width: max-content;
+		animation: scrollFloat 100s linear infinite;
+	}
+
+	.reel-track:hover {
+		animation-play-state: paused;
+	}
+
+	.reel-card {
+		width: 170px;
+		min-width: 170px;
+		height: 220px;
+		border-radius: 6px;
+		overflow: hidden;
+		background: #EAE6DE;
+		border: 1px solid var(--border-card, #DFDBD3);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+		opacity: 0.9;
+		transition: opacity 0.3s ease, transform 0.3s ease;
+	}
+
+	.reel-card img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		filter: brightness(0.95) contrast(1.02);
+		transition: transform 0.4s ease, filter 0.4s ease;
+	}
+
+	.reel-card:hover {
+		opacity: 1;
+		transform: translateY(-2px);
+	}
+
+	.reel-card:hover img {
+		filter: brightness(1) contrast(1.06);
+	}
+
+	@keyframes scrollFloat {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.reel-card {
+			width: 130px;
+			min-width: 130px;
+			height: 170px;
+		}
+		.reel-track {
+			animation-duration: 60s;
+		}
+	}
+</style>
