@@ -1,7 +1,9 @@
 ---
-title: "Tradičné Rožky"
-description: "Classic Slovak Tapered Yeast Bread Rolls with Crisp Crust & Soft Crumb"
-pubDate: "Aug 24, 2026"
+title: "Tradičné Slovenské Rožky"
+description: "Standard bakery yeast rolls with a thin crisp crust and soft, airy crumb."
+difficulty: "Advanced"
+time: "2.5 hrs"
+dietary: ["Vegetarian", "Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

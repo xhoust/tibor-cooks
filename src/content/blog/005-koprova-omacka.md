@@ -1,7 +1,9 @@
 ---
 title: "Kôprová Omáčka s Vareným Hovädzím a Parenou Knedľou"
-description: "Simmered Beef Chuck in Sweet-Tart Fresh Dill Velvet Cream Sauce with Steamed Dumpling"
-pubDate: "Aug 24, 2026"
+description: "Simmered beef chuck in sweet-tart fresh dill velvet cream sauce with steamed dumpling."
+difficulty: "Intermediate"
+time: "2.5 hrs"
+dietary: ["Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

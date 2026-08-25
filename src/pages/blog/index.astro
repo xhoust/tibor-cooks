@@ -37,6 +37,9 @@ const posts = (await getCollection('blog')).sort(
 					posts.map((post) => {
 						const diff = post.data.difficulty || 'Intermediate';
 						const diffClass = `tag-${diff.toLowerCase()}`;
+						const time = post.data.time || '45 mins';
+						const dietary = post.data.dietary || [];
+
 						return (
 							<a 
 								href={`/blog/${post.id}/`} 
@@ -47,15 +50,16 @@ const posts = (await getCollection('blog')).sort(
 								<div class="card-content">
 									<div class="tag-row">
 										<span class={`mono-tag ${diffClass}`}>{diff}</span>
-										{post.data.category && (
-											<span class="mono-tag tag-neutral">{post.data.category}</span>
-										)}
+										<span class="mono-tag tag-time">{time}</span>
+										{dietary.map((diet: string) => (
+											<span class="mono-tag tag-diet">{diet}</span>
+										))}
 									</div>
 									<h2>{post.data.title}</h2>
 									{post.data.description && <p>{post.data.description}</p>}
 								</div>
 								<div class="card-footer">
-									<span>View Formulation &rarr;</span>
+									<span>View Recipe &rarr;</span>
 								</div>
 							</a>
 						);
@@ -178,7 +182,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.tag-row {
 				display: flex;
-				gap: 0.5rem;
+				gap: 0.4rem;
 				margin-bottom: 1.1rem;
 				flex-wrap: wrap;
 			}

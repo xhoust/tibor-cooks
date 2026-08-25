@@ -1,7 +1,9 @@
 ---
-title: "Sviečková na Smotane s Parenou Knedľou"
-description: "Larded Braised Beef Tenderloin in Sweet-Sour Root Vegetable Cream Sauce"
-pubDate: "Aug 24, 2026"
+title: "Sviečková na Smotane"
+description: "Larded beef braised with caramelized root vegetables, finished with sour cream, lemon, and cranberries."
+difficulty: "Advanced"
+time: "3.5 hrs"
+dietary: ["Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

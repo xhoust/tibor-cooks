@@ -1,7 +1,9 @@
 ---
 title: "Parížsky Šalát"
-description: "Traditional Slovak Parisian Salad with Fine Bologna, Sweet Peas & Mustard Dressing"
-pubDate: "Aug 24, 2026"
+description: "Traditional deli charcuterie salad with Parisian soft sausage, pickles, peas, and seasoned mayonnaise."
+difficulty: "Easy"
+time: "25 mins"
+dietary: ["Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

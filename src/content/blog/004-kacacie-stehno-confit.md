@@ -1,7 +1,9 @@
 ---
 title: "Kačacie Stehno Confit, Dusená Červená Kapusta a Borievkové Jus"
-description: "Slow-Cured Confit Duck Leg with Spiced Braised Red Cabbage & Juniper Jus"
-pubDate: "Aug 24, 2026"
+description: "Slow-cured confit duck leg served with spiced braised red cabbage and juniper jus."
+difficulty: "Advanced"
+time: "4.5 hrs"
+dietary: ["GF", "DF", "Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

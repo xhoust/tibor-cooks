@@ -7,8 +7,8 @@ const blog = defineCollection({
 		title: z.string(),
 		description: z.string().optional().default(''),
 		difficulty: z.enum(['Easy', 'Intermediate', 'Advanced']).optional().default('Intermediate'),
-		time: z.string().optional().default('Takes Time'),
-		category: z.string().optional().default('Slovak Classic'),
+		time: z.string().optional().default('45 mins'),
+		dietary: z.array(z.string()).optional().default([]), // e.g. ['GF', 'DF', 'Vegetarian', 'Vegan']
 		pubDate: z.coerce.date().optional(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),

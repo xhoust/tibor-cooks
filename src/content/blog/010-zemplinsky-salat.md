@@ -1,7 +1,9 @@
 ---
 title: "Zemplínsky Šalát"
-description: "Eastern Slovak Pickled Red Cabbage, Sweet Pea & Mayonnaise Salad"
-pubDate: "Aug 24, 2026"
+description: "Eastern Slovak cold deli salad with diced root vegetables, eggs, and rich mayonnaise dressing."
+difficulty: "Easy"
+time: "30 mins"
+dietary: ["Vegetarian", "Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

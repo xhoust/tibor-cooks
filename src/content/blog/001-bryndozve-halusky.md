@@ -1,7 +1,9 @@
 ---
 title: "Bryndzové Halušky so Slaninou"
-description: "Potato-Flour Dumplings with Sheep's Cheese & Crispy Smoked Bacon"
-pubDate: "Aug 24, 2026"
+description: "Potato-flour dumplings tossed in fresh bryndza sheep's cheese and topped with crispy smoked pork lardons."
+difficulty: "Intermediate"
+time: "45 mins"
+dietary: ["Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

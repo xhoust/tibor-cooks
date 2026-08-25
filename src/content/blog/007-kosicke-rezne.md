@@ -1,7 +1,9 @@
 ---
-title: "Košické Rezne s Tarhoňou"
-description: "Traditional Reverse-Crumbed Braised Beef with Toasted Pasta"
-pubDate: "Aug 24, 2026"
+title: "Košické Rezne"
+description: "Regional breaded pork cutlets coated in seasoned egg batter and pan-fried golden."
+difficulty: "Easy"
+time: "40 mins"
+dietary: ["Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

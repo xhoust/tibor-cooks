@@ -1,7 +1,9 @@
 ---
 title: "Treska v Majonéze"
-description: "Traditional Slovak Poached Cod & Carrot Salad in Mustard Mayonnaise"
-pubDate: "Aug 24, 2026"
+description: "Classic cold deli salad of poached cod, root vegetables, pickles, and light mayonnaise."
+difficulty: "Intermediate"
+time: "35 mins"
+dietary: ["DF", "Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

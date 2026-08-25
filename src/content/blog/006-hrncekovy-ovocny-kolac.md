@@ -1,7 +1,9 @@
 ---
 title: "Hrnčekový Ovocný Koláč s Posýpkou"
-description: "Quick Baking Powder Sheet Cake with Seasonal Fruit & Butter Streusel"
-pubDate: "Aug 24, 2026"
+description: "Quick baking powder sheet cake with seasonal fruit and buttery crumble topping."
+difficulty: "Easy"
+time: "50 mins"
+dietary: ["Vegetarian", "Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

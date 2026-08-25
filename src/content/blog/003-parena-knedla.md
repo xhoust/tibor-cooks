@@ -1,7 +1,9 @@
 ---
 title: "Parená Knedľa"
-description: "Traditional Slovak Steamed Yeast Bread Dumpling"
-pubDate: "Aug 24, 2026"
+description: "Traditional Slovak steamed yeast bread dumpling for braises and velvet cream sauces."
+difficulty: "Intermediate"
+time: "90 mins"
+dietary: ["Vegetarian", "Nut-Free"]
 ---
 
 ### Mise en Place (Metric)

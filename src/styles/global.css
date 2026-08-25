@@ -7,7 +7,7 @@
 	--card-bg: #FFFFFF;
 	--text-main: #1A1A1A;
 	--text-muted: #6B6864;
-	--border-subtle: #E5E1D8;
+	--border-subtle: #E8E5DF;
 	--border-card: #DFDBD3;
 	
 	/* Editorial Accents */
@@ -22,8 +22,10 @@
 	--tag-inter-text: #7C5211;
 	--tag-adv-bg: #F9EBE8;
 	--tag-adv-text: #8A2B22;
-	--tag-neutral-bg: #EAE6DE;
-	--tag-neutral-text: #45423E;
+	--tag-time-bg: #EAE6DE;
+	--tag-time-text: #45423E;
+	--tag-diet-bg: #E4EEF8;
+	--tag-diet-text: #1E4670;
 }
 
 *, *::before, *::after {
@@ -53,9 +55,9 @@ p, li, span, input, button {
 	font-family: var(--font-mono);
 	font-size: 0.68rem;
 	text-transform: uppercase;
-	letter-spacing: 0.1em;
+	letter-spacing: 0.08em;
 	font-weight: 600;
-	padding: 0.25rem 0.6rem;
+	padding: 0.22rem 0.55rem;
 	border-radius: 4px;
 	display: inline-block;
 }
@@ -63,4 +65,5 @@ p, li, span, input, button {
 .tag-easy { background-color: var(--tag-easy-bg); color: var(--tag-easy-text); }
 .tag-intermediate { background-color: var(--tag-inter-bg); color: var(--tag-inter-text); }
 .tag-advanced { background-color: var(--tag-adv-bg); color: var(--tag-adv-text); }
-.tag-neutral { background-color: var(--tag-neutral-bg); color: var(--tag-neutral-text); }
+.tag-time { background-color: var(--tag-time-bg); color: var(--tag-time-text); }
+.tag-diet { background-color: var(--tag-diet-bg); color: var(--tag-diet-text); }
