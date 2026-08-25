@@ -1,95 +1,56 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const featuredPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 6);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Recipes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main class="archive-container">
-			<div class="archive-header">
-				<span class="eyebrow">Culinary Archive</span>
-				<h1>Recipe Archive</h1>
-				<p class="subtitle">Standardized formulations, method parameters, and metric specifications.</p>
-				
-				<div class="search-wrap">
-					<input
-						type="text"
-						id="recipe-search"
-						placeholder="Search formulations (e.g. Sviečková, Halúšky, Lokše)..."
-					/>
+		<main class="home-container">
+			<section class="hero-section">
+				<span class="eyebrow">Washington, D.C. &bull; Resident Chef</span>
+				<h1>Tibor Markovič</h1>
+				<p class="bio">
+					Standardized Central European recipes, diplomatic service formulations, and kitchen specifications.
+				</p>
+			</section>
+
+			<section class="showcase-section">
+				<div class="section-title-row">
+					<h2>Featured Formulations</h2>
+					<a href="/blog" class="view-all-link">View all recipes &rarr;</a>
 				</div>
-			</div>
 
-			<div id="recipe-grid" class="cards-grid">
-				{
-					posts.map((post) => (
-						<a 
-							href={`/blog/${post.id}/`} 
-							class="recipe-card"
-							data-title={post.data.title.toLowerCase()}
-							data-desc={(post.data.description || '').toLowerCase()}
-						>
-							<div class="card-content">
-								<span class="spec-tag">Standard Metric Spec</span>
-								<h2>{post.data.title}</h2>
-								{post.data.description && <p>{post.data.description}</p>}
-							</div>
-							<div class="card-footer">
-								<span>View Formulation &rarr;</span>
-							</div>
-						</a>
-					))
-				}
-			</div>
-
-			<div id="no-results" class="no-results hidden">
-				<p>No formulations found matching your search.</p>
-			</div>
+				<div class="cards-grid">
+					{
+						featuredPosts.map((post) => (
+							<a href={`/blog/${post.id}/`} class="recipe-card">
+								<div class="card-content">
+									<span class="spec-tag">Metric Spec</span>
+									<h3>{post.data.title}</h3>
+									{post.data.description && <p>{post.data.description}</p>}
+								</div>
+								<div class="card-footer">
+									<span>View Spec &rarr;</span>
+								</div>
+							</a>
+						))
+					}
+				</div>
+			</section>
 		</main>
 		<Footer />
-
-		<script>
-			const searchInput = document.getElementById('recipe-search') as HTMLInputElement;
-			const cards = document.querySelectorAll('.recipe-card') as NodeListOf<HTMLElement>;
-			const noResults = document.getElementById('no-results');
-
-			searchInput?.addEventListener('input', (e) => {
-				const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
-				let visibleCount = 0;
-
-				cards.forEach((card) => {
-					const title = card.getAttribute('data-title') || '';
-					const desc = card.getAttribute('data-desc') || '';
-
-					if (title.includes(query) || desc.includes(query)) {
-						card.style.display = 'flex';
-						visibleCount++;
-					} else {
-						card.style.display = 'none';
-					}
-				});
-
-				if (noResults) {
-					if (visibleCount === 0) {
-						noResults.classList.remove('hidden');
-					} else {
-						noResults.classList.add('hidden');
-					}
-				}
-			});
-		</script>
 
 		<style>
 			*, *::before, *::after {
@@ -103,51 +64,62 @@ const posts = (await getCollection('blog')).sort(
 				padding: 0;
 				width: 100%;
 			}
-			.archive-container {
+			.home-container {
 				width: 100%;
-				max-width: 1280px; /* Scales across 2K desktop displays */
+				max-width: 1280px;
 				margin: 0 auto;
-				padding: 3.5rem 2rem;
+				padding: 4rem 2rem;
+			}
+			.hero-section {
+				margin-bottom: 3.5rem;
+				border-bottom: 1px solid #e5e5e5;
+				padding-bottom: 2.5rem;
 			}
 			.eyebrow {
 				font-family: monospace;
 				font-size: 0.72rem;
+				letter-spacing: 0.12em;
 				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				color: #888;
+				color: #777;
 				display: block;
-				margin-bottom: 0.4rem;
+				margin-bottom: 0.5rem;
 			}
-			.archive-header {
-				margin-bottom: 2.5rem;
-			}
-			.archive-header h1 {
+			h1 {
 				font-family: Georgia, serif;
-				font-size: 2.5rem;
+				font-size: 2.8rem;
 				font-weight: 700;
-				margin: 0 0 0.5rem 0;
+				margin: 0 0 0.75rem 0;
 				color: #111;
 			}
-			.subtitle {
-				color: #666;
-				font-size: 0.95rem;
-				margin: 0 0 1.5rem 0;
+			.bio {
+				font-family: Georgia, serif;
+				font-size: 1.15rem;
+				line-height: 1.6;
+				color: #555;
+				max-width: 650px;
+				margin: 0;
 			}
-			.search-wrap input {
-				width: 100%;
-				max-width: 440px;
-				padding: 0.8rem 1rem;
-				font-size: 0.92rem;
-				border: 1px solid #d4d4d4;
-				border-radius: 6px;
-				background-color: #fff;
+			.section-title-row {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				margin-bottom: 1.5rem;
+			}
+			.section-title-row h2 {
+				font-family: Georgia, serif;
+				font-size: 1.4rem;
+				font-weight: 700;
+				margin: 0;
 				color: #111;
-				outline: none;
-				transition: border-color 0.2s, box-shadow 0.2s;
 			}
-			.search-wrap input:focus {
-				border-color: #111;
-				box-shadow: 0 0 0 1px #111;
+			.view-all-link {
+				font-size: 0.85rem;
+				font-weight: 600;
+				color: #111;
+				text-decoration: none;
+			}
+			.view-all-link:hover {
+				text-decoration: underline;
 			}
 			.cards-grid {
 				display: grid;
@@ -180,9 +152,9 @@ const posts = (await getCollection('blog')).sort(
 				display: block;
 				margin-bottom: 0.5rem;
 			}
-			.card-content h2 {
+			.card-content h3 {
 				font-family: Georgia, serif;
-				font-size: 1.3rem;
+				font-size: 1.25rem;
 				font-weight: 700;
 				line-height: 1.3;
 				margin: 0 0 0.5rem 0;
@@ -196,28 +168,21 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.card-footer {
 				margin-top: 1.5rem;
-				padding-top: 1rem;
+				padding-top: 0.75rem;
 				border-top: 1px solid #f0f0f0;
 				font-size: 0.82rem;
 				font-weight: 600;
 				color: #111;
 			}
-			.no-results {
-				padding: 4rem 0;
-				text-align: center;
-				color: #777;
-				font-family: Georgia, serif;
-			}
-			.hidden {
-				display: none;
-			}
-
 			@media (max-width: 640px) {
-				.archive-container {
-					padding: 1.5rem 1rem;
+				.home-container {
+					padding: 2rem 1rem;
 				}
-				.archive-header h1 {
-					font-size: 1.85rem;
+				h1 {
+					font-size: 2rem;
+				}
+				.bio {
+					font-size: 1rem;
 				}
 				.cards-grid {
 					grid-template-columns: 1fr;
