@@ -5,66 +5,91 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<div class="brand">
-			<a href="/" class="brand-title">{SITE_TITLE}</a>
-			<span class="brand-subtitle">Culinary Archive</span>
-		</div>
+		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Recipes</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/about" class="nav-flag-link">
+				<svg class="flag-icon" viewBox="0 0 900 600" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+					<!-- Background tricolor: White, Blue, Red -->
+					<rect width="900" height="600" fill="#EE1C25"/>
+					<rect width="900" height="400" fill="#0B4EA2"/>
+					<rect width="900" height="200" fill="#FFFFFF"/>
+					<!-- Slovak Coat of Arms -->
+					<g transform="translate(180, 75) scale(0.6)">
+						<path d="M 0 0 C 400 0 400 350 200 600 C 0 350 0 0 0 0 Z" fill="#EE1C25" stroke="#FFFFFF" stroke-width="24"/>
+						<!-- Three blue mountains -->
+						<path d="M 50 480 C 100 400 150 400 200 480 C 250 400 300 400 350 480 L 350 560 C 200 600 200 600 50 560 Z" fill="#0B4EA2"/>
+						<path d="M 120 440 C 160 340 240 340 280 440 Z" fill="#0B4EA2"/>
+						<!-- Double cross -->
+						<path d="M 185 140 H 215 V 450 H 185 Z" fill="#FFFFFF"/>
+						<path d="M 140 200 H 260 V 225 H 140 Z" fill="#FFFFFF"/>
+						<path d="M 115 280 H 285 V 305 H 115 Z" fill="#FFFFFF"/>
+					</g>
+				</svg>
+				<span>About</span>
+			</HeaderLink>
 		</div>
 	</nav>
 </header>
 
 <style>
 	header {
-		background: #FFFFFF;
-		border-bottom: 1px solid #E8E5DF;
-		padding: 1.25rem 2rem;
+		margin: 0;
+		padding: 0 1em;
+		background: var(--bg-main, #FDFBF7);
+		border-bottom: 1px solid var(--border-subtle, #EAE6DE);
+	}
+	h2 {
+		margin: 0;
+		font-size: 1.1em;
+		font-family: var(--font-serif, Georgia, serif);
+		letter-spacing: -0.01em;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+		color: #1A1917;
+		font-weight: 600;
 	}
 	nav {
-		max-width: 1280px;
+		max-width: 1080px;
 		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-	}
-	.brand {
-		display: flex;
-		flex-direction: column;
-	}
-	.brand-title {
-		font-family: Georgia, serif;
-		font-size: 1.25rem;
-		font-weight: 700;
-		color: #1A1A1A;
-		text-decoration: none;
-		letter-spacing: -0.01em;
-	}
-	.brand-subtitle {
-		font-family: monospace;
-		font-size: 0.68rem;
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
-		color: #2C3E35;
-		font-weight: 600;
+		padding: 1.25em 0;
 	}
 	.internal-links {
 		display: flex;
-		gap: 1.5rem;
+		align-items: center;
+		gap: 1.5em;
 	}
-	.internal-links :global(a) {
+	nav a {
+		padding: 0.25em 0;
+		color: var(--text-muted, #5A554E);
+		border-bottom: 2px solid transparent;
 		text-decoration: none;
-		font-size: 0.9rem;
+		font-size: 0.92rem;
 		font-weight: 500;
-		color: #6B6864;
-		transition: color 0.15s ease;
+		transition: color 0.2s ease, border-color 0.2s ease;
 	}
-	.internal-links :global(a:hover),
-	.internal-links :global(a.active) {
-		color: #9E472A;
-		border-bottom: 2px solid #9E472A;
-		padding-bottom: 0.2rem;
+	nav a:hover,
+	nav a.active {
+		color: #1A1917;
+		border-bottom-color: var(--accent-green, #23372B);
+	}
+	.nav-flag-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+	}
+	.flag-icon {
+		border-radius: 2px;
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+		display: inline-block;
+		vertical-align: middle;
+		flex-shrink: 0;
 	}
 </style>
