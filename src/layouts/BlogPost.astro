@@ -1,86 +1,110 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
+		<BaseHead title={`${title} | Tibor Markovič`} description={description} />
 	</head>
 
 	<body>
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
+		<main class="spec-page">
+			<article class="spec-card">
+				<header class="spec-header">
+					<div class="meta-badge">Culinary Archive &bull; Spec Card</div>
+					<h1 class="title">{title}</h1>
+					{description && <p class="description">{description}</p>}
+				</header>
+
+				<div class="content-body">
 					<slot />
 				</div>
 			</article>
 		</main>
 		<Footer />
+
+		<style>
+			body {
+				background-color: #fbfbfa;
+				color: #1a1a1a;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+			}
+			.spec-page {
+				max-width: 780px;
+				margin: 0 auto;
+				padding: 3rem 1.5rem;
+			}
+			.spec-card {
+				background: #ffffff;
+				border: 1px solid #e5e5e5;
+				border-radius: 8px;
+				padding: 2.5rem;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+			}
+			.spec-header {
+				border-bottom: 1px solid #e5e5e5;
+				padding-bottom: 1.5rem;
+				margin-bottom: 2rem;
+			}
+			.meta-badge {
+				font-family: monospace;
+				font-size: 0.72rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: #888;
+				margin-bottom: 0.5rem;
+			}
+			.title {
+				font-family: Georgia, serif;
+				font-size: 2.2rem;
+				font-weight: 700;
+				margin: 0 0 0.5rem 0;
+				color: #111;
+				line-height: 1.2;
+			}
+			.description {
+				font-family: Georgia, serif;
+				font-style: italic;
+				font-size: 0.95rem;
+				color: #555;
+				margin: 0;
+				line-height: 1.5;
+			}
+			.content-body :global(h3) {
+				font-family: Georgia, serif;
+				font-size: 1.2rem;
+				font-weight: 700;
+				margin-top: 2rem;
+				margin-bottom: 0.75rem;
+				color: #111;
+			}
+			.content-body :global(p),
+			.content-body :global(li) {
+				font-size: 0.9rem;
+				line-height: 1.6;
+				color: #2b2b2b;
+			}
+			.content-body :global(ul),
+			.content-body :global(ol) {
+				padding-left: 1.25rem;
+				margin-bottom: 1.5rem;
+			}
+			.content-body :global(li) {
+				margin-bottom: 0.35rem;
+			}
+			.content-body :global(hr) {
+				border: none;
+				border-top: 1px solid #eee;
+				margin: 2rem 0;
+			}
+		</style>
 	</body>
 </html>

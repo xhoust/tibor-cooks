@@ -6,7 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
@@ -15,36 +15,195 @@ const posts = (await getCollection('blog')).sort(
 	<head>
 		<BaseHead title={`Recipes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="bg-[#FBFBFA] text-[#1A1A1A]">
+	<body>
 		<Header />
-		<main class="max-w-4xl mx-auto px-6 py-12">
-			<section class="mb-10">
-				<h1 class="text-3xl font-serif font-bold tracking-tight mb-2">Recipe Archive</h1>
-				<p class="text-neutral-600 text-sm">Classic Central European gastronomy, embassy formulations, and kitchen notes.</p>
-			</section>
+		<main class="archive-container">
+			<div class="archive-header">
+				<span class="eyebrow">Culinary Archive</span>
+				<h1>Recipe Archive</h1>
+				<p class="subtitle">Standardized formulations, method parameters, and metric specifications.</p>
+				
+				<div class="search-wrap">
+					<input
+						type="text"
+						id="recipe-search"
+						placeholder="Search formulations (e.g. Sviečková, Halúšky, Lokše)..."
+					/>
+				</div>
+			</div>
 
-			<ul class="divide-y divide-neutral-200">
+			<div id="recipe-grid" class="cards-grid">
 				{
 					posts.map((post) => (
-						<li class="py-6 group">
-							<a href={`/blog/${post.id || post.slug}/`} class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 no-underline">
-								<div>
-									<h2 class="text-xl font-serif font-bold text-neutral-900 group-hover:text-neutral-600 transition-colors">
-										{post.data.title}
-									</h2>
-									{post.data.description && (
-										<p class="text-neutral-600 text-sm italic mt-1">{post.data.description}</p>
-									)}
-								</div>
-								<span class="text-xs font-mono text-neutral-400 shrink-0">
-									{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-								</span>
-							</a>
-						</li>
+						<a 
+							href={`/blog/${post.id}/`} 
+							class="recipe-card"
+							data-title={post.data.title.toLowerCase()}
+							data-desc={(post.data.description || '').toLowerCase()}
+						>
+							<div class="card-content">
+								<span class="spec-tag">Standard Metric Spec</span>
+								<h2>{post.data.title}</h2>
+								{post.data.description && <p>{post.data.description}</p>}
+							</div>
+							<div class="card-footer">
+								<span>View Formulation &rarr;</span>
+							</div>
+						</a>
 					))
 				}
-			</ul>
+			</div>
+
+			<div id="no-results" class="no-results hidden">
+				<p>No formulations found matching your search.</p>
+			</div>
 		</main>
 		<Footer />
+
+		<script>
+			const searchInput = document.getElementById('recipe-search') as HTMLInputElement;
+			const cards = document.querySelectorAll('.recipe-card') as NodeListOf<HTMLElement>;
+			const noResults = document.getElementById('no-results');
+
+			searchInput?.addEventListener('input', (e) => {
+				const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+				let visibleCount = 0;
+
+				cards.forEach((card) => {
+					const title = card.getAttribute('data-title') || '';
+					const desc = card.getAttribute('data-desc') || '';
+
+					if (title.includes(query) || desc.includes(query)) {
+						card.style.display = 'flex';
+						visibleCount++;
+					} else {
+						card.style.display = 'none';
+					}
+				});
+
+				if (noResults) {
+					if (visibleCount === 0) {
+						noResults.classList.remove('hidden');
+					} else {
+						noResults.classList.add('hidden');
+					}
+				}
+			});
+		</script>
+
+		<style>
+			body {
+				background-color: #fbfbfa;
+				color: #1a1a1a;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+			}
+			.archive-container {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: 3rem 1.5rem;
+			}
+			.eyebrow {
+				font-family: monospace;
+				font-size: 0.72rem;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				color: #888;
+				display: block;
+				margin-bottom: 0.4rem;
+			}
+			.archive-header {
+				margin-bottom: 2.5rem;
+			}
+			.archive-header h1 {
+				font-family: Georgia, serif;
+				font-size: 2.25rem;
+				font-weight: 700;
+				margin: 0 0 0.5rem 0;
+				color: #111;
+			}
+			.subtitle {
+				color: #666;
+				font-size: 0.95rem;
+				margin: 0 0 1.5rem 0;
+			}
+			.search-wrap input {
+				width: 100%;
+				max-width: 420px;
+				padding: 0.75rem 1rem;
+				font-size: 0.9rem;
+				border: 1px solid #d4d4d4;
+				border-radius: 6px;
+				background-color: #fff;
+				color: #111;
+				outline: none;
+				transition: border-color 0.2s, box-shadow 0.2s;
+			}
+			.search-wrap input:focus {
+				border-color: #111;
+				box-shadow: 0 0 0 1px #111;
+			}
+			.cards-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+				gap: 1.5rem;
+			}
+			.recipe-card {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				background: #ffffff;
+				border: 1px solid #e5e5e5;
+				border-radius: 8px;
+				padding: 1.5rem;
+				text-decoration: none;
+				color: inherit;
+				transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+			}
+			.recipe-card:hover {
+				transform: translateY(-2px);
+				border-color: #999;
+				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+			}
+			.spec-tag {
+				font-family: monospace;
+				font-size: 0.7rem;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: #888;
+				display: block;
+				margin-bottom: 0.5rem;
+			}
+			.card-content h2 {
+				font-family: Georgia, serif;
+				font-size: 1.25rem;
+				font-weight: 700;
+				line-height: 1.3;
+				margin: 0 0 0.5rem 0;
+				color: #111;
+			}
+			.card-content p {
+				font-size: 0.82rem;
+				line-height: 1.5;
+				color: #555;
+				margin: 0;
+			}
+			.card-footer {
+				margin-top: 1.5rem;
+				padding-top: 1rem;
+				border-top: 1px solid #f0f0f0;
+				font-size: 0.8rem;
+				font-weight: 600;
+				color: #111;
+			}
+			.no-results {
+				padding: 4rem 0;
+				text-align: center;
+				color: #777;
+				font-family: Georgia, serif;
+			}
+			.hidden {
+				display: none;
+			}
+		</style>
 	</body>
 </html>
