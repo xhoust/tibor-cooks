@@ -1,34 +1,56 @@
 ---
 title: "Bryndzové Halušky so Slaninou"
-description: "Potato-flour dumplings tossed in fresh bryndza sheep's cheese and topped with crispy smoked pork lardons."
-difficulty: "Intermediate"
-time: "45 mins"
-dietary: ["Nut-Free"]
+description: "Traditional Slovak potato dumplings with sheep's milk cheese and crispy fatty bacon lardons."
+pubDate: 2026-08-25
+tags: ["25 MINS", "Pork", "Bryndza", "Main Courses"]
+course: "Main Course"
+yield: "4 Portions"
+prepTime: "15 mins"
+cookTime: "10 mins"
+author: "Tibor Markovič"
 ---
 
-### Mise en Place (Metric)
+<div class="print-page">
+  <h2>Ingredients</h2>
+  
+  <h3>Halušky Batter</h3>
+  <ul>
+    <li><strong>800 g</strong> Russet potatoes, peeled and blitzed completely smooth in a food processor</li>
+    <li><strong>240 g–280 g</strong> All-Purpose (AP) flour (unbleached, adjusted for potato moisture)</li>
+    <li><strong>8 g</strong> Fine sea salt</li>
+    <li><strong>To taste</strong> Coarse salt (for boiling water)</li>
+  </ul>
 
-**Halušky:**
-- 800 g Starchy russet potatoes (peeled and blitzed smooth)
-- 240–280 g All-Purpose (AP) flour
-- 8 g Fine sea salt
+  <h3>Cheese Options (Select Option A or B)</h3>
+  <ul>
+    <li><strong>Option A (Crumbled Sheep's Milk Cheese):</strong> 300 g Bulgarian Piknik sheep cheese, French Valbreso feta, or authentic Slovak bryndza, crumbled</li>
+    <li><strong>Option B (Homemade Emulsified Bryndza):</strong> 200 g high-quality sheep's milk feta, 70 g full-fat sour cream, 50 ml whole milk, and 0.5 g xanthan gum (sheared in a blender until silky)</li>
+  </ul>
 
-**House "Bryndza" Emulsion:**
-- 200 g Sheep's milk feta
-- 70 g Full-fat sour cream
-- 50 ml Whole milk
-- 0.5 g Xanthan gum
+  <h3>Crispy Topping & Garnish</h3>
+  <ul>
+    <li><strong>200 g</strong> Unsmoked, fatty bacon (like guanciale or lardo), cut into small lardons</li>
+    <li><strong>30 ml–50 ml</strong> Reserved hot starchy dumpling cooking water</li>
+    <li><strong>15 g</strong> Fresh chives, finely sliced</li>
+  </ul>
+</div>
 
-**Topping & Garnish:**
-- 200 g Smoked slab bacon (*slanina*, 8mm lardons)
-- 15 g Fresh chives (sliced)
+<div class="print-page page-two">
+  <div class="print-content-block">
+    <h2>Method</h2>
+    <ol>
+      <li><strong>Render Bacon:</strong> Add diced bacon lardons to a cold skillet over medium-low heat. Cook slowly until crispy and deep golden brown. Remove with a slotted spoon and keep warm; reserve hot rendered fat.</li>
+      <li><strong>Homemade Bryndza Prep (Option B only):</strong> Combine sheep's feta, sour cream, milk, and xanthan gum in a high-speed blender. Blend until completely smooth and emulsified.</li>
+      <li><strong>Make Dough:</strong> Blitz peeled raw potatoes until liquefied. Pour into a bowl, stir in fine sea salt, and incorporate AP flour in stages with a wooden spoon until a sticky, drop-consistency batter forms. Rest 5 minutes.</li>
+      <li><strong>Boil Dumplings:</strong> Bring a large pot of salted water to a boil. Working in two batches, place the batter onto a haluškár (or a coarse strainer/perforated device) and scrape it using a bench scraper so the small dumplings drop directly into the boiling water. Once floating, boil 2–3 minutes until tender.</li>
+      <li><strong>Emulsify & Coat:</strong> Lift dumplings directly into a warm bowl. Toss immediately with Option A (cheese + 2 tbsp bacon fat + starchy water) or fold in Option B until glossy.</li>
+      <li><strong>Plate & Finish:</strong> Divide into warm bowls, top generously with crispy bacon lardons, a drizzle of hot bacon fat, and fresh chives.</li>
+    </ol>
+  </div>
 
----
-
-### Method & Service Parameters
-
-1. **Render Bacon:** Cook lardons in a cold skillet over medium-low heat until crispy and fully rendered. Reserve hot fat.
-2. **Emulsify Cheese:** Blitz sheep's feta, sour cream, milk, and xanthan gum in a blender until velvety and smooth.
-3. **Form Dough:** Puree blitzed potatoes with salt and incorporate AP flour in stages until a cohesive, sticky drop-consistency dough forms. Rest 5 minutes.
-4. **Boil:** Drop batter through a haluškár into boiling salted water. Cook 2–3 minutes after dumplings float to the surface.
-5. **Emulsify & Finish:** Toss hot dumplings immediately with the house bryndza cream and 2 tbsp warm bacon fat. Plate in warm shallow bowls, topping with crispy lardons and chives.
+  <div class="tip-at-bottom">
+    <blockquote>
+      <strong>Chef's Tip:</strong> 8–10 mm holes for the haluškár are optimal. Never rinse dumplings in cold water—the hot surface starch is essential to emulsify the cheese sauce.
+    </blockquote>
+  </div>
+</div>
