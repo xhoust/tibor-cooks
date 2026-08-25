@@ -9,6 +9,7 @@ type Props = CollectionEntry<'blog'>['data'];
 const { title, description } = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={`${title} | Tibor Markovič`} description={description} />
@@ -19,7 +20,7 @@ const { title, description } = Astro.props;
 		<main class="spec-page">
 			<article class="spec-card">
 				<header class="spec-header">
-					<div class="meta-badge">Culinary Archive &bull; Spec Card</div>
+					<div class="meta-badge">Standard Metric Spec &bull; Diplomatic Service</div>
 					<h1 class="title">{title}</h1>
 					{description && <p class="description">{description}</p>}
 				</header>
@@ -32,124 +33,100 @@ const { title, description } = Astro.props;
 		<Footer />
 
 		<style>
-			*, *::before, *::after {
-				box-sizing: border-box;
-			}
-			body {
-				background-color: #fbfbfa;
-				color: #1a1a1a;
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-				margin: 0;
-				padding: 0;
-				width: 100%;
+			:global(html), :global(body) {
+				background-color: #F9F8F6;
+				color: #1A1A1A;
 			}
 			.spec-page {
 				width: 100%;
-				max-width: 980px; /* Expands wider for 1440p / 2K screens */
+				max-width: 960px;
 				margin: 0 auto;
-				padding: 3.5rem 2rem;
+				padding: 3.5rem 1.5rem;
 			}
 			.spec-card {
-				background: #ffffff;
-				border: 1px solid #e5e5e5;
+				background: #FFFFFF;
+				border: 1px solid #DFDBD3;
 				border-radius: 8px;
-				padding: 3rem;
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+				padding: 3.5rem;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 			}
 			.spec-header {
-				border-bottom: 1px solid #e5e5e5;
-				padding-bottom: 1.5rem;
-				margin-bottom: 2rem;
+				border-bottom: 1px solid #E8E5DF;
+				padding-bottom: 1.75rem;
+				margin-bottom: 2.25rem;
 			}
 			.meta-badge {
 				font-family: monospace;
 				font-size: 0.72rem;
-				letter-spacing: 0.1em;
+				letter-spacing: 0.12em;
 				text-transform: uppercase;
-				color: #888;
-				margin-bottom: 0.5rem;
+				color: #2C3E35;
+				font-weight: 600;
+				margin-bottom: 0.6rem;
 			}
 			.title {
 				font-family: Georgia, serif;
-				font-size: 2.5rem;
+				font-size: 2.6rem;
 				font-weight: 700;
-				margin: 0 0 0.5rem 0;
-				color: #111;
-				line-height: 1.2;
-				word-break: break-word;
+				margin: 0 0 0.6rem 0;
+				color: #1A1A1A;
+				line-height: 1.15;
 			}
 			.description {
 				font-family: Georgia, serif;
 				font-style: italic;
-				font-size: 1rem;
-				color: #555;
+				font-size: 1.05rem;
+				color: #6B6864;
 				margin: 0;
-				line-height: 1.5;
+				line-height: 1.55;
 			}
 			.content-body :global(h3) {
 				font-family: Georgia, serif;
-				font-size: 1.25rem;
+				font-size: 1.3rem;
 				font-weight: 700;
-				margin-top: 2rem;
-				margin-bottom: 0.75rem;
-				color: #111;
+				margin-top: 2.25rem;
+				margin-bottom: 0.85rem;
+				color: #1A1A1A;
+				border-left: 3px solid #9E472A;
+				padding-left: 0.75rem;
 			}
 			.content-body :global(p),
 			.content-body :global(li) {
 				font-size: 0.98rem;
-				line-height: 1.7;
-				color: #2b2b2b;
+				line-height: 1.75;
+				color: #262626;
 			}
 			.content-body :global(ul),
 			.content-body :global(ol) {
-				padding-left: 1.25rem;
+				padding-left: 1.35rem;
 				margin-bottom: 1.5rem;
 			}
 			.content-body :global(li) {
-				margin-bottom: 0.4rem;
-			}
-			.content-body :global(hr) {
-				border: none;
-				border-top: 1px solid #eee;
-				margin: 2.25rem 0;
+				margin-bottom: 0.45rem;
 			}
 			.content-body :global(table) {
 				width: 100%;
 				border-collapse: collapse;
-				margin: 1.5rem 0;
+				margin: 1.75rem 0;
 				display: block;
 				overflow-x: auto;
-				-webkit-overflow-scrolling: touch;
 			}
 			.content-body :global(th),
 			.content-body :global(td) {
-				padding: 0.6rem 0.85rem;
-				border: 1px solid #e5e5e5;
-				font-size: 0.9rem;
+				padding: 0.7rem 0.9rem;
+				border: 1px solid #E8E5DF;
+				font-size: 0.92rem;
 			}
 			.content-body :global(th) {
-				background-color: #f7f7f6;
+				background-color: #F9F8F6;
+				color: #2C3E35;
+				font-weight: 600;
 			}
 
-			/* Mobile breakpoint */
 			@media (max-width: 640px) {
-				.spec-page {
-					padding: 1rem;
-				}
-				.spec-card {
-					padding: 1.5rem 1.25rem;
-					border-radius: 6px;
-				}
-				.title {
-					font-size: 1.75rem;
-				}
-				.description {
-					font-size: 0.9rem;
-				}
-				.content-body :global(p),
-				.content-body :global(li) {
-					font-size: 0.92rem;
-				}
+				.spec-page { padding: 1.25rem; }
+				.spec-card { padding: 1.75rem 1.25rem; }
+				.title { font-size: 1.85rem; }
 			}
 		</style>
 	</body>
