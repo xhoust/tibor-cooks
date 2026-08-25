@@ -2,155 +2,173 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { SITE_TITLE } from '../../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
 
-function getBadges(post: any) {
-	const raw = post.data.tags || post.data.badges || [];
-	if (Array.isArray(raw) && raw.length > 0) return raw;
-
-	const title = post.data.title.toLowerCase();
-	const badges: string[] = [];
-
-	if (title.includes('stehno') || title.includes('sviečková') || title.includes('confit')) {
-		badges.push('ADVANCED', '4.5 HRS', 'GF', 'DF', 'NUT-FREE');
-	} else if (title.includes('knedľa') || title.includes('halušky') || title.includes('lokše')) {
-		badges.push('INTERMEDIATE', '60 MINS', 'NUT-FREE');
-	} else if (title.includes('kôprová')) {
-		badges.push('INTERMEDIATE', '2.5 HRS', 'NUT-FREE');
-	} else if (title.includes('koláč')) {
-		badges.push('EASY', '50 MINS', 'VEGETARIAN', 'NUT-FREE');
-	} else if (title.includes('treska') || title.includes('šalát')) {
-		badges.push('EASY', '25 MINS', 'NUT-FREE');
-	} else {
-		badges.push('INTERMEDIATE', '45 MINS', 'NUT-FREE');
+function formatTimeTag(tag: string): string {
+	const upper = tag.toUpperCase().trim();
+	
+	// Check for hours
+	const hrMatch = upper.match(/(\d+(\.\d+)?)\s*(HRS?|HOURS?)/);
+	if (hrMatch) {
+		const hours = parseFloat(hrMatch[1]);
+		if (hours >= 2) return `${tag} >`;
+		return `${tag} >>`;
 	}
-	return badges;
+
+	// Check for minutes
+	const minMatch = upper.match(/(\d+)\s*(MINS?|MINUTES?)/);
+	if (minMatch) {
+		const mins = parseInt(minMatch[1], 10);
+		if (mins <= 30) return `${tag} >>>`;
+		if (mins < 120) return `${tag} >>`;
+		return `${tag} >`;
+	}
+
+	return tag;
+}
+
+function getTagType(tag: string): string {
+	const t = tag.toUpperCase();
+	if (t.includes('MIN') || t.includes('HR') || t.includes('HOUR')) return 'tag-time';
+	if (t.includes('OVERNIGHT')) return 'tag-overnight';
+	if (['ITALIAN', 'FRENCH', 'AUSTRIAN', 'AMERICAN', 'GLOBAL', 'MEDITERRANEAN', 'INTERNATIONAL', 'IRISH', 'ASIAN'].includes(t)) return 'tag-origin';
+	if (['PORK', 'BEEF', 'DUCK', 'POULTRY', 'CHICKEN', 'FISH', 'POTATO', 'CHEESE', 'BRYNDZA', 'FRUIT', 'MUSHROOM', 'BREADS'].includes(t)) return 'tag-element';
+	if (['MAIN COURSES', 'SIDES', 'DESSERTS', 'BAKING', 'SOUPS', 'SALADS'].includes(t)) return 'tag-course';
+	if (['VEGETARIAN', 'VEGAN', 'NUT-FREE', 'GF', 'DF'].includes(t)) return 'tag-diet';
+	return 'tag-default';
+}
+
+function getProcessedTags(tags: string[], description: string = ''): string[] {
+	// Strip out 'TRADITIONAL' by default
+	let list = tags.filter(t => t.toUpperCase() !== 'TRADITIONAL');
+
+	const hasOvernight = list.some(t => t.toUpperCase().includes('OVERNIGHT')) || 
+	                     description.toLowerCase().includes('overnight');
+
+	// Prioritize: 1. Time, 2. Origin (if abroad), 3. Protein/Core Element, 4. Course / Diet
+	list.sort((a, b) => {
+		const score = (val: string) => {
+			const u = val.toUpperCase();
+			if (u.includes('MIN') || u.includes('HR')) return 4;
+			if (['ITALIAN', 'FRENCH', 'AUSTRIAN', 'AMERICAN', 'GLOBAL', 'MEDITERRANEAN', 'INTERNATIONAL', 'IRISH', 'ASIAN'].includes(u)) return 3;
+			if (['PORK', 'BEEF', 'DUCK', 'POULTRY', 'CHICKEN', 'FISH', 'POTATO', 'CHEESE', 'BRYNDZA', 'FRUIT', 'MUSHROOM', 'BREADS'].includes(u)) return 2;
+			return 1;
+		};
+		return score(b) - score(a);
+	});
+
+	if (hasOvernight && !list.some(t => t.toUpperCase() === 'OVERNIGHT')) {
+		list.splice(1, 0, 'OVERNIGHT');
+	}
+
+	return list;
 }
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead
-			title={`Recipes & Notes | ${SITE_TITLE}`}
-			description="Traditional Slovak comfort food, embassy kitchen staples, and personal favorites."
-		/>
+		<BaseHead title={`Recipes & Notes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<!-- Archive Header -->
-			<header class="archive-header">
+			<section class="archive-header">
 				<span class="eyebrow">RECIPE ARCHIVE</span>
-				<h1 class="archive-title">Recipes &amp; Notes</h1>
-				<p class="archive-subtitle">
+				<h1 class="archive-title">Recipes & Notes</h1>
+				<p class="archive-lead">
 					Traditional Slovak comfort food, embassy kitchen staples, and personal favorites.
 				</p>
 
-				<!-- Client-side Search -->
 				<div class="search-wrap">
-					<input
-						type="text"
-						id="recipe-search"
-						placeholder="Search recipes (e.g. Sviečková, Halušky, Lokše)..."
+					<input 
+						type="text" 
+						id="recipeSearch" 
+						placeholder="Search recipes (e.g. Sviečková, Halušky, Lokše)..." 
 						autocomplete="off"
 					/>
 				</div>
-			</header>
+			</section>
 
-			<hr class="header-divider" />
-
-			<!-- Recipe Cards Grid -->
-			<div class="recipes-grid" id="recipes-grid">
+			<section class="recipes-grid" id="recipeGrid">
 				{
 					posts.map((post) => {
-						const badges = getBadges(post);
+						const rawTags: string[] = post.data.tags || [];
+						const processedTags = getProcessedTags(rawTags, post.data.description);
+
 						return (
-							<article
-								class="recipe-card-item"
-								data-title={post.data.title.toLowerCase()}
-								data-desc={(post.data.description || '').toLowerCase()}
-							>
-								<div class="badge-cluster">
-									{badges.map((badge: string) => {
-										const isDiff = ['EASY', 'INTERMEDIATE', 'ADVANCED'].includes(badge);
-										const isTime = badge.includes('MIN') || badge.includes('HR');
-										return (
-											<span
-												class:list={[
-													'pill-badge',
-													{ 'pill-diff': isDiff },
-													{ 'pill-time': isTime },
-													{ 'pill-diet': !isDiff && !isTime },
-												]}
-											>
-												{badge}
-											</span>
-										);
-									})}
-								</div>
+							<article class="recipe-card" data-title={post.data.title.toLowerCase()} data-tags={processedTags.join(' ').toLowerCase()}>
+								{processedTags.length > 0 && (
+									<div class="tag-pills-row">
+										{processedTags.map((tag: string) => {
+											const isTime = tag.toUpperCase().includes('MIN') || tag.toUpperCase().includes('HR');
+											const displayLabel = isTime ? formatTimeTag(tag) : tag;
+											return (
+												<span class={`tag-pill ${getTagType(tag)}`}>{displayLabel}</span>
+											);
+										})}
+									</div>
+								)}
 
-								<h2 class="recipe-heading">{post.data.title}</h2>
+								<h2 class="recipe-card-title">{post.data.title}</h2>
+								
+								{post.data.description && (
+									<p class="recipe-card-desc">{post.data.description}</p>
+								)}
 
-								{post.data.description && <p class="recipe-summary">{post.data.description}</p>}
+								<div class="card-bottom-spacer"></div>
 
-								<div class="card-footer-action">
-									<a href={`/blog/${post.id}/`} class="view-link">
-										VIEW RECIPE &rarr;
-									</a>
-								</div>
+								<hr class="card-divider" />
+
+								<a href={`/blog/${post.id}/`} class="view-recipe-link">
+									VIEW RECIPE &rarr;
+								</a>
 							</article>
 						);
 					})
 				}
-			</div>
-
-			<p id="no-results" class="no-results-msg" style="display: none;">
-				No recipes match your search.
-			</p>
+			</section>
 		</main>
 		<Footer />
 
-		<script>
-			const searchInput = document.getElementById('recipe-search') as HTMLInputElement;
-			const cards = document.querySelectorAll('.recipe-card-item');
-			const noResults = document.getElementById('no-results');
+		<!-- Client-side Instant Filter -->
+		<script is:inline>
+			document.addEventListener('DOMContentLoaded', () => {
+				const searchInput = document.getElementById('recipeSearch');
+				const grid = document.getElementById('recipeGrid');
+				if (!searchInput || !grid) return;
 
-			if (searchInput) {
+				const cards = Array.from(grid.querySelectorAll('.recipe-card'));
+
 				searchInput.addEventListener('input', (e) => {
-					const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
-					let matches = 0;
-
+					const query = e.target.value.toLowerCase().trim();
 					cards.forEach((card) => {
-						const el = card as HTMLElement;
-						const title = el.getAttribute('data-title') || '';
-						const desc = el.getAttribute('data-desc') || '';
-
-						if (title.includes(query) || desc.includes(query)) {
-							el.style.display = 'flex';
-							matches++;
+						const title = card.getAttribute('data-title') || '';
+						const tags = card.getAttribute('data-tags') || '';
+						if (title.includes(query) || tags.includes(query)) {
+							card.style.display = 'flex';
 						} else {
-							el.style.display = 'none';
+							card.style.display = 'none';
 						}
 					});
-
-					if (noResults) {
-						noResults.style.display = matches === 0 ? 'block' : 'none';
-					}
 				});
-			}
+			});
 		</script>
 
 		<style>
 			main {
-				max-width: 1080px;
+				max-width: 1140px;
 				margin: 0 auto;
 				padding: 3.5rem 1.5rem 6rem 1.5rem;
+			}
+
+			.archive-header {
+				margin-bottom: 3.5rem;
 			}
 
 			.eyebrow {
@@ -166,70 +184,57 @@ function getBadges(post: any) {
 
 			.archive-title {
 				font-family: Georgia, serif;
-				font-size: 3.4rem;
+				font-size: 3.2rem;
 				line-height: 1.1;
 				font-weight: 700;
-				letter-spacing: -0.025em;
 				color: #1A1917;
 				margin: 0 0 0.85rem 0;
+				letter-spacing: -0.02em;
 			}
 
-			.archive-subtitle {
-				font-size: 1.15rem;
+			.archive-lead {
+				font-family: Georgia, serif;
 				font-style: italic;
+				font-size: 1.15rem;
 				color: #5A554E;
+				line-height: 1.5;
 				margin: 0 0 2rem 0;
-				max-width: 760px;
 			}
 
-			/* Search Field */
 			.search-wrap {
 				max-width: 440px;
-				margin-bottom: 1.5rem;
 			}
 
-			#recipe-search {
+			.search-wrap input {
 				width: 100%;
 				padding: 0.75rem 1rem;
-				font-size: 0.9rem;
+				font-size: 0.88rem;
+				font-family: inherit;
 				border: 1px solid #D8D2C4;
 				border-radius: 6px;
 				background: #FFFFFF;
 				color: #1A1917;
 				outline: none;
-				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
-				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+				transition: border-color 0.15s ease;
 			}
 
-			#recipe-search:focus {
-				border-color: #1A1917;
-				box-shadow: 0 0 0 3px rgba(35, 55, 43, 0.08);
+			.search-wrap input:focus {
+				border-color: #23372B;
 			}
 
-			#recipe-search::placeholder {
-				color: #9E978C;
-			}
-
-			.header-divider {
-				border: 0;
-				height: 1px;
-				background: #EAE6DE;
-				margin: 2rem 0 3rem 0;
-			}
-
-			/* Grid */
+			/* Grid Layout */
 			.recipes-grid {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 				gap: 1.5rem;
 			}
 
-			/* Tactile Card Item */
-			.recipe-card-item {
+			.recipe-card {
 				background: #FFFFFF;
 				border: 1px solid #DFD9CE;
-				border-radius: 8px;
-				padding: 1.75rem 1.6rem;
+				border-radius: 10px;
+				padding: 1.75rem 1.6rem 1.4rem 1.6rem;
 				display: flex;
 				flex-direction: column;
 				box-shadow: 
@@ -238,111 +243,137 @@ function getBadges(post: any) {
 				transition: transform 0.2s ease, box-shadow 0.2s ease;
 			}
 
-			.recipe-card-item:hover {
+			.recipe-card:hover {
 				transform: translateY(-2px);
 				box-shadow: 
 					0 1px 0 rgba(255, 255, 255, 0.9) inset,
 					0 6px 18px rgba(0, 0, 0, 0.06);
 			}
 
-			/* Badges */
-			.badge-cluster {
+			/* Color-Coded Tag Pills */
+			.tag-pills-row {
 				display: flex;
 				flex-wrap: wrap;
 				gap: 0.4rem;
 				margin-bottom: 1.25rem;
 			}
 
-			.pill-badge {
+			.tag-pill {
 				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 				font-size: 0.65rem;
 				font-weight: 700;
-				letter-spacing: 0.04em;
-				padding: 0.25rem 0.5rem;
-				border-radius: 4px;
+				letter-spacing: 0.05em;
 				text-transform: uppercase;
+				padding: 0.22rem 0.55rem;
+				border-radius: 4px;
+				border: 1px solid transparent;
+				white-space: nowrap;
 			}
 
-			.pill-diff {
-				background: #FDF3E7;
-				color: #A35C14;
-				border: 1px solid #F5DEB3;
+			/* Time: Warm Amber / Ochre with Speed Indicators */
+			.tag-pill.tag-time {
+				background: #FBF4E8;
+				border-color: #EBDEC5;
+				color: #935B16;
+				letter-spacing: 0.08em;
 			}
 
-			.pill-time {
-				background: #F0EDE6;
-				color: #5A554E;
-				border: 1px solid #DFD9CE;
+			/* Overnight Prep: Deep Plum / Wine Accent */
+			.tag-pill.tag-overnight {
+				background: #F4EEF7;
+				border-color: #E2D3E8;
+				color: #6D3B7D;
 			}
 
-			.pill-diet {
-				background: #E8F0F7;
-				color: #245782;
-				border: 1px solid #C8DCEF;
+			/* Origin / Abroad: Terracotta Red */
+			.tag-pill.tag-origin {
+				background: #FBEFEF;
+				border-color: #E8CDCD;
+				color: #A33838;
 			}
 
-			/* Card Text */
-			.recipe-heading {
+			/* Protein / Core Element: Warm Rust / Caramel */
+			.tag-pill.tag-element {
+				background: #F8EFEA;
+				border-color: #EAD3C6;
+				color: #964821;
+			}
+
+			/* Course: Forest Olive */
+			.tag-pill.tag-course {
+				background: #EAEFEA;
+				border-color: #CADBCB;
+				color: #2D4A34;
+			}
+
+			/* Dietary: Earthy Slate / Soft Blue */
+			.tag-pill.tag-diet {
+				background: #EFF3F7;
+				border-color: #D3DEE8;
+				color: #3B6180;
+			}
+
+			/* Default / Fallback: Parchment */
+			.tag-pill.tag-default {
+				background: #F4F1EA;
+				border-color: #E2DBD0;
+				color: #6B635B;
+			}
+
+			.recipe-card-title {
 				font-family: Georgia, serif;
-				font-size: 1.4rem;
+				font-size: 1.45rem;
 				line-height: 1.25;
 				font-weight: 700;
-				margin: 0 0 0.85rem 0;
 				color: #1A1917;
+				margin: 0 0 0.85rem 0;
 			}
 
-			.recipe-summary {
-				font-size: 0.92rem;
-				line-height: 1.6;
+			.recipe-card-desc {
+				font-size: 0.9rem;
+				line-height: 1.55;
 				color: #5A554E;
-				margin: 0 0 1.75rem 0;
+				margin: 0;
+			}
+
+			.card-bottom-spacer {
 				flex-grow: 1;
+				min-height: 1.5rem;
 			}
 
-			.card-footer-action {
-				padding-top: 1rem;
-				border-top: 1px solid #F0ECE4;
+			.card-divider {
+				border: 0;
+				height: 1px;
+				background: #EAE6DE;
+				margin: 0 0 1rem 0;
 			}
 
-			.view-link {
+			.view-recipe-link {
 				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 				font-size: 0.78rem;
 				font-weight: 700;
-				letter-spacing: 0.06em;
 				color: #B24C24;
 				text-decoration: none;
-				display: inline-block;
-				transition: color 0.15s ease;
+				letter-spacing: 0.04em;
+				align-self: flex-start;
 			}
 
-			.view-link:hover {
-				color: #8A3716;
+			.view-recipe-link:hover {
 				text-decoration: underline;
 			}
 
-			.no-results-msg {
-				text-align: center;
-				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-				color: #7A746B;
-				margin: 4rem 0;
-				font-size: 0.95rem;
-			}
-
-			@media (max-width: 900px) {
+			@media (max-width: 960px) {
 				.recipes-grid {
 					grid-template-columns: repeat(2, 1fr);
 				}
-				.archive-title {
-					font-size: 2.75rem;
-				}
 			}
 
-			@media (max-width: 600px) {
+			@media (max-width: 620px) {
 				.recipes-grid {
 					grid-template-columns: 1fr;
 				}
 				.archive-title {
-					font-size: 2.2rem;
+					font-size: 2.5rem;
 				}
 			}
 		</style>

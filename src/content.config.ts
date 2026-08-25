@@ -5,13 +5,15 @@ const blog = defineCollection({
 	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
 	schema: z.object({
 		title: z.string(),
-		description: z.string().optional().default(''),
-		difficulty: z.enum(['Easy', 'Intermediate', 'Advanced']).optional().default('Intermediate'),
-		time: z.string().optional().default('45 mins'),
-		dietary: z.array(z.string()).optional().default([]), // e.g. ['GF', 'DF', 'Vegetarian', 'Vegan']
+		description: z.string().optional(),
 		pubDate: z.coerce.date().optional(),
 		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
+		tags: z.array(z.string()).default([]),
+		course: z.string().optional(),
+		yield: z.string().optional(),
+		prepTime: z.string().optional(),
+		cookTime: z.string().optional(),
+		author: z.string().optional(),
 	}),
 });
 
