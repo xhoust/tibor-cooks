@@ -1,111 +1,222 @@
 ---
-// src/layouts/BlogPost.astro
-const { frontmatter } = Astro.props;
+const props = Astro.props;
+const data = props.data || props.frontmatter || props;
+
+const {
+  title = '',
+  description = '',
+  tags = [],
+  yield: recipeYield = '',
+  prepTime = '',
+  cookTime = '',
+} = data;
 ---
 
-<article class="recipe-card-container">
-  <!-- Recipe Header -->
-  <header class="recipe-header">
-    {/* Tags Row */}
-    {frontmatter.tags && frontmatter.tags.length > 0 && (
-      <div class="tags-row">
-        {frontmatter.tags.map((tag: string) => (
-          <span class="tag-badge">{tag}</span>
-        ))}
-      </div>
-    )}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title ? `${title} | Tibor Cooks` : 'Tibor Cooks'}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="page-wrapper">
+      <article class="recipe-card">
+        <!-- Print Trigger Header -->
+        <div class="print-header no-print">
+          <button type="button" class="print-btn" onclick="window.print()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print Card
+          </button>
+        </div>
 
-    {/* Title & Description */}
-    <h1 class="recipe-title">{frontmatter.title}</h1>
-    {frontmatter.description && (
-      <p class="recipe-description">{frontmatter.description}</p>
-    )}
+        <!-- Recipe Top Section (Header + Title + Meta Boxes) -->
+        <header class="recipe-top-section">
+          {tags && tags.length > 0 && (
+            <div class="tags-row">
+              {tags.map((tag: string) => (
+                <span class="tag-badge">{tag}</span>
+              ))}
+            </div>
+          )}
 
-    {/* 3-Column Metadata Strip (No Chef / No Overflow) */}
-    <div class="recipe-meta-grid">
-      <div class="meta-box">
-        <span class="meta-label">YIELD</span>
-        <span class="meta-value">{frontmatter.yield}</span>
-      </div>
-      <div class="meta-box">
-        <span class="meta-label">PREP</span>
-        <span class="meta-value">{frontmatter.prepTime}</span>
-      </div>
-      <div class="meta-box">
-        <span class="meta-label">COOK</span>
-        <span class="meta-value">{frontmatter.cookTime}</span>
-      </div>
-    </div>
-  </header>
+          <h1 class="recipe-title">{title}</h1>
+          {description && <p class="recipe-description">{description}</p>}
 
-  <!-- Recipe Markdown Body (Ingredients, Method, Chef's Tip) -->
-  <div class="recipe-content">
-    <slot />
-  </div>
-</article>
-<style>
-  .recipe-card-container {
-    max-width: 720px;
+          <div class="recipe-meta-grid">
+            <div class="meta-box">
+              <span class="meta-label">YIELD</span>
+              <span class="meta-value">{recipeYield || '—'}</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">PREP</span>
+              <span class="meta-value">{prepTime || '—'}</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">COOK</span>
+              <span class="meta-value">{cookTime || '—'}</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Recipe Markdown Body (Contains .print-page and .page-two) -->
+        <div class="recipe-body">
+          <slot />
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  /* Reset & Base Fonts */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #f4f3ef;
+    color: #1c1917;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 1.5rem 0.75rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-wrapper {
+    max-width: 760px;
     margin: 0 auto;
-    padding: 1.5rem 1rem;
+  }
+
+  .recipe-card {
+    background-color: #ffffff;
+    border: 1px solid #e7e5e4;
+    border-radius: 8px;
+    padding: 2rem 1.75rem;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  @media (max-width: 640px) {
+    body {
+      padding: 0.5rem 0.25rem;
+    }
+    .recipe-card {
+      padding: 1.25rem 1rem;
+      border-radius: 6px;
+    }
+  }
+
+  .print-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.25rem;
+  }
+
+  .print-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.65rem;
+    background-color: #f5f5f4;
+    border: 1px solid #d6d3d1;
+    border-radius: 4px;
+    color: #44403c;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .print-btn:hover {
+    background-color: #e7e5e4;
   }
 
   .tags-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
   }
 
   .tag-badge {
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.25rem 0.5rem;
+    padding: 0.2rem 0.5rem;
     background-color: #f5f5f4;
     border: 1px solid #e7e5e4;
-    border-radius: 4px;
-    color: #44403c;
+    border-radius: 3px;
+    color: #57534e;
   }
 
   .recipe-title {
-    font-family: serif;
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 2.25rem;
     font-weight: 700;
     line-height: 1.15;
-    margin: 0 0 0.5rem 0;
-    color: #1c1917;
+    color: #0c0a09;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .recipe-title {
+      font-size: 1.85rem;
+    }
   }
 
   .recipe-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.5;
     color: #57534e;
-    margin: 0 0 1.25rem 0;
+    margin-bottom: 1.25rem;
   }
 
-  /* 3-Column Equal Grid */
   .recipe-meta-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.5rem;
     width: 100%;
     margin-bottom: 1.5rem;
-    box-sizing: border-box;
   }
 
   .meta-box {
     background-color: #fafaf9;
     border: 1px solid #e7e5e4;
     border-radius: 4px;
-    padding: 0.5rem 0.25rem;
+    padding: 0.6rem 0.25rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 0; /* Prevents text overflow blowouts */
+    min-width: 0;
   }
 
   .meta-label {
@@ -123,5 +234,158 @@ const { frontmatter } = Astro.props;
     color: #1c1917;
     line-height: 1.2;
     word-break: break-word;
+  }
+
+  .recipe-body h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1c1917;
+    margin: 1.75rem 0 0.75rem 0;
+    border-bottom: 1px solid #f0eee6;
+    padding-bottom: 0.35rem;
+  }
+
+  .recipe-body h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #292524;
+    margin: 1.25rem 0 0.5rem 0;
+    border-left: 3px solid #8b261e;
+    padding-left: 0.5rem;
+  }
+
+  .recipe-body ul,
+  .recipe-body ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .recipe-body li {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #292524;
+    margin-bottom: 0.4rem;
+  }
+
+  .recipe-body strong {
+    font-weight: 600;
+    color: #0c0a09;
+  }
+
+  .recipe-body blockquote {
+    background-color: #fafaf9;
+    border-left: 3px solid #8b261e;
+    border-top: 1px solid #e7e5e4;
+    border-right: 1px solid #e7e5e4;
+    border-bottom: 1px solid #e7e5e4;
+    border-radius: 0 4px 4px 0;
+    padding: 0.85rem 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.88rem;
+    color: #44403c;
+  }
+
+  /* Strict 2-Page Print Layout */
+  @media print {
+    @page {
+      margin: 1cm 1.2cm;
+      size: letter portrait;
+    }
+
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      padding: 0 !important;
+      font-size: 9.5pt;
+    }
+
+    .no-print,
+    .print-header {
+      display: none !important;
+    }
+
+    .recipe-card {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+
+    /* Keep Top Section firmly attached to Page 1 Ingredients */
+    .recipe-top-section {
+      break-after: avoid;
+      page-break-after: avoid;
+      margin-bottom: 0.5rem;
+    }
+
+    .recipe-title {
+      font-size: 1.75rem !important;
+      margin-bottom: 0.25rem !important;
+    }
+
+    .recipe-description {
+      font-size: 0.85rem !important;
+      margin-bottom: 0.75rem !important;
+    }
+
+    .recipe-meta-grid {
+      margin-bottom: 1rem !important;
+    }
+
+    .meta-box {
+      padding: 0.35rem 0.2rem !important;
+    }
+
+    /* Page 1: Top section + Ingredients container */
+    .print-page:not(.page-two) {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      break-after: page;
+      page-break-after: always;
+    }
+
+    /* Page 2: Method + Tip */
+    .print-page.page-two {
+      break-before: page;
+      page-break-before: always;
+      display: flex;
+      flex-direction: column;
+      min-height: 94vh;
+      justify-content: space-between;
+    }
+
+    .print-content-block {
+      flex: 1;
+    }
+
+    .tip-at-bottom {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-top: auto;
+      padding-top: 0.75rem;
+    }
+
+    .recipe-body h2 {
+      font-size: 1.25rem !important;
+      margin: 0.75rem 0 0.5rem 0 !important;
+    }
+
+    .recipe-body h3 {
+      font-size: 0.9rem !important;
+      margin: 0.5rem 0 0.25rem 0 !important;
+    }
+
+    .recipe-body li {
+      font-size: 8.5pt !important;
+      line-height: 1.4 !important;
+      margin-bottom: 0.25rem !important;
+    }
+
+    .recipe-body blockquote {
+      background: #fafafa !important;
+      border-color: #000000 !important;
+      padding: 0.5rem 0.75rem !important;
+    }
   }
 </style>
