@@ -1,6 +1,6 @@
 ---
 title: "Košické Rezne (Obrátené Rezne)"
-description: "My absolute death row meal when made by my mama—tender beef eye of round hammered into breadcrumbs, dipped in egg, crisp-fried, and slow-braised in rich tomato-onion gravy, served with savory onion-toasted tarhoňa (or pearl couscous / fregola)."
+description: "My absolute death row meal when made by my mom, tender beef eye of round hammered into breadcrumbs, dipped in egg, crisp-fried, and slow-braised in rich tomato-onion gravy, served with savory onion-toasted tarhoňa (or pearl couscous / fregola)."
 pubDate: 2026-08-25
 tags: ["2 HOURS", "Beef", "Pasta", "Main Courses"]
 course: "Main Course"

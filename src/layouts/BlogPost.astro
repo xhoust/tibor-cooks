@@ -1,223 +1,127 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-
-interface Props {
-	title: string;
-	description?: string;
-	tags?: string[];
-	yield?: string;
-	prepTime?: string;
-	cookTime?: string;
-	author?: string;
-}
-
-const { 
-	title, 
-	description = '', 
-	tags = [],
-	yield: recipeYield, 
-	prepTime, 
-	cookTime, 
-	author 
-} = Astro.props;
+// src/layouts/BlogPost.astro
+const { frontmatter } = Astro.props;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={`${title} | Tibor Cooks`} description={description} />
-	</head>
+<article class="recipe-card-container">
+  <!-- Recipe Header -->
+  <header class="recipe-header">
+    {/* Tags Row */}
+    {frontmatter.tags && frontmatter.tags.length > 0 && (
+      <div class="tags-row">
+        {frontmatter.tags.map((tag: string) => (
+          <span class="tag-badge">{tag}</span>
+        ))}
+      </div>
+    )}
 
-	<body>
-		<div class="site-header-wrap no-print">
-			<Header />
-		</div>
-		
-		<main class="page-wrap">
-			<div class="recipe-container">
-				<div class="screen-action-bar no-print">
-					<span></span>
-					<button class="btn-print" onclick="window.print()">
-						<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="6 9 6 2 18 2 18 9"></polyline>
-							<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-							<rect x="6" y="14" width="12" height="8"></rect>
-						</svg>
-						Print Card
-					</button>
-				</div>
+    {/* Title & Description */}
+    <h1 class="recipe-title">{frontmatter.title}</h1>
+    {frontmatter.description && (
+      <p class="recipe-description">{frontmatter.description}</p>
+    )}
 
-				<header class="recipe-main-header">
-					{tags.length > 0 && (
-						<div class="meta-tags-row">
-							{tags.map((tag: string) => (
-								<span class="recipe-tag-pill">{tag}</span>
-							))}
-						</div>
-					)}
-					<h1 class="recipe-title">{title}</h1>
-					{description && <p class="recipe-desc">{description}</p>}
+    {/* 3-Column Metadata Strip (No Chef / No Overflow) */}
+    <div class="recipe-meta-grid">
+      <div class="meta-box">
+        <span class="meta-label">YIELD</span>
+        <span class="meta-value">{frontmatter.yield}</span>
+      </div>
+      <div class="meta-box">
+        <span class="meta-label">PREP</span>
+        <span class="meta-value">{frontmatter.prepTime}</span>
+      </div>
+      <div class="meta-box">
+        <span class="meta-label">COOK</span>
+        <span class="meta-value">{frontmatter.cookTime}</span>
+      </div>
+    </div>
+  </header>
 
-					<div class="spec-grid">
-						{recipeYield && (
-							<div class="spec-cell">
-								<span class="spec-label">YIELD</span>
-								<span class="spec-val">{recipeYield}</span>
-							</div>
-						)}
-						{prepTime && (
-							<div class="spec-cell">
-								<span class="spec-label">PREP</span>
-								<span class="spec-val">{prepTime}</span>
-							</div>
-						)}
-						{cookTime && (
-							<div class="spec-cell">
-								<span class="spec-label">COOK</span>
-								<span class="spec-val">{cookTime}</span>
-							</div>
-						)}
-						{author && (
-							<div class="spec-cell">
-								<span class="spec-label">CHEF</span>
-								<span class="spec-val">{author}</span>
-							</div>
-						)}
-					</div>
-				</header>
+  <!-- Recipe Markdown Body (Ingredients, Method, Chef's Tip) -->
+  <div class="recipe-content">
+    <slot />
+  </div>
+</article>
+<style>
+  .recipe-card-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
 
-				<div class="recipe-markdown-body">
-					<slot />
-				</div>
-			</div>
-		</main>
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
 
-		<div class="no-print">
-			<Footer />
-		</div>
+  .tag-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    background-color: #f5f5f4;
+    border: 1px solid #e7e5e4;
+    border-radius: 4px;
+    color: #44403c;
+  }
 
-		<!-- Screen Styles -->
-		<style>
-			.page-wrap { max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem 6rem 1.5rem; }
-			.recipe-container { background: #FFFFFF; border: 1px solid #DFD9CE; border-radius: 8px; padding: 2.75rem 2.5rem; }
-			.screen-action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-			.btn-print { display: inline-flex; align-items: center; gap: 0.4rem; background: #F4F1EA; border: 1px solid #D3CCC0; padding: 0.35rem 0.75rem; border-radius: 5px; font-family: ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
-			
-			.meta-tags-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-			.recipe-tag-pill { 
-				background: #F4F1EA; 
-				border: 1px solid #D3CCC0; 
-				color: #23372B; 
-				padding: 0.2rem 0.6rem; 
-				border-radius: 4px; 
-				font-family: ui-monospace, monospace; 
-				font-size: 0.7rem; 
-				font-weight: 700; 
-				letter-spacing: 0.05em; 
-				text-transform: uppercase; 
-			}
+  .recipe-title {
+    font-family: serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 0.5rem 0;
+    color: #1c1917;
+  }
 
-			.recipe-title { font-family: Georgia, serif; font-size: 2.5rem; line-height: 1.15; color: #1A1917; margin: 0 0 0.5rem 0; }
-			.recipe-desc { font-size: 1.05rem; color: #5A554E; margin: 0 0 1.25rem 0; }
-			.spec-grid { display: flex; gap: 0.65rem; margin-bottom: 1.75rem; }
-			.spec-cell { background: #F8F6F0; border: 1px solid #E4DFD5; padding: 0.35rem 0.65rem; font-family: ui-monospace, monospace; font-size: 0.75rem; display: inline-flex; gap: 0.4rem; }
-			.spec-label { color: #8C827A; font-weight: 600; }
-			.spec-val { color: #1A1917; font-weight: 700; }
-		</style>
+  .recipe-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #57534e;
+    margin: 0 0 1.25rem 0;
+  }
 
-		<!-- Ink-Efficient Strict Print Engine -->
-		<style is:global>
-			@media print {
-				@page { size: letter portrait; margin: 12mm; }
+  /* 3-Column Equal Grid */
+  .recipe-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+  }
 
-				html, body {
-					background: #FFFFFF !important;
-					color: #000000 !important;
-					margin: 0 !important;
-					padding: 0 !important;
-				}
+  .meta-box {
+    background-color: #fafaf9;
+    border: 1px solid #e7e5e4;
+    border-radius: 4px;
+    padding: 0.5rem 0.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 0; /* Prevents text overflow blowouts */
+  }
 
-				/* Hide website layout elements */
-				.no-print, .site-header-wrap, footer, nav, .screen-action-bar, .recipe-main-header {
-					display: none !important;
-				}
+  .meta-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #78716c;
+    margin-bottom: 0.15rem;
+  }
 
-				/* Reset container for print */
-				.page-wrap {
-					max-width: 100% !important;
-					padding: 0 !important;
-					margin: 0 !important;
-				}
-
-				.recipe-container {
-					background: transparent !important;
-					border: none !important;
-					box-shadow: none !important;
-					padding: 0 !important;
-					margin: 0 !important;
-				}
-
-				/* Print Pages */
-				.recipe-markdown-body {
-					display: block !important;
-				}
-
-				.print-page {
-					box-sizing: border-box !important;
-					border: 2pt solid #000000 !important;
-					padding: 18pt 20pt !important;
-					height: 245mm !important;
-					max-height: 245mm !important;
-					display: flex !important;
-					flex-direction: column !important;
-					page-break-after: always !important;
-					break-after: page !important;
-					overflow: hidden !important;
-					background: #FFFFFF !important;
-				}
-
-				.print-page.page-two {
-					justify-content: space-between !important;
-				}
-
-				.print-page h2 {
-					font-family: ui-monospace, monospace !important;
-					font-size: 10pt !important;
-					font-weight: bold !important;
-					text-transform: uppercase !important;
-					border-bottom: 1pt solid #000000 !important;
-					padding-bottom: 3pt !important;
-					margin: 0 0 8pt 0 !important;
-				}
-
-				.print-page h3 {
-					font-family: Georgia, serif !important;
-					font-size: 9.5pt !important;
-					font-weight: bold !important;
-					margin: 8pt 0 2pt 0 !important;
-				}
-
-				.print-page ul, .print-page ol {
-					padding-left: 14pt !important;
-					margin: 0 0 6pt 0 !important;
-				}
-
-				.print-page li {
-					font-size: 8.5pt !important;
-					line-height: 1.35 !important;
-					margin-bottom: 2pt !important;
-				}
-
-				.print-page blockquote {
-					background: transparent !important;
-					border-left: 2pt solid #000000 !important;
-					padding: 4pt 8pt !important;
-					margin: 0 !important;
-					font-size: 8pt !important;
-					line-height: 1.3 !important;
-				}
-			}
-		</style>
-	</body>
-</html>
+  .meta-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1c1917;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+</style>
