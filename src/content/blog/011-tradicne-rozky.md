@@ -2,7 +2,7 @@
 title: "Tradičné Slovenské Rožky"
 description: "Iconic crisp, golden crescent bread rolls with a soft, airy crumb—classic bakery style with plant-based options."
 pubDate: 2026-08-25
-tags: ["2 HOURS", "Baking", "Bread", "Vegan"]
+tags: ["2 HOURS", "Baking", "Bread", "Vegan", "FREEZER-FRIENDLY ❄️"]
 course: "Bakery / Bread"
 yield: "10–12 Rožky"
 prepTime: "25 mins"

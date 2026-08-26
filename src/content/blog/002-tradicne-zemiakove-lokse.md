@@ -2,7 +2,7 @@
 title: "Tradičné Zemiakové Lokše"
 description: "Traditional Slovak dry-griddled potato flatbreads brushed with rich melted duck fat."
 pubDate: 2026-08-25
-tags: ["35 MINS", "Potato", "Sides", "Vegetarian"]
+tags: ["35 MINS", "Potato", "Sides", "Vegetarian", "FREEZER-FRIENDLY ❄️"]
 course: "Side Dish"
 yield: "10–12 Flatbreads"
 prepTime: "20 mins"

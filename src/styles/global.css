@@ -28,6 +28,15 @@
 	--tag-diet-text: #1E4670;
 }
 
+/* Freezer Friendly Badge */
+.tag-badge:has-text("FREEZER"),
+[class*="freezer"],
+.tag-freezer {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
 *, *::before, *::after {
 	box-sizing: border-box;
 }
