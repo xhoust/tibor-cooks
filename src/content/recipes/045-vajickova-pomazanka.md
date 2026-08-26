@@ -26,7 +26,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li>Fresh crusty sourdough, rye bread, or <a href="/blog/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
+    <li>Fresh crusty sourdough, rye bread, or <a href="/recipes/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
     <li>Sliced radishes and extra snipped chives.</li>
   </ul>
 </div>

@@ -48,7 +48,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li><strong>1 loaf</strong> Sliced warm <a href="/blog/003-parena-knedla">Parená Knedľa</a> (or karlovarská knedľa)</li>
+    <li><strong>1 loaf</strong> Sliced warm <a href="/recipes/003-parena-knedla">Parená Knedľa</a> (or karlovarská knedľa)</li>
     <li><strong>Lingonberry or cranberry compote</strong> (brusnice)</li>
     <li><strong>Lemon slices & double cream</strong></li>
   </ul>

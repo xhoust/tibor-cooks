@@ -63,7 +63,7 @@ const journalEntries = [
             A collection of traditional Slovak recipes I grew up with—taught by the great cooks in my family and fueled by nostalgia—alongside personal global favorites, embassy kitchen notes, and bits of life across the USA.
           </p>
           <div class="hero-actions">
-            <a href="/blog" class="btn btn-primary">Browse Recipes</a>
+            <a href="/recipes" class="btn btn-primary">Browse Recipes</a>
             <a href="/about" class="btn btn-secondary">About Me & Gallery</a>
           </div>
         </div>
@@ -118,14 +118,14 @@ const journalEntries = [
             <span class="eyebrow">HANDPICKED SELECTION</span>
             <h2 class="section-title">Featured Recipes</h2>
           </div>
-          <a href="/blog" class="view-all-link">View All Recipes &rarr;</a>
+          <a href="/recipes" class="view-all-link">View All Recipes &rarr;</a>
         </div>
 
         <div class="recipes-grid">
           {
             featuredPosts.map((post) => (
               <article class="recipe-two-tone-card">
-                <a href={`/blog/${post.id}/`} class="recipe-card-link">
+                <a href={`/recipes/${post.id}/`} class="recipe-card-link">
                   <div class="card-top-banner">
                     <span class="recipe-badge">{(post.data.course || 'RECIPE').toUpperCase()}</span>
                   </div>

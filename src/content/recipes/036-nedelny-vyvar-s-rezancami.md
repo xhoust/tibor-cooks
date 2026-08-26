@@ -45,7 +45,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li><a href="/blog/035-domace-rezance-a-fliacky"><strong>Domáce Tenké Rezance:</strong></a> Handcrafted fine soup egg vermicelli, boiled separately.</li>
+    <li><a href="/recipes/035-domace-rezance-a-fliacky"><strong>Domáce Tenké Rezance:</strong></a> Handcrafted fine soup egg vermicelli, boiled separately.</li>
     <li>Thinly sliced tender cooked carrots, shredded poultry or beef, drops of lovage oil, and chopped fresh parsley.</li>
   </ul>
 </div>
@@ -65,7 +65,7 @@ author: "Tibor Markovič"
       <li><strong>Add Root Vegetables & Lovage:</strong> Add peeled carrots, parsley roots, celeriac, kohlrabi, leek, bundled parsley greens, and fresh lovage sprigs. Continue to simmer gently for an additional 60–75 minutes until vegetables are fork-tender but hold their clean shape.</li>
       <li><strong>Strain & Clarify:</strong> Turn off heat. Gently lift out meat and vegetables with tongs and set aside to cool slightly. Pour the broth through a fine-mesh sieve lined with cheesecloth or a clean linen towel into a clean pot. Do not press down on solids to keep the broth crystal clear.</li>
       <li><strong>Final Seasoning:</strong> Skim off excess surface fat if desired. Stir in a microplane pinch of fresh nutmeg and adjust seasoning with extra sea salt.</li>
-      <li><strong>Assemble & Serve:</strong> Place a portion of separately boiled <a href="/blog/035-domace-rezance-a-fliacky">Domáce Tenké Rezance</a> into warm soup bowls. Add sliced carrots, picked meat pieces, ladle over boiling hot clear broth, and finish with a drop of lovage oil and fresh chopped parsley.</li>
+      <li><strong>Assemble & Serve:</strong> Place a portion of separately boiled <a href="/recipes/035-domace-rezance-a-fliacky">Domáce Tenké Rezance</a> into warm soup bowls. Add sliced carrots, picked meat pieces, ladle over boiling hot clear broth, and finish with a drop of lovage oil and fresh chopped parsley.</li>
     </ol>
   </div>
 

@@ -28,9 +28,9 @@ author: "Tibor Markovič"
 
   <h3>Recommended Pairings</h3>
   <ul>
-    <li><a href="/blog/017-vyprazany-syr"><strong>Vyprážaný Syr:</strong></a> Crispy fried breaded cheese.</li>
-    <li><a href="/blog/021-zbojnicka-kapsa"><strong>Zbojnícka Kapsa:</strong></a> Crispy potato pancake pocket with chicken sauté.</li>
-    <li><a href="/blog/014-vyprazany-bravcovy-rezen"><strong>Vyprážaný Bravčový Rezeň:</strong></a> Golden pan-fried pork cutlets.</li>
+    <li><a href="/recipes/017-vyprazany-syr"><strong>Vyprážaný Syr:</strong></a> Crispy fried breaded cheese.</li>
+    <li><a href="/recipes/021-zbojnicka-kapsa"><strong>Zbojnícka Kapsa:</strong></a> Crispy potato pancake pocket with chicken sauté.</li>
+    <li><a href="/recipes/014-vyprazany-bravcovy-rezen"><strong>Vyprážaný Bravčový Rezeň:</strong></a> Golden pan-fried pork cutlets.</li>
   </ul>
 </div>
 

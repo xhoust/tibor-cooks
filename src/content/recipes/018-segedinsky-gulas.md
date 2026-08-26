@@ -37,7 +37,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li><a href="/blog/003-parena-knedla"><strong>Domáca Parená Knedľa:</strong></a> Steamed yeast dumpling slices.</li>
+    <li><a href="/recipes/003-parena-knedla"><strong>Domáca Parená Knedľa:</strong></a> Steamed yeast dumpling slices.</li>
   </ul>
 </div>
 

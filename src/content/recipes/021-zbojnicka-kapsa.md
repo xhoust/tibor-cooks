@@ -44,7 +44,7 @@ author: "Tibor Markovič"
   <ul>
     <li><strong>120 g</strong> Young unsmoked provolone, finely grated</li>
     <li>Fresh flat-leaf parsley, finely chopped</li>
-    <li><a href="/blog/022-tatarska-omacka"><strong>Domáca Tatárska Omáčka:</strong></a> Homemade herbed caper tartar sauce for serving.</li>
+    <li><a href="/recipes/022-tatarska-omacka"><strong>Domáca Tatárska Omáčka:</strong></a> Homemade herbed caper tartar sauce for serving.</li>
   </ul>
 </div>
 
@@ -57,7 +57,7 @@ author: "Tibor Markovič"
       <li><strong>Mix Pancake Batter:</strong> Place raw grated potatoes into a large bowl. Stir in egg, 3 cloves grated garlic, crushed marjoram, fine sea salt, and black pepper. Gradually stir in AP flour just until a cohesive, wet batter forms.</li>
       <li><strong>Fry Placky:</strong> Heat 25 g lard in a large non-stick skillet over medium-high heat. Ladle a generous portion of batter (~180 g) into the pan, spreading it with the back of a spoon into an even, thin oval disc roughly 22–24 cm wide. Fry for 3–4 minutes until bottom is deep golden and crisp, flip gently, and fry the second side for 2–3 minutes.</li>
       <li><strong>Fill & Fold:</strong> Transfer hot potato pancake to a warmed plate. Spoon a fourth of the hot chicken and corn sauté across one half of the pancake. Fold the empty half over the filling to create a half-moon pocket (kapsa).</li>
-      <li><strong>Garnish & Serve:</strong> Immediately scatter finely grated cheese over top so it melts against the hot crust. Serve piping hot alongside a generous dollop of cold <a href="/blog/022-tatarska-omacka">Domáca Tatárska Omáčka</a> and chopped fresh parsley.</li>
+      <li><strong>Garnish & Serve:</strong> Immediately scatter finely grated cheese over top so it melts against the hot crust. Serve piping hot alongside a generous dollop of cold <a href="/recipes/022-tatarska-omacka">Domáca Tatárska Omáčka</a> and chopped fresh parsley.</li>
     </ol>
   </div>
 

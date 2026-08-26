@@ -42,7 +42,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li><strong>Choice of Side:</strong> Warm sliced <a href="/blog/003-parena-knedla">Parená Knedľa</a>, boiled buttered baby potatoes with parsley, or thick slices of fresh sourdough/crusty bread</li>
+    <li><strong>Choice of Side:</strong> Warm sliced <a href="/recipes/003-parena-knedla">Parená Knedľa</a>, boiled buttered baby potatoes with parsley, or thick slices of fresh sourdough/crusty bread</li>
   </ul>
 </div>
 

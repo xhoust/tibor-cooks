@@ -36,8 +36,8 @@ author: "Tibor Markovič"
 
   <h3>Recommended Prívarok Pairings</h3>
   <ul>
-    <li><a href="/blog/027-zemiaky-na-kyslo"><strong>Zemiaky na Kyslo:</strong></a> Creamy sweet-sour potato stew with dill and bay leaves.</li>
-    <li><a href="/blog/028-sosovicovy-privarok"><strong>Šošovicový Prívarok:</strong></a> Rich sweet-sour brown lentil stew.</li>
+    <li><a href="/recipes/027-zemiaky-na-kyslo"><strong>Zemiaky na Kyslo:</strong></a> Creamy sweet-sour potato stew with dill and bay leaves.</li>
+    <li><a href="/recipes/028-sosovicovy-privarok"><strong>Šošovicový Prívarok:</strong></a> Rich sweet-sour brown lentil stew.</li>
   </ul>
 </div>
 

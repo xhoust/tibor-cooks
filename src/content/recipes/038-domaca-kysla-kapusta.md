@@ -53,7 +53,7 @@ author: "Tibor Markovič"
           <li><em>Cool Maturation:</em> Move the vessel to a cool basement, pantry, or refrigerator (10°C–15°C) for 2 to 3 weeks to slowly mature, develop complex acidity, and preserve crunch.</li>
         </ul>
       </li>
-      <li><strong>Harvest & Harvest Juška:</strong> Once pleasantly sour, crisp, and tangy, use directly in kapustnica, holúbky, and strapačky. Pour off the pure, probiotic sauerkraut juice (juška) into clean glass bottles to keep in the fridge for <a href="/blog/037-vychodnarska-hubova-macanka">Východniarska Hubová Mačanka</a>.</li>
+      <li><strong>Harvest & Harvest Juška:</strong> Once pleasantly sour, crisp, and tangy, use directly in kapustnica, holúbky, and strapačky. Pour off the pure, probiotic sauerkraut juice (juška) into clean glass bottles to keep in the fridge for <a href="/recipes/037-vychodnarska-hubova-macanka">Východniarska Hubová Mačanka</a>.</li>
     </ol>
   </div>
 

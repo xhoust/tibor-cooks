@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('recipes')).sort(
 	(a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
 
@@ -125,7 +125,7 @@ function getProcessedTags(tags: string[], description: string = ''): string[] {
 
 								<hr class="card-divider" />
 
-								<a href={`/blog/${post.id}/`} class="view-recipe-link">
+								<a href={`/recipes/${post.id}/`} class="view-recipe-link">
 									VIEW RECIPE &rarr;
 								</a>
 							</article>

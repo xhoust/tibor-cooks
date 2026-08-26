@@ -29,7 +29,7 @@ author: "Tibor Markovič"
 
   <h3>Recommended Side Pairings</h3>
   <ul>
-    <li><a href="/blog/022-tatarska-omacka"><strong>Domáca Tatárska Omáčka:</strong></a> Homemade cold tartar sauce with shallots, capers, gherkins, and fresh parsley.</li>
+    <li><a href="/recipes/022-tatarska-omacka"><strong>Domáca Tatárska Omáčka:</strong></a> Homemade cold tartar sauce with shallots, capers, gherkins, and fresh parsley.</li>
     <li>Boiled baby potatoes tossed in butter and parsley, or crispy fries.</li>
   </ul>
 </div>
@@ -55,7 +55,7 @@ author: "Tibor Markovič"
       </li>
       <li><strong>Freeze:</strong> Transfer double-breaded portions to a parchment-lined tray and freeze for 15–20 minutes to firm up the structural crust.</li>
       <li><strong>Fry:</strong> Heat oil or lard in a heavy skillet over medium-high heat to 175°C–180°C (at least 2 cm deep). Fry cold cheese portions for 90–120 seconds per side until deep golden and blistered. Do not overcrowd the pan.</li>
-      <li><strong>Drain & Serve:</strong> Lift out with a slotted spatula onto a wire rack for 30 seconds to drain excess fat. Serve piping hot with a generous side of cold <a href="/blog/022-tatarska-omacka">Domáca Tatárska Omáčka</a> and boiled baby potatoes or fries.</li>
+      <li><strong>Drain & Serve:</strong> Lift out with a slotted spatula onto a wire rack for 30 seconds to drain excess fat. Serve piping hot with a generous side of cold <a href="/recipes/022-tatarska-omacka">Domáca Tatárska Omáčka</a> and boiled baby potatoes or fries.</li>
     </ol>
   </div>
 

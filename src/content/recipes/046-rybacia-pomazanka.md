@@ -28,7 +28,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li>Fresh crusty bread or sliced <a href="/blog/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
+    <li>Fresh crusty bread or sliced <a href="/recipes/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
     <li>Extra salted finely diced white onion and snipped chives on top.</li>
   </ul>
 </div>

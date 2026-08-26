@@ -36,7 +36,7 @@ author: "Tibor Markovič"
   <ul>
     <li><strong>4 L</strong> Water + <strong>15 g</strong> Fine sea salt (for cooking halušky)</li>
     <li>Crisp rendered bacon bits and warm rendered fat for garnish</li>
-    <li><a href="/blog/001-bryndzove-halusky"><strong>Bryndzové Halušky:</strong></a> Recommended to serve alongside for a traditional half-and-half platter (pol na pol).</li>
+    <li><a href="/recipes/001-bryndzove-halusky"><strong>Bryndzové Halušky:</strong></a> Recommended to serve alongside for a traditional half-and-half platter (pol na pol).</li>
   </ul>
 </div>
 
@@ -55,7 +55,7 @@ author: "Tibor Markovič"
 
   <div class="tip-at-bottom">
     <blockquote>
-      <strong>Chef's Tip:</strong> Strapačky are at their absolute best when enjoyed side-by-side with a bowl of warm <a href="/blog/001-bryndzove-halusky">Bryndzové Halušky</a>. The sharp, savory tang of the sheep cheese balances the rich, caramelized acidity of the sauerkraut and smoked pork lardons.
+      <strong>Chef's Tip:</strong> Strapačky are at their absolute best when enjoyed side-by-side with a bowl of warm <a href="/recipes/001-bryndzove-halusky">Bryndzové Halušky</a>. The sharp, savory tang of the sheep cheese balances the rich, caramelized acidity of the sauerkraut and smoked pork lardons.
     </blockquote>
   </div>
 </div>

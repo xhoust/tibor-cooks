@@ -32,7 +32,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li>Fresh crusty bread, dark rye, or white <a href="/blog/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
+    <li>Fresh crusty bread, dark rye, or white <a href="/recipes/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
     <li>Sliced crisp red radishes and raw green peppers on the side.</li>
   </ul>
 </div>

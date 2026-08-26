@@ -15,8 +15,8 @@ author: "Tibor Markovič"
   
   <h3>The Sour Base & Forest Element</h3>
   <ul>
-    <li><strong>1 kg</strong> Fermented sauerkraut, unrinsed (<a href="/blog/038-domaca-kysla-kapusta/">Domáca Kyslá Kapusta</a>)</li>
-    <li><strong>500 ml</strong> Homemade Juška (<a href="/blog/038-domaca-kysla-kapusta/">cabbage fermentation juice</a>)</li>
+    <li><strong>1 kg</strong> Fermented sauerkraut, unrinsed (<a href="/recipes/038-domaca-kysla-kapusta/">Domáca Kyslá Kapusta</a>)</li>
+    <li><strong>500 ml</strong> Homemade Juška (<a href="/recipes/038-domaca-kysla-kapusta/">cabbage fermentation juice</a>)</li>
     <li><strong>40 g</strong> Hand-picked dried wild mushrooms (dried porcini or boletes)</li>
   </ul>
 

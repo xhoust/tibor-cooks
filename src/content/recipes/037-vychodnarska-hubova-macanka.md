@@ -43,7 +43,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve (Na Máčanie)</h3>
   <ul>
-    <li>Thick slabs of rustic sourdough bread or homemade <a href="/blog/003-parena-knedla">Parená Knedľa</a> for dipping.</li>
+    <li>Thick slabs of rustic sourdough bread or homemade <a href="/recipes/003-parena-knedla">Parená Knedľa</a> for dipping.</li>
   </ul>
 </div>
 

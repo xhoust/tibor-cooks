@@ -35,7 +35,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li><a href="/blog/039-figovo-datlove-chutney.md"><strong>Figovo-Datľové Chutney:</strong></a> Spiced sweet and sour fig-date chutney.</li>
+    <li><a href="/recipes/039-figovo-datlove-chutney.md"><strong>Figovo-Datľové Chutney:</strong></a> Spiced sweet and sour fig-date chutney.</li>
     <li>Cornichons or sweet pickled gherkins, whole grain mustard, and warm toasted brioche or crusty sourdough.</li>
   </ul>
 </div>

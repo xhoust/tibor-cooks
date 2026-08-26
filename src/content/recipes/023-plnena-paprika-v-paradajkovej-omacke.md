@@ -43,7 +43,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li><a href="/blog/003-parena-knedla"><strong>Domáca Parená Knedľa:</strong></a> Warm steamed yeast dumpling slices, or boiled baby potatoes.</li>
+    <li><a href="/recipes/003-parena-knedla"><strong>Domáca Parená Knedľa:</strong></a> Warm steamed yeast dumpling slices, or boiled baby potatoes.</li>
   </ul>
 </div>
 
@@ -57,7 +57,7 @@ author: "Tibor Markovič"
       <li><strong>Build Stovetop Tomato Sauce:</strong> In a wide Dutch oven or deep heavy pot, melt 40 g pork lard over medium heat. Whisk in AP flour and cook for 2 minutes to form a pale golden roux (zápražka). Whisk in tomato paste and cook for 1 minute until fragrant. Gradually pour in hot stock and tomato passata, whisking vigorously to avoid lumps.</li>
       <li><strong>Season & Simmer:</strong> Add bay leaves, allspice berries, sugar, pinch of cinnamon, and salt. Bring to a gentle boil, stirring until smooth and lightly thickened.</li>
       <li><strong>Poach Stuffed Peppers:</strong> Submerge stuffed peppers and free meatballs into simmering sauce in a single layer. Lower heat to medium-low, cover with a lid, and simmer gently for 40–45 minutes until meat is fully cooked and rice is tender.</li>
-      <li><strong>Adjust & Serve:</strong> Discard bay leaves and allspice. Taste sauce and adjust balance with extra sugar or salt if needed. Serve piping hot with warm slices of steamed <a href="/blog/003-parena-knedla">Domáca Parená Knedľa</a> or boiled potatoes.</li>
+      <li><strong>Adjust & Serve:</strong> Discard bay leaves and allspice. Taste sauce and adjust balance with extra sugar or salt if needed. Serve piping hot with warm slices of steamed <a href="/recipes/003-parena-knedla">Domáca Parená Knedľa</a> or boiled potatoes.</li>
     </ol>
   </div>
 

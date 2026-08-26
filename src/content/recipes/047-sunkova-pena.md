@@ -27,7 +27,7 @@ author: "Tibor Markovič"
   <h3>Garnish & To Serve</h3>
   <ul>
     <li><strong>2–3 tbsp</strong> Fresh chives, finely snipped</li>
-    <li>Warm crusty bread, toasted brioche, or fresh <a href="/blog/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
+    <li>Warm crusty bread, toasted brioche, or fresh <a href="/recipes/011-tradicne-rozky/">Tradičné Rožky</a>.</li>
     <li>Thinly sliced sweet pickled gherkins (optional).</li>
   </ul>
 </div>

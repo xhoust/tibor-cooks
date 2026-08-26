@@ -39,7 +39,7 @@ author: "Tibor Markovič"
   <ul>
     <li><strong>4 links (~450 g)</strong> Boar's Head uncured knockwurst (špekáčiky substitute), halved lengthwise and scored skin-side in a tight diamond crosshatch pattern</li>
     <li><strong>15 g</strong> Rendered pork lard or butter (for searing sausages)</li>
-    <li><a href="/blog/026-tradicna-fasirka"><strong>Tradičná Fašírka:</strong></a> Crispy fried pork patties, or fried sunny-side-up eggs.</li>
+    <li><a href="/recipes/026-tradicna-fasirka"><strong>Tradičná Fašírka:</strong></a> Crispy fried pork patties, or fried sunny-side-up eggs.</li>
     <li>Fresh crusty bread.</li>
   </ul>
 </div>
@@ -54,7 +54,7 @@ author: "Tibor Markovič"
       <li><strong>Temper Sour Cream:</strong> In a bowl, whisk sour cream with whole milk. Whisk in a ladle of hot stew liquid, then pour into the simmering pot, stirring continuously.</li>
       <li><strong>Balance & Season:</strong> Take off heat. Stir in vinegar and sugar. Taste and adjust balance: the stew should be rich, tangy, and subtly sweet. Discard bay leaves and allspice.</li>
       <li><strong>Pan-Sear Knockwurst Halves:</strong> Melt 15 g lard in a skillet over medium-high heat. Sear the knockwurst halves cut-side down for 2 minutes until browned, then flip onto the crosshatched skin for 3–4 minutes until the diamond cuts fan open into crisp, charred edges.</li>
-      <li><strong>Serve:</strong> Dish warm into wide bowls, topped with two crispy crosshatch knockwurst halves, a freshly fried <a href="/blog/026-tradicna-fasirka">Tradičná Fašírka</a>, and warm sourdough slices.</li>
+      <li><strong>Serve:</strong> Dish warm into wide bowls, topped with two crispy crosshatch knockwurst halves, a freshly fried <a href="/recipes/026-tradicna-fasirka">Tradičná Fašírka</a>, and warm sourdough slices.</li>
     </ol>
   </div>
 

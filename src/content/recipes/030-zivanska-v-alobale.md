@@ -38,7 +38,7 @@ author: "Tibor Markovič"
 
   <h3>To Serve</h3>
   <ul>
-    <li><a href="/blog/022-tatarska-omacka"><strong>Domáca Tatárska Omáčka:</strong></a> Chilled homemade tartar sauce with shallots, capers, and gherkins.</li>
+    <li><a href="/recipes/022-tatarska-omacka"><strong>Domáca Tatárska Omáčka:</strong></a> Chilled homemade tartar sauce with shallots, capers, and gherkins.</li>
     <li>Sweet-sour pickled gherkins (kyslé uhorky) or pickled hot feferónky.</li>
     <li>Crusty fresh sourdough bread.</li>
   </ul>
@@ -53,7 +53,7 @@ author: "Tibor Markovič"
       <li><strong>Assemble Parcels:</strong> In a large bowl, toss sliced potatoes, sliced onions, and bell peppers with a pinch of salt. Divide the mixture evenly across the center of each foil double-sheet. Scatter sliced smoked klobása and smoked bacon lardons over the potatoes, then top with the marinated pork neck cubes. Dot each parcel with a small dab of pork lard (~7–8 g).</li>
       <li><strong>Seal Airtight:</strong> Bring the long edges of the foil together over the top and fold down tightly several times into a seam. Fold and crimp both side ends inward firmly to create an airtight, sealed dome with room inside for steam to circulate.</li>
       <li><strong>Stovetop Cast-Iron Braise:</strong> Place a large, dry heavy-bottomed skillet or Dutch oven over medium heat on your cooktop. Place 2 sealed parcels into the pan, cover the pot with a heavy lid, and cook for 30–35 minutes on medium-low heat. The bottom potatoes will crisp and caramelize in rendered bacon fat while steam cooks the pork through. Repeat for the remaining parcels.</li>
-      <li><strong>Serve:</strong> Transfer each foil parcel directly to a wide plate. Carefully slit the top open with a knife (watch for hot escaping steam), fold back the foil edges, and serve piping hot alongside cold <a href="/blog/022-tatarska-omacka">Domáca Tatárska Omáčka</a>, pickled gherkins, and crusty bread.</li>
+      <li><strong>Serve:</strong> Transfer each foil parcel directly to a wide plate. Carefully slit the top open with a knife (watch for hot escaping steam), fold back the foil edges, and serve piping hot alongside cold <a href="/recipes/022-tatarska-omacka">Domáca Tatárska Omáčka</a>, pickled gherkins, and crusty bread.</li>
     </ol>
   </div>
 

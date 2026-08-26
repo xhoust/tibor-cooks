@@ -46,7 +46,7 @@ author: "Tibor Markovič"
 
   <h3>Recommended Pairings</h3>
   <ul>
-    <li><a href="/blog/040-domaca-kuracia-pateta"><strong>Domáca Paštéta z Kuracích Pečení:</strong></a> Velvety chicken liver parfait or rustic terrines.</li>
+    <li><a href="/recipes/040-domaca-kuracia-pateta"><strong>Domáca Paštéta z Kuracích Pečení:</strong></a> Velvety chicken liver parfait or rustic terrines.</li>
     <li>Sharp aged cheddar, pungent Slovak bryndza, ripe camembert, or blue cheeses.</li>
     <li>Warm crusty sourdough or buttered toast points.</li>
   </ul>

@@ -20,7 +20,7 @@ author: "Tibor Markovič"
 
   <h3>Base Spreads (Choose One or Mix)</h3>
   <ul>
-    <li><strong>350 g</strong> <a href="/blog/009-parizsky-salat/">Parížsky Šalát</a> or classic <a href="/blog/015-tradicny-zemiakovy-salat/">Tradičný Zemiakový Šalát</a></li>
+    <li><strong>350 g</strong> <a href="/recipes/009-parizsky-salat/">Parížsky Šalát</a> or classic <a href="/recipes/015-tradicny-zemiakovy-salat/">Tradičný Zemiakový Šalát</a></li>
     <li><strong>Whipped Garlic Butter Alternative:</strong>
       <ul>
         <li><strong>150 g</strong> Unsalted butter, softened to room temperature</li>
