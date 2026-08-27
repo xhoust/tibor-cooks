@@ -1,0 +1,368 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+
+type Props = CollectionEntry<'journal'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} image={heroImage} />
+	</head>
+
+	<body>
+		<Header />
+		<main class="journal-entry-container">
+			<article class="journal-article">
+				<header class="journal-header">
+					<div class="meta-row">
+	<a href="/journal" class="back-link">&larr; Back to Journal</a>
+	<div class="meta-right">
+		{chapter && <span class="chapter-badge">{chapter}.</span>}
+		<span class="date-badge">
+			<FormattedDate date={pubDate} />
+			{
+				updatedDate && (
+					<span class="updated-date">
+						(Updated <FormattedDate date={updatedDate} />)
+					</span>
+				)
+			}
+		</span>
+	</div>
+</div>
+					<h1>{title}</h1>
+					{description && <p class="lead-description">{description}</p>}
+				</header>
+
+				{
+					heroImage && (
+						<div class="hero-image-wrap zoomable">
+							<img src={heroImage} alt={title} />
+						</div>
+					)
+				}
+
+				<div class="prose-content">
+					<slot />
+				</div>
+
+				<ShareButtons title={title} description={description} />
+			</article>
+		</main>
+    
+		<!-- Lightbox Modal Dialog -->
+		<dialog id="photoModal" class="photo-modal">
+			<div class="modal-backdrop"></div>
+			<div class="modal-content">
+				<button type="button" class="modal-close" id="modalClose" aria-label="Close image">&times;</button>
+				<img id="modalImg" src="" alt="" />
+				<p id="modalCaption"></p>
+			</div>
+		</dialog>
+
+		<Footer />
+
+		<script>
+			const modal = document.getElementById('photoModal') as HTMLDialogElement;
+			const modalImg = document.getElementById('modalImg') as HTMLImageElement;
+			const modalCaption = document.getElementById('modalCaption') as HTMLParagraphElement;
+			const closeBtn = document.getElementById('modalClose');
+
+			// Attach click event to all figures/images inside the article
+			document.querySelectorAll('.prose-content figure, .hero-image-wrap').forEach((el) => {
+				const img = el.querySelector('img');
+				const caption = el.querySelector('figcaption');
+				if (img) {
+					el.classList.add('zoom-cursor');
+					el.addEventListener('click', () => {
+						modalImg.src = img.src;
+						modalImg.alt = img.alt;
+						modalCaption.textContent = caption ? caption.textContent : img.alt;
+						modal.showModal();
+					});
+				}
+			});
+
+			closeBtn?.addEventListener('click', () => modal.close());
+
+			// Close on backdrop click
+			modal?.addEventListener('click', (e) => {
+				if (e.target === modal) {
+					modal.close();
+				}
+			});
+		</script>
+
+		<style>
+            .meta-right {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.chapter-badge {
+	font-family: var(--font-mono, monospace);
+	font-size: 0.74rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--accent-green, #23372B);
+	background: rgba(35, 55, 43, 0.06);
+	padding: 0.2rem 0.5rem;
+	border-radius: 4px;
+}
+			.journal-entry-container {
+				max-width: 780px;
+				margin: 0 auto;
+				padding: 4rem 1.5rem;
+			}
+			.journal-header {
+				margin-bottom: 2.5rem;
+				border-bottom: 1px solid var(--border-card, #DFD9CE);
+				padding-bottom: 2rem;
+			}
+			.meta-row {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1.5rem;
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+				font-size: 0.78rem;
+			}
+			.back-link {
+				color: var(--accent-green, #23372B);
+				text-decoration: none;
+				font-weight: 600;
+			}
+			.back-link:hover {
+				text-decoration: underline;
+			}
+			.date-badge {
+				color: var(--accent-copper, #B24C24);
+				font-weight: 600;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+			}
+			h1 {
+				font-size: 3rem;
+				font-weight: 500;
+				letter-spacing: -0.02em;
+				line-height: 1.15;
+				margin: 0 0 1rem 0;
+				color: #1A1917;
+			}
+			.lead-description {
+				font-family: var(--font-serif, Georgia, serif);
+				font-style: italic;
+				font-size: 1.2rem;
+				line-height: 1.5;
+				color: #55514B;
+				margin: 0;
+			}
+			.hero-image-wrap {
+				margin: 0 0 3rem 0;
+				border-radius: 8px;
+				overflow: hidden;
+				border: 1px solid var(--border-card, #DFD9CE);
+				box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+				cursor: pointer;
+			}
+			.hero-image-wrap img {
+				width: 100%;
+				height: auto;
+				max-height: 480px;
+				object-fit: cover;
+				display: block;
+			}
+			.prose-content {
+				font-size: 1.12rem;
+				line-height: 1.85;
+				color: #2C2A26;
+			}
+			.prose-content :global(p) {
+				margin-bottom: 1.8rem;
+			}
+			.prose-content :global(h2) {
+				font-size: 1.8rem;
+				margin: 2.5rem 0 1rem 0;
+				color: #1A1917;
+			}
+			.prose-content :global(strong) {
+				color: #111;
+			}
+
+			/* Centered Single Inline Figures */
+			.prose-content :global(.journal-figure) {
+				margin: 3rem auto;
+				max-width: 520px;
+				text-align: center;
+				cursor: pointer;
+			}
+			.prose-content :global(.journal-figure img) {
+				width: 100%;
+				height: auto;
+				max-height: 560px;
+				object-fit: contain;
+				border-radius: 8px;
+				border: 1px solid var(--border-card, #DFD9CE);
+				box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+				display: block;
+				margin: 0 auto;
+				transition: transform 0.2s ease;
+			}
+			.prose-content :global(.journal-figure:hover img) {
+				transform: scale(1.015);
+			}
+			.prose-content :global(.journal-figure figcaption) {
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+				font-size: 0.78rem;
+				color: var(--text-muted, #7A746B);
+				margin-top: 0.75rem;
+				text-align: center;
+			}
+
+			/* Centered 9-Photo Bottom Grid (3x3) */
+			.prose-content :global(.journal-photo-grid) {
+				margin-top: 4.5rem;
+				border-top: 1px solid var(--border-card, #DFD9CE);
+				padding-top: 2.5rem;
+				text-align: center;
+			}
+			.prose-content :global(.journal-photo-grid h3) {
+				font-size: 1.5rem;
+				font-weight: 500;
+				margin-bottom: 2rem;
+				font-family: var(--font-serif, Georgia, serif);
+				color: #1A1917;
+				text-align: center;
+			}
+			.prose-content :global(.grid-layout) {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 2rem 1.25rem;
+				align-items: start;
+			}
+			.prose-content :global(.grid-layout figure) {
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				cursor: pointer;
+			}
+			.prose-content :global(.grid-layout img) {
+				width: 100%;
+				aspect-ratio: 1 / 1;
+				object-fit: cover;
+				border-radius: 6px;
+				border: 1px solid var(--border-card, #DFD9CE);
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+				display: block;
+				transition: transform 0.25s ease, box-shadow 0.25s ease;
+			}
+			.prose-content :global(.grid-layout figure:hover img) {
+				transform: translateY(-3px) scale(1.02);
+				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+			}
+			.prose-content :global(.grid-layout figcaption) {
+				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+				font-size: 0.74rem;
+				color: var(--text-muted, #7A746B);
+				margin-top: 0.65rem;
+				line-height: 1.4;
+				text-align: center;
+			}
+
+			/* Lightbox Modal */
+			.photo-modal {
+				border: none;
+				border-radius: 12px;
+				padding: 0;
+				background: transparent;
+				max-width: 90vw;
+				max-height: 90vh;
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+			}
+			.photo-modal::backdrop {
+				background: rgba(18, 17, 16, 0.85);
+				backdrop-filter: blur(4px);
+			}
+			.modal-content {
+				position: relative;
+				background: #1A1917;
+				padding: 1.25rem;
+				border-radius: 10px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.modal-content img {
+				max-width: 82vw;
+				max-height: 75vh;
+				object-fit: contain;
+				border-radius: 6px;
+				display: block;
+			}
+			.modal-content p {
+				color: #DFD9CE;
+				font-family: var(--font-mono, monospace);
+				font-size: 0.82rem;
+				margin: 0.9rem 0 0.25rem 0;
+				text-align: center;
+			}
+			.modal-close {
+				position: absolute;
+				top: 0.5rem;
+				right: 0.75rem;
+				background: rgba(0, 0, 0, 0.6);
+				color: #FFF;
+				border: none;
+				font-size: 1.8rem;
+				width: 36px;
+				height: 36px;
+				border-radius: 50%;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 1;
+				transition: background 0.15s ease;
+			}
+			.modal-close:hover {
+				background: rgba(178, 76, 36, 0.9);
+			}
+
+			@media (max-width: 768px) {
+				.journal-entry-container {
+					padding: 2.5rem 1.25rem;
+				}
+				h1 {
+					font-size: 2.2rem;
+				}
+				.lead-description {
+					font-size: 1.05rem;
+				}
+				.prose-content {
+					font-size: 1.02rem;
+				}
+				.prose-content :global(.grid-layout) {
+					grid-template-columns: repeat(2, 1fr);
+					gap: 1.5rem 1rem;
+				}
+			}
+			@media (max-width: 480px) {
+				.prose-content :global(.grid-layout) {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+				}
+			}
+		</style>
+	</body>
+</html>

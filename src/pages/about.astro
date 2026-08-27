@@ -5,368 +5,374 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
 
 const galleryImages = [
-	{ src: '/reel/01.webp', caption: 'Rolling šúľance with embassy staff' },
-	{ src: '/reel/02.webp', caption: 'Fresh lúpačky with poppy seeds' },
-	{ src: '/reel/03.webp', caption: 'Diplomatic reception catering service' },
-	{ src: '/reel/04.webp', caption: 'Sviečková & knedľa plating line' },
-	{ src: '/reel/05.webp', caption: 'Steak tartare canapés on vintage china' },
-	{ src: '/reel/06.webp', caption: 'Confit duck leg with braised red cabbage' },
-	{ src: '/reel/07.webp', caption: 'Plated pastry & berry reduction' },
-	{ src: '/reel/08.webp', caption: 'Traditional Bratislavské rožky' },
-	{ src: '/reel/09.webp', caption: 'Fine dining savory tartlets' },
-	{ src: '/reel/10.webp', caption: 'High-heat searing on the range' },
-	{ src: '/reel/11.webp', caption: 'Crisp traditional potato flatbreads' },
-	{ src: '/reel/13.webp', caption: 'Crispy golden schnitzel & potato salad' },
+    { src: '/reel/01.webp', caption: 'Rolling šúľance with embassy staff' },
+    { src: '/reel/02.webp', caption: 'Fresh lúpačky with poppy seeds' },
+    { src: '/reel/03.webp', caption: 'Diplomatic reception catering service' },
+    { src: '/reel/04.webp', caption: 'Sviečková & knedľa plating line' },
+    { src: '/reel/05.webp', caption: 'Steak tartare canapés on vintage china' },
+    { src: '/reel/06.webp', caption: 'Confit duck leg with braised red cabbage' },
+    { src: '/reel/07.webp', caption: 'Plated pastry & berry reduction' },
+    { src: '/reel/08.webp', caption: 'Traditional Bratislavské rožky' },
+    { src: '/reel/09.webp', caption: 'Fine dining savory tartlets' },
+    { src: '/reel/10.webp', caption: 'High-heat searing on the range' },
+    { src: '/reel/11.webp', caption: 'Crisp traditional potato flatbreads' },
+    { src: '/reel/13.webp', caption: 'Crispy golden schnitzel & potato salad' },
 ];
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={`About | ${SITE_TITLE}`} description="Culinary background, technical philosophy, and contact information for Tibor Markovič." />
-	</head>
-	<body>
-		<Header />
-		<main class="about-container">
-			<section class="about-header">
-				<span class="eyebrow">Bio</span>
-				<h1>Tibor Markovič</h1>
-				<p class="role-lead">Resident Chef &bull; Embassy of the Slovak Republic, Washington, D.C.</p>
-			</section>
+    <head>
+        <BaseHead title={`About | ${SITE_TITLE}`} description="Culinary background, technical philosophy, and contact information for Tibor Markovič." />
+    </head>
+    <body>
+        <Header />
+        <main class="about-container">
+            <section class="about-header">
+                <span class="eyebrow">Bio</span>
+                <h1>Tibor Markovič</h1>
+                <p class="role-lead">Resident Chef &bull; Embassy of the Slovak Republic, Washington, D.C.</p>
+            </section>
 
-			<section class="about-grid">
-				<div class="bio-prose">
-					<p>
-						Tibor Cooks is a dedicated digital culinary archive and working formulation ledger. It bridges classical fine-dining kitchen standards with traditional Slovak and Central European gastronomy.
-					</p>
-					<p>
-						With a professional foundation shaped in Ireland—including classical brigade service at <strong>The Morrison Room</strong>—my approach centers on rigorous technical discipline, ingredient integrity, and precise, repeatable metric documentation.
-					</p>
-					<p>
-						Currently serving as Resident Chef at the Embassy of the Slovak Republic in Washington, D.C., these records document standardized kitchen formulations for diplomatic service, regional preservation, and modern culinary execution.
-					</p>
+            <section class="about-grid">
+                <div class="bio-prose">
+                    <p>
+                        Food has been the background rhythm of my life for as long as I can remember. Born in Slovakia in 1991, I was raised in a family where practically everyone was a great cook—parents, grandparents, great-grandparents, aunts, and uncles. Good food wasn’t a rare occasion; it was everywhere. We cultivated our own garden, harvesting fresh fruit and vegetables across every season, and raised chickens, pigs, and cows. Witnessing that complete lifecycle up close taught me early on to respect raw ingredients and understand where real flavor originates.
+                    </p>
+                    <p>
+                        In 2007, I moved to Ireland. For a decade, I flew as cabin crew, though anyone who worked a shift with me knew what I actually cared about. Even at 30,000 feet, I spent hours talking about food, culinary techniques, and my quiet ambition of working in professional kitchens.
+                    </p>
+                    <p>
+                        When COVID grounded the world in 2020 and the airline went under, I spent six months out of work before deciding it was time to stop daydreaming. I stepped into a commercial kitchen at Court Yard Hotel in Leixlip as a kitchen porter, scrubbing pots and observing every station. The head chef noticed my focus and gave me an opportunity on the line.
+                    </p>
+                    <p>
+                        From there, my culinary education accelerated. I moved to Carton House in Maynooth, working my way through demanding kitchen brigades alongside talented mentors. That journey led me to <strong>The Morrison Room</strong> and Chef Adam Nevin. At first, the standard felt daunting, and there were days I wasn't sure I could survive the pace. But discipline, hard work, and accountability eventually clicked. Adam challenged and shaped how I approach food, technique, and kitchen culture. Earning a Michelin star as part of that kitchen brigade remains one of the proudest milestones of my career.
+                    </p>
+                    <p>
+                        Today, I serve as Resident Chef at the Embassy of the Slovak Republic in Washington, D.C. This digital archive is an extension of that journey: bridging classical European foundations, rigorous professional technique, and the comforting Slovak recipes I grew up with.
+                    </p>
 
-					<div class="contact-card">
-						<h3>Professional Inquiries &amp; Contact</h3>
-						<p>Open for culinary consultations, diplomatic event specifications, and recipe inquiries.</p>
-						<div class="contact-links">
-							<a href="mailto:hello@tiborcooks.com" class="btn-contact">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-								Email Direct
-							</a>
-							<a href="https://www.linkedin.com/in/tibormarkovic" target="_blank" rel="noopener noreferrer" class="btn-contact btn-outline">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-								LinkedIn
-							</a>
-							<a href="https://www.instagram.com/tibor.markovic/" target="_blank" rel="noopener noreferrer" class="btn-contact btn-outline">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-								Instagram
-							</a>
-						</div>
-					</div>
-				</div>
+                    <div class="contact-card">
+                        <h3>Professional Inquiries &amp; Contact</h3>
+                        <p>Open for culinary consultations, diplomatic event specifications, and recipe inquiries.</p>
+                        <div class="contact-links">
+                            <a href="mailto:hello@tiborcooks.com" class="btn-contact">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                Email Direct
+                            </a>
+                            <a href="https://www.linkedin.com/in/tibormarkovic" target="_blank" rel="noopener noreferrer" class="btn-contact btn-outline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                LinkedIn
+                            </a>
+                            <a href="https://www.instagram.com/tibor.markovic/" target="_blank" rel="noopener noreferrer" class="btn-contact btn-outline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-				<div class="feature-portrait">
-					<div class="portrait-card">
-						<img src="/reel/tibor.webp" alt="Tibor Markovič - Resident Chef" class="profile-photo" />
-						<div class="photo-caption">
-							<span>Tibor Markovič</span> &bull; <em>Resident Chef</em>
-						</div>
-					</div>
-				</div>
-			</section>
+                <div class="feature-portrait">
+                    <div class="portrait-card">
+                        <img src="/reel/tibor.webp" alt="Tibor Markovič - Resident Chef" class="profile-photo" />
+                        <div class="photo-caption">
+                            <span>Tibor Markovič</span> &bull; <em>Resident Chef</em>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-			<section class="foundation-feature">
-				<div class="wide-photo-card">
-					<img src="/reel/12.webp" alt="The Morrison Room Kitchen Brigade" class="team-photo" />
-					<div class="wide-caption">
-						<span>The Morrison Room Brigade</span> &bull; <em>Classical fine dining foundation &amp; brigade discipline</em>
-					</div>
-				</div>
-			</section>
+            <section class="foundation-feature">
+                <div class="wide-photo-card">
+                    <img src="/reel/12.webp" alt="The Morrison Room Kitchen Brigade" class="team-photo" />
+                    <div class="wide-caption">
+                        <span>The Morrison Room Brigade</span> &bull; <em>Classical fine dining foundation &amp; brigade discipline</em>
+                    </div>
+                </div>
+            </section>
 
-			<section class="archive-gallery">
-				<div class="gallery-title-row">
-					<h2>Kitchen Archive &amp; Field Records</h2>
-					<span class="gallery-sub">Diplomatic Service &bull; Plating &bull; Production</span>
-				</div>
+            <section class="archive-gallery">
+                <div class="gallery-title-row">
+                    <h2>Kitchen Archive &amp; Field Records</h2>
+                    <span class="gallery-sub">Diplomatic Service &bull; Plating &bull; Production</span>
+                </div>
 
-				<div class="masonry-gallery">
-					{
-						galleryImages.map((img) => (
-							<div class="gallery-card">
-								<img src={img.src} alt={img.caption} loading="lazy" />
-								<div class="caption-overlay">
-									<span>{img.caption}</span>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</section>
-		</main>
-		<Footer />
+                <div class="masonry-gallery">
+                    {
+                        galleryImages.map((img) => (
+                            <div class="gallery-card">
+                                <img src={img.src} alt={img.caption} loading="lazy" />
+                                <div class="caption-overlay">
+                                    <span>{img.caption}</span>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+        </main>
+        <Footer />
 
-		<style>
-			.about-container {
-				max-width: 1100px;
-				margin: 0 auto;
-				padding: 4.5rem 2rem;
-			}
-			.about-header {
-				margin-bottom: 3rem;
-				border-bottom: 1px solid var(--border-card, #DFD9CE);
-				padding-bottom: 2rem;
-			}
-			.eyebrow {
-				display: block;
-				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-				font-size: 0.72rem;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
-				color: var(--accent-green, #23372B);
-				font-weight: 600;
-				margin-bottom: 0.8rem;
-			}
-			h1 {
-				font-size: 3.5rem;
-				font-weight: 500;
-				letter-spacing: -0.02em;
-				margin: 0 0 0.6rem 0;
-				line-height: 1.1;
-			}
-			.role-lead {
-				font-family: var(--font-serif, Georgia, serif);
-				font-style: italic;
-				font-size: 1.25rem;
-				color: var(--accent-copper, #B24C24);
-				margin: 0;
-			}
-			.about-grid {
-				display: grid;
-				grid-template-columns: 1.2fr 1fr;
-				gap: 3.5rem;
-				align-items: start;
-				margin-bottom: 4.5rem;
-			}
-			.bio-prose p {
-				font-size: 1.05rem;
-				line-height: 1.75;
-				color: #383531;
-				margin-bottom: 1.5rem;
-			}
-			.bio-prose strong {
-				color: #1A1917;
-			}
-			.portrait-card {
-				background: var(--card-bg, #FFFFFF);
-				border: 1px solid var(--border-card, #DFD9CE);
-				border-radius: 8px;
-				overflow: hidden;
-				box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-			}
-			.profile-photo {
-				width: 100%;
-				height: 480px;
-				object-fit: cover;
-				display: block;
-			}
-			.photo-caption {
-				padding: 0.85rem 1.1rem;
-				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-				font-size: 0.76rem;
-				color: var(--text-muted, #7A746B);
-				border-top: 1px solid var(--border-subtle, #EAE6DE);
-			}
-			.photo-caption span {
-				font-weight: 600;
-				color: #2C2A26;
-			}
-			.contact-card {
-				margin-top: 2.5rem;
-				padding: 1.75rem;
-				background: #F4F1EA;
-				border: 1px solid var(--border-card, #DFD9CE);
-				border-radius: 8px;
-			}
-			.contact-card h3 {
-				font-size: 1.15rem;
-				margin: 0 0 0.5rem 0;
-			}
-			.contact-card p {
-				font-size: 0.9rem;
-				color: var(--text-muted, #7A746B);
-				margin-bottom: 1.25rem;
-			}
-			.contact-links {
-				display: flex;
-				gap: 0.75rem;
-				flex-wrap: wrap;
-			}
+        <style>
+            .about-container {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 4.5rem 2rem;
+            }
+            .about-header {
+                margin-bottom: 3rem;
+                border-bottom: 1px solid var(--border-card, #DFD9CE);
+                padding-bottom: 2rem;
+            }
+            .eyebrow {
+                display: block;
+                font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+                font-size: 0.72rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--accent-green, #23372B);
+                font-weight: 600;
+                margin-bottom: 0.8rem;
+            }
+            h1 {
+                font-size: 3.5rem;
+                font-weight: 500;
+                letter-spacing: -0.02em;
+                margin: 0 0 0.6rem 0;
+                line-height: 1.1;
+            }
+            .role-lead {
+                font-family: var(--font-serif, Georgia, serif);
+                font-style: italic;
+                font-size: 1.25rem;
+                color: var(--accent-copper, #B24C24);
+                margin: 0;
+            }
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1.2fr 1fr;
+                gap: 3.5rem;
+                align-items: start;
+                margin-bottom: 4.5rem;
+            }
+            .bio-prose p {
+                font-size: 1.05rem;
+                line-height: 1.75;
+                color: #383531;
+                margin-bottom: 1.5rem;
+            }
+            .bio-prose strong {
+                color: #1A1917;
+            }
+            .portrait-card {
+                background: var(--card-bg, #FFFFFF);
+                border: 1px solid var(--border-card, #DFD9CE);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            }
+            .profile-photo {
+                width: 100%;
+                height: 480px;
+                object-fit: cover;
+                display: block;
+            }
+            .photo-caption {
+                padding: 0.85rem 1.1rem;
+                font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+                font-size: 0.76rem;
+                color: var(--text-muted, #7A746B);
+                border-top: 1px solid var(--border-subtle, #EAE6DE);
+            }
+            .photo-caption span {
+                font-weight: 600;
+                color: #2C2A26;
+            }
+            .contact-card {
+                margin-top: 2.5rem;
+                padding: 1.75rem;
+                background: #F4F1EA;
+                border: 1px solid var(--border-card, #DFD9CE);
+                border-radius: 8px;
+            }
+            .contact-card h3 {
+                font-size: 1.15rem;
+                margin: 0 0 0.5rem 0;
+            }
+            .contact-card p {
+                font-size: 0.9rem;
+                color: var(--text-muted, #7A746B);
+                margin-bottom: 1.25rem;
+            }
+            .contact-links {
+                display: flex;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
 
-			/* Tactile Buttons */
-			.btn-contact {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5rem;
-				padding: 0.65rem 1.15rem;
-				border-radius: 6px;
-				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-				font-size: 0.82rem;
-				font-weight: 600;
-				letter-spacing: 0.02em;
-				text-decoration: none;
-				user-select: none;
-				background: var(--accent-green, #23372B);
-				color: #FDFBF7;
-				border: 1px solid #1A2A21;
-				box-shadow: 
-					0 1px 0 rgba(255, 255, 255, 0.15) inset,
-					0 2px 4px rgba(35, 55, 43, 0.18),
-					0 1px 2px rgba(0, 0, 0, 0.08);
-				transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-			.btn-contact:hover {
-				background: #1B2C22;
-				border-color: #121E18;
-				box-shadow: 
-					0 1px 0 rgba(255, 255, 255, 0.2) inset,
-					0 4px 10px rgba(35, 55, 43, 0.25);
-			}
-			.btn-contact:active {
-				transform: translateY(1px);
-				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
-			}
+            /* Tactile Buttons */
+            .btn-contact {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.65rem 1.15rem;
+                border-radius: 6px;
+                font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                text-decoration: none;
+                user-select: none;
+                background: var(--accent-green, #23372B);
+                color: #FDFBF7;
+                border: 1px solid #1A2A21;
+                box-shadow: 
+                    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+                    0 2px 4px rgba(35, 55, 43, 0.18),
+                    0 1px 2px rgba(0, 0, 0, 0.08);
+                transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .btn-contact:hover {
+                background: #1B2C22;
+                border-color: #121E18;
+                box-shadow: 
+                    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+                    0 4px 10px rgba(35, 55, 43, 0.25);
+            }
+            .btn-contact:active {
+                transform: translateY(1px);
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+            }
 
-			.btn-outline {
-				background: #FFFFFF;
-				color: #2C2A26;
-				border: 1px solid #D3CCC0;
-				box-shadow: 
-					0 1px 0 rgba(255, 255, 255, 0.9) inset,
-					0 2px 4px rgba(0, 0, 0, 0.05);
-			}
-			.btn-outline:hover {
-				background: #F9F7F2;
-				border-color: #BEB6A8;
-				color: #1A1917;
-				box-shadow: 
-					0 1px 0 rgba(255, 255, 255, 0.9) inset,
-					0 3px 6px rgba(0, 0, 0, 0.08);
-			}
-			.btn-outline:active {
-				transform: translateY(1px);
-				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
-			}
+            .btn-outline {
+                background: #FFFFFF;
+                color: #2C2A26;
+                border: 1px solid #D3CCC0;
+                box-shadow: 
+                    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+                    0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+            .btn-outline:hover {
+                background: #F9F7F2;
+                border-color: #BEB6A8;
+                color: #1A1917;
+                box-shadow: 
+                    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+                    0 3px 6px rgba(0, 0, 0, 0.08);
+            }
+            .btn-outline:active {
+                transform: translateY(1px);
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+            }
 
-			.foundation-feature {
-				margin-bottom: 4.5rem;
-			}
-			.wide-photo-card {
-				background: var(--card-bg, #FFFFFF);
-				border: 1px solid var(--border-card, #DFD9CE);
-				border-radius: 8px;
-				overflow: hidden;
-				box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-				max-width: 960px;
-				margin: 0 auto;
-			}
-			.team-photo {
-				width: 100%;
-				height: auto;
-				max-height: 480px;
-				object-fit: contain;
-				display: block;
-				image-rendering: -webkit-optimize-contrast;
-			}
-			.wide-caption {
-				padding: 0.9rem 1.25rem;
-				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-				font-size: 0.78rem;
-				color: var(--text-muted, #7A746B);
-				border-top: 1px solid var(--border-subtle, #EAE6DE);
-			}
-			.wide-caption span {
-				font-weight: 600;
-				color: #2C2A26;
-			}
-			.archive-gallery {
-				border-top: 1px solid var(--border-card, #DFD9CE);
-				padding-top: 3.5rem;
-			}
-			.gallery-title-row {
-				display: flex;
-				justify-content: space-between;
-				align-items: baseline;
-				margin-bottom: 2rem;
-				flex-wrap: wrap;
-				gap: 0.5rem;
-			}
-			.gallery-title-row h2 {
-				font-size: 1.75rem;
-				margin: 0;
-			}
-			.gallery-sub {
-				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-				font-size: 0.76rem;
-				color: var(--accent-copper, #B24C24);
-				letter-spacing: 0.06em;
-				text-transform: uppercase;
-			}
-			.masonry-gallery {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-				gap: 1.25rem;
-			}
-			.gallery-card {
-				position: relative;
-				border-radius: 6px;
-				overflow: hidden;
-				aspect-ratio: 4/5;
-				background: #EAE6DE;
-				border: 1px solid var(--border-card, #DFD9CE);
-				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-			}
-			.gallery-card img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				display: block;
-				transition: transform 0.4s ease;
-			}
-			.caption-overlay {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				padding: 1.5rem 1rem 0.75rem 1rem;
-				background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
-				color: #FFF;
-				font-size: 0.78rem;
-				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-				opacity: 0;
-				transform: translateY(6px);
-				transition: opacity 0.3s ease, transform 0.3s ease;
-			}
-			.gallery-card:hover img {
-				transform: scale(1.04);
-			}
-			.gallery-card:hover .caption-overlay {
-				opacity: 1;
-				transform: translateY(0);
-			}
-			@media (max-width: 860px) {
-				.about-grid {
-					grid-template-columns: 1fr;
-					gap: 2.5rem;
-				}
-				.about-container {
-					padding: 2.5rem 1.25rem;
-				}
-				h1 {
-					font-size: 2.4rem;
-				}
-			}
-		</style>
-	</body>
+            .foundation-feature {
+                margin-bottom: 4.5rem;
+            }
+            .wide-photo-card {
+                background: var(--card-bg, #FFFFFF);
+                border: 1px solid var(--border-card, #DFD9CE);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+                max-width: 960px;
+                margin: 0 auto;
+            }
+            .team-photo {
+                width: 100%;
+                height: auto;
+                max-height: 480px;
+                object-fit: contain;
+                display: block;
+                image-rendering: -webkit-optimize-contrast;
+            }
+            .wide-caption {
+                padding: 0.9rem 1.25rem;
+                font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+                font-size: 0.78rem;
+                color: var(--text-muted, #7A746B);
+                border-top: 1px solid var(--border-subtle, #EAE6DE);
+            }
+            .wide-caption span {
+                font-weight: 600;
+                color: #2C2A26;
+            }
+            .archive-gallery {
+                border-top: 1px solid var(--border-card, #DFD9CE);
+                padding-top: 3.5rem;
+            }
+            .gallery-title-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                margin-bottom: 2rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .gallery-title-row h2 {
+                font-size: 1.75rem;
+                margin: 0;
+            }
+            .gallery-sub {
+                font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+                font-size: 0.76rem;
+                color: var(--accent-copper, #B24C24);
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+            }
+            .masonry-gallery {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.25rem;
+            }
+            .gallery-card {
+                position: relative;
+                border-radius: 6px;
+                overflow: hidden;
+                aspect-ratio: 4/5;
+                background: #EAE6DE;
+                border: 1px solid var(--border-card, #DFD9CE);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            }
+            .gallery-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.4s ease;
+            }
+            .caption-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 1.5rem 1rem 0.75rem 1rem;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+                color: #FFF;
+                font-size: 0.78rem;
+                font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+                opacity: 0;
+                transform: translateY(6px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .gallery-card:hover img {
+                transform: scale(1.04);
+            }
+            .gallery-card:hover .caption-overlay {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            @media (max-width: 860px) {
+                .about-grid {
+                    grid-template-columns: 1fr;
+                    gap: 2.5rem;
+                }
+                .about-container {
+                    padding: 2.5rem 1.25rem;
+                }
+                h1 {
+                    font-size: 2.4rem;
+                }
+            }
+        </style>
+    </body>
 </html>

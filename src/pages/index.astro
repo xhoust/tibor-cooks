@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 
@@ -21,29 +22,10 @@ const featuredPosts = total >= 3 ? [
   posts[(dayOfYear + 2) % total],
 ] : posts.slice(0, 3);
 
-const journalEntries = [
-  {
-    tag: 'LIFE IN D.C.',
-    num: 'Entry 01',
-    title: 'Settling Into Washington, D.C.',
-    excerpt: 'First impressions, adjusting from European kitchens to the District, and building a routine on embassy grounds.',
-    href: '/journal',
-  },
-  {
-    tag: 'TRAVEL',
-    num: 'Entry 02',
-    title: 'Road Trip Across the American West',
-    excerpt: 'Traveling through Utah, Arizona, and California—national parks, open highways, and roadside diners.',
-    href: '/journal',
-  },
-  {
-    tag: 'EMBASSY KITCHEN',
-    num: 'Entry 03',
-    title: 'Friday Staff Lunches at the Embassy',
-    excerpt: 'Bringing the team together over rotating Central European menus, prep workflow, and staff favorites.',
-    href: '/journal',
-  },
-];
+// Dynamically fetch journal entries (sorted by latest)
+const journalEntries = (await getCollection('journal'))
+  .sort((a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0))
+  .slice(0, 3);
 ---
 
 <!doctype html>
@@ -94,17 +76,23 @@ const journalEntries = [
 
         <div class="journal-grid">
           {
-            journalEntries.map((item) => (
-              <article class="journal-preview-card">
-                <div class="journal-meta">
-                  <span class="journal-tag">{item.tag}</span>
-                  <span class="journal-num">{item.num}</span>
-                </div>
-                <h3 class="journal-card-title">{item.title}</h3>
-                <p class="journal-excerpt">{item.excerpt}</p>
-                <a href={item.href} class="card-action-link">Read Entry &rarr;</a>
-              </article>
-            ))
+            journalEntries.length === 0 ? (
+              <p class="empty-state">No journal entries published yet.</p>
+            ) : (
+              journalEntries.map((item) => (
+                <article class="journal-preview-card">
+                  <div class="journal-meta">
+                    <span class="journal-tag">{item.data.chapter || 'DISPATCH'}</span>
+                    <span class="journal-date">
+                      <FormattedDate date={item.data.pubDate} />
+                    </span>
+                  </div>
+                  <h3 class="journal-card-title">{item.data.title}</h3>
+                  <p class="journal-excerpt">{item.data.description}</p>
+                  <a href={`/journal/${item.id}/`} class="card-action-link">Read Entry &rarr;</a>
+                </article>
+              ))
+            )
           }
         </div>
       </section>
@@ -321,13 +309,13 @@ const journalEntries = [
         color: #B24C24;
       }
 
-      /* Journal Grid */
+      /* Journal Grid (Adaptive layout for 1-3 entries) */
       .journal-section {
         margin-bottom: 2rem;
       }
       .journal-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1.5rem;
       }
       .journal-preview-card {
@@ -353,10 +341,15 @@ const journalEntries = [
         letter-spacing: 0.08em;
         text-transform: uppercase;
         font-weight: 700;
-        color: #2C2A26;
+        color: #23372B;
+        background: rgba(35, 55, 43, 0.06);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
       }
-      .journal-num {
-        color: #8C827A;
+      .journal-date {
+        color: #B24C24;
+        font-weight: 600;
+        text-transform: uppercase;
       }
       .journal-card-title {
         font-family: Georgia, serif;
@@ -372,6 +365,11 @@ const journalEntries = [
         color: #5A554E;
         margin: 0 0 1.5rem 0;
         flex-grow: 1;
+      }
+      .empty-state {
+        font-family: ui-monospace, monospace;
+        color: #7A746B;
+        padding: 2rem 0;
       }
 
       /* Action Links */
@@ -510,7 +508,6 @@ const journalEntries = [
         .portrait-card {
           max-width: 280px;
         }
-        .journal-grid,
         .recipes-grid {
           grid-template-columns: 1fr;
         }

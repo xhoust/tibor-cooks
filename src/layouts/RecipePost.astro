@@ -1,4 +1,6 @@
 ---
+import ShareButtons from '../components/ShareButtons.astro';
+
 const props = Astro.props;
 const data = props.data || props.frontmatter || props;
 
@@ -83,6 +85,11 @@ const {
         <!-- Recipe Markdown Body (Contains .print-page and .page-two) -->
         <div class="recipe-body">
           <slot />
+        </div>
+
+        <!-- Share Buttons (Hidden during printing) -->
+        <div class="no-print">
+          <ShareButtons title={title} description={description} />
         </div>
       </article>
     </main>

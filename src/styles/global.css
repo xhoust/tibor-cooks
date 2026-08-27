@@ -29,7 +29,6 @@
 }
 
 /* Freezer Friendly Badge */
-.tag-badge:has-text("FREEZER"),
 [class*="freezer"],
 .tag-freezer {
   background-color: #e0f2fe;
