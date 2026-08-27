@@ -38,17 +38,17 @@ const journalEntries = (await getCollection('journal'))
     <main>
       <!-- Two-Column Editorial Hero -->
       <section class="hero-section">
-      <div class="hero-left">
-  <span class="eyebrow">WASHINGTON, D.C. &bull; KITCHEN NOTES &amp; STORIES</span>
-  <h1 class="hero-title">Slovak cooking in D.C.</h1>
-  <p class="hero-lead">
-    My collection of traditional and nostalgic Slovak recipes, alongside other personal favorites, embassy kitchen notes, and bits of life across the USA.
-  </p>
-  <div class="hero-actions">
-    <a href="/recipes" class="btn btn-primary">Browse Recipes</a>
-    <a href="/about" class="btn btn-secondary">About Me &amp; Gallery</a>
-  </div>
-</div>
+        <div class="hero-left">
+          <span class="eyebrow">WASHINGTON, D.C. &bull; KITCHEN NOTES &amp; STORIES</span>
+          <h1 class="hero-title">Slovak cooking in D.C.</h1>
+          <p class="hero-lead">
+            My collection of traditional and nostalgic Slovak recipes, alongside other personal favorites, embassy kitchen notes, and bits of life across the USA.
+          </p>
+          <div class="hero-actions">
+            <a href="/recipes" class="btn btn-primary">Browse Recipes</a>
+            <a href="/about" class="btn btn-secondary">About Me &amp; Gallery</a>
+          </div>
+        </div>
 
         <div class="hero-right">
           <div class="portrait-card">
@@ -142,7 +142,7 @@ const journalEntries = (await getCollection('journal'))
       main {
         max-width: 1080px;
         margin: 0 auto;
-        padding: 3rem 1.5rem 6rem 1.5rem;
+        padding: 2.5rem 1.5rem 5rem 1.5rem;
       }
 
       .eyebrow {
@@ -160,16 +160,16 @@ const journalEntries = (await getCollection('journal'))
       .hero-section {
         display: grid;
         grid-template-columns: 1.35fr 0.65fr;
-        gap: 3rem;
+        gap: 2.5rem;
         align-items: center;
-        padding: 1.5rem 0 3.5rem 0;
+        padding: 1rem 0 1.25rem 0;
       }
       .hero-title {
         font-family: Georgia, serif;
         font-size: 3.4rem;
         line-height: 1.1;
         font-weight: 700;
-        margin: 0 0 1.5rem 0;
+        margin: 0 0 1.25rem 0;
         color: #1A1917;
         letter-spacing: -0.025em;
       }
@@ -177,7 +177,7 @@ const journalEntries = (await getCollection('journal'))
         font-size: 1.12rem;
         line-height: 1.65;
         color: #5A554E;
-        margin: 0 0 2rem 0;
+        margin: 0 0 1.75rem 0;
       }
       .hero-actions {
         display: flex;
@@ -276,11 +276,12 @@ const journalEntries = (await getCollection('journal'))
         background: #FCFAF6;
       }
 
+      /* Tightened Dividers */
       .section-divider {
         border: 0;
         height: 1px;
         background: #EAE6DE;
-        margin: 3.5rem 0 3.5rem 0;
+        margin: 1.75rem 0;
       }
 
       /* Section Headers */
@@ -288,7 +289,7 @@ const journalEntries = (await getCollection('journal'))
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        margin-bottom: 2rem;
+        margin-bottom: 1.25rem;
       }
       .section-title {
         font-family: Georgia, serif;
@@ -309,9 +310,9 @@ const journalEntries = (await getCollection('journal'))
         color: #B24C24;
       }
 
-      /* Journal Grid (Adaptive layout for 1-3 entries) */
+      /* Journal Section */
       .journal-section {
-        margin-bottom: 2rem;
+        margin-bottom: 0;
       }
       .journal-grid {
         display: grid;
@@ -369,7 +370,7 @@ const journalEntries = (await getCollection('journal'))
       .empty-state {
         font-family: ui-monospace, monospace;
         color: #7A746B;
-        padding: 2rem 0;
+        padding: 1.5rem 0;
       }
 
       /* Action Links */
@@ -385,9 +386,9 @@ const journalEntries = (await getCollection('journal'))
         text-decoration: underline;
       }
 
-      /* Two-Tone Recipe Cards */
+      /* Featured Recipes Section */
       .recipes-section {
-        margin-bottom: 5rem;
+        margin-bottom: 3.5rem;
       }
       .recipes-grid {
         display: grid;
@@ -462,7 +463,7 @@ const journalEntries = (await getCollection('journal'))
         background: #EBE7DF;
         border: 1px solid #D8D2C4;
         border-radius: 8px;
-        padding: 3.5rem 2rem;
+        padding: 3rem 2rem;
         text-align: center;
         box-shadow: 
           0 1px 0 rgba(255, 255, 255, 0.7) inset,
