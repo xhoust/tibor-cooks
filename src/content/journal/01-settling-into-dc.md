@@ -16,7 +16,7 @@ The current Slovak Ambassador to the United States was serving as Ambassador to 
 
 Sorting through the administrative paperwork took a few months, but the hardest part was saying goodbye to The Morrison Room. Telling Chef Adam Nevin was difficult—he had given me so much guidance, discipline, and belief as a chef that leaving felt almost like a betrayal of the brigade. But when I told him, he understood completely and gave me his full support, which is why I hold so much respect and gratitude for that kitchen.
 
-On February 25, 2026, I arrived in Washington, D.C. 
+On February 1st, 2026, I arrived in Washington, D.C. 
 
 Stepping into a new country, far from family, friends, and the daily rhythm I had known in Ireland for eighteen years, felt surreal. But walking into the embassy kitchen for the first time and seeing a Rational combi-oven waiting for me, I smiled: I knew immediately this was going to be a joy to cook in.
 
