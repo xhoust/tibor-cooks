@@ -45,3 +45,7 @@ const { title, description, image = '/reel/tibor.webp' } = Astro.props;
   src='https://static.cloudflareinsights.com/beacon.min.js' 
   data-cf-beacon='{"token": "PASTE_YOUR_COPIED_TOKEN_HERE"}'>
 </script>
+<script>
+  import { inject } from '@vercel/analytics';
+  inject();
+</script>
