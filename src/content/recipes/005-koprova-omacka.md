@@ -1,5 +1,6 @@
 ---
 title: "Kôprová Omáčka s Hovädzím Mäsom"
+image: "/recipes/koprova-omacka.webp"
 description: "Braised beef eye of round sliced against the grain and served in a velvety, sweet-and-sour dill velouté enriched with heavy cream, finished with fresh dill fronds."
 pubDate: 2026-09-04
 tags: ["2 HOURS", "MAINS", "BEEF"]

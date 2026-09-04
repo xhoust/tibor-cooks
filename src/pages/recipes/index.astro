@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
+import '../../styles/global.css';
 
 const posts = (await getCollection('recipes')).sort(
     (a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
@@ -43,7 +44,6 @@ function getTagType(tag: string): string {
 function getProcessedTags(tags: string[] = []): string[] {
     let list = tags.filter(t => t.toUpperCase() !== 'TRADITIONAL');
 
-    // Rank: 1. Time -> 2. Course/Station -> 3. Protein/Diet -> 4. Special Modifiers
     list.sort((a, b) => {
         const score = (val: string) => {
             const u = val.toUpperCase().trim();
@@ -91,64 +91,158 @@ function getProcessedTags(tags: string[] = []): string[] {
                         const processedTags = getProcessedTags(rawTags);
 
                         return (
-                            <article class="recipe-card" data-title={post.data.title.toLowerCase()} data-tags={processedTags.join(' ').toLowerCase()}>
-                                {processedTags.length > 0 && (
-                                    <div class="tag-pills-row">
-                                        {processedTags.map((tag: string) => {
-                                            const tagClass = getTagType(tag);
-                                            return (
-                                                <span class={`tag-pill ${tagClass}`}>{tag}</span>
-                                            );
-                                        })}
-                                    </div>
-                                )}
+                            <div class="flip-card-scene" data-title={post.data.title.toLowerCase()} data-tags={processedTags.join(' ').toLowerCase()}>
+                                <div class="flip-card-inner">
+                                    <!-- FRONT FACE -->
+                                    <article class="recipe-card card-front">
+                                        {processedTags.length > 0 && (
+                                            <div class="tag-pills-row">
+                                                {processedTags.map((tag: string) => (
+                                                    <span class={`tag-pill ${getTagType(tag)}`}>{tag}</span>
+                                                ))}
+                                            </div>
+                                        )}
 
-                                <h2 class="recipe-card-title">{post.data.title}</h2>
-                                
-                                {post.data.description && (
-                                    <p class="recipe-card-desc">{post.data.description}</p>
-                                )}
+                                        <h2 class="recipe-card-title">{post.data.title}</h2>
 
-                                <div class="card-bottom-spacer"></div>
+                                        {post.data.description && (
+                                            <p class="recipe-card-desc">{post.data.description}</p>
+                                        )}
 
-                                <hr class="card-divider" />
+                                        <div class="card-bottom-spacer"></div>
+                                        <hr class="card-divider" />
 
-                                <a href={`/recipes/${post.id}/`} class="view-recipe-link">
-                                    VIEW RECIPE &rarr;
-                                </a>
-                            </article>
+                                        <div class="card-footer-row">
+                                            <button type="button" class="flip-trigger-btn" aria-label="Flip for photo">
+                                                Photo ↻
+                                            </button>
+                                            <a href={`/recipes/${post.id}/`} class="view-recipe-link">
+                                                VIEW RECIPE &rarr;
+                                            </a>
+                                        </div>
+                                    </article>
+
+                                    <!-- BACK FACE -->
+                                    <article class="recipe-card card-back">
+                                        {post.data.image ? (
+                                            <div class="back-photo-full js-lightbox-trigger" data-img-src={post.data.image} data-img-title={post.data.title} title="Click to enlarge photo">
+                                                <img src={post.data.image} alt={post.data.title} loading="lazy" />
+                                                <div class="back-photo-scrim"></div>
+
+                                                <span class="zoom-badge">⤢ Zoom</span>
+
+                                                <div class="back-photo-footer">
+                                                    <button type="button" class="flip-trigger-btn flip-glass-btn" aria-label="Flip back to front">
+                                                        ↺ Front
+                                                    </button>
+                                                    <a href={`/recipes/${post.id}/`} class="view-recipe-btn view-glass-btn">
+                                                        VIEW RECIPE &rarr;
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div class="back-no-photo">
+                                                <span class="eyebrow">NO PHOTO YET</span>
+                                                <h3 class="back-title">{post.data.title}</h3>
+                                                <div class="card-bottom-spacer"></div>
+                                                <hr class="card-divider" />
+                                                <div class="card-footer-row">
+                                                    <button type="button" class="flip-trigger-btn" aria-label="Flip back to front">
+                                                        ↺ Front
+                                                    </button>
+                                                    <a href={`/recipes/${post.id}/`} class="view-recipe-btn">
+                                                        VIEW RECIPE &rarr;
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </article>
+                                </div>
+                            </div>
                         );
                     })
                 }
             </section>
         </main>
+
+        <!-- Full-Screen Lightbox Modal -->
+        <dialog id="recipeLightbox" class="lightbox-modal">
+            <div class="lightbox-content">
+                <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close image">✕</button>
+                <img id="lightboxImg" src="" alt="" />
+                <p id="lightboxCaption" class="lightbox-caption"></p>
+            </div>
+        </dialog>
+
         <Footer />
 
-        <!-- Client-side Instant Filter -->
+        <!-- Scripts -->
         <script is:inline>
             document.addEventListener('DOMContentLoaded', () => {
+                // Search filter
                 const searchInput = document.getElementById('recipeSearch');
                 const grid = document.getElementById('recipeGrid');
-                if (!searchInput || !grid) return;
+                if (searchInput && grid) {
+                    const items = Array.from(grid.children);
+                    searchInput.addEventListener('input', (e) => {
+                        const query = e.target.value.toLowerCase().trim();
+                        items.forEach((item) => {
+                            const title = item.getAttribute('data-title') || '';
+                            const tags = item.getAttribute('data-tags') || '';
+                            if (title.includes(query) || tags.includes(query)) {
+                                item.style.display = 'flex';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    });
+                }
 
-                const cards = Array.from(grid.querySelectorAll('.recipe-card'));
-
-                searchInput.addEventListener('input', (e) => {
-                    const query = e.target.value.toLowerCase().trim();
-                    cards.forEach((card) => {
-                        const title = card.getAttribute('data-title') || '';
-                        const tags = card.getAttribute('data-tags') || '';
-                        if (title.includes(query) || tags.includes(query)) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
+                // Flip trigger
+                document.querySelectorAll('.flip-card-scene').forEach((card) => {
+                    const triggers = card.querySelectorAll('.flip-trigger-btn');
+                    triggers.forEach((btn) => {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            card.classList.toggle('is-flipped');
+                        });
                     });
                 });
+
+                // Lightbox zoom logic
+                const lightbox = document.getElementById('recipeLightbox');
+                const lightboxImg = document.getElementById('lightboxImg');
+                const lightboxCaption = document.getElementById('lightboxCaption');
+                const lightboxClose = document.getElementById('lightboxCloseBtn');
+
+                if (lightbox && lightboxImg) {
+                    document.querySelectorAll('.js-lightbox-trigger').forEach((wrap) => {
+                        wrap.addEventListener('click', (e) => {
+                            // Don't trigger zoom if clicking footer buttons
+                            if (e.target.closest('.back-photo-footer')) return;
+                            
+                            const src = wrap.getAttribute('data-img-src');
+                            const title = wrap.getAttribute('data-img-title');
+                            if (src) {
+                                lightboxImg.src = src;
+                                lightboxImg.alt = title || '';
+                                if (lightboxCaption) lightboxCaption.textContent = title || '';
+                                lightbox.showModal();
+                            }
+                        });
+                    });
+
+                    // Close handlers
+                    lightboxClose?.addEventListener('click', () => lightbox.close());
+                    lightbox.addEventListener('click', (e) => {
+                        if (e.target === lightbox) lightbox.close();
+                    });
+                }
             });
         </script>
 
-        <style is:inline>
+        <style>
             main {
                 max-width: 1140px;
                 margin: 0 auto;
@@ -161,7 +255,7 @@ function getProcessedTags(tags: string[] = []): string[] {
 
             .eyebrow {
                 display: block;
-                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-family: var(--font-mono);
                 font-size: 0.72rem;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
@@ -171,7 +265,7 @@ function getProcessedTags(tags: string[] = []): string[] {
             }
 
             .archive-title {
-                font-family: Georgia, serif;
+                font-family: var(--font-serif);
                 font-size: 3.2rem;
                 line-height: 1.1;
                 font-weight: 700;
@@ -181,7 +275,7 @@ function getProcessedTags(tags: string[] = []): string[] {
             }
 
             .archive-lead {
-                font-family: Georgia, serif;
+                font-family: var(--font-serif);
                 font-style: italic;
                 font-size: 1.15rem;
                 color: #5A554E;
@@ -216,227 +310,6 @@ function getProcessedTags(tags: string[] = []): string[] {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 1.5rem;
-            }
-
-            .recipe-card {
-                background: #FFFFFF;
-                border: 1px solid #DFD9CE;
-                border-radius: 10px;
-                padding: 1.75rem 1.6rem 1.4rem 1.6rem;
-                display: flex;
-                flex-direction: column;
-                box-shadow: 
-                    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-                    0 2px 8px rgba(0, 0, 0, 0.03);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-            }
-
-            .recipe-card:hover {
-                transform: translateY(-2px);
-                box-shadow: 
-                    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-                    0 6px 18px rgba(0, 0, 0, 0.06);
-            }
-
-            /* Base Tag Pills Container & Rules */
-            .tag-pills-row {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.35rem;
-                margin-bottom: 1.15rem;
-                align-items: center;
-            }
-
-            .recipe-card .tag-pill {
-                display: inline-flex;
-                align-items: center;
-                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-                font-size: 0.65rem;
-                font-weight: 700;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
-                padding: 0.22rem 0.55rem;
-                border-radius: 4px;
-                line-height: 1;
-                white-space: nowrap;
-                border-style: solid;
-                border-width: 1px;
-            }
-
-            /* Station & Course Chevrons */
-            .recipe-card .tag-pill.tag-mains::before,
-            .recipe-card .tag-pill.tag-bakes::before,
-            .recipe-card .tag-pill.tag-soup::before,
-            .recipe-card .tag-pill.tag-fresh::before,
-            .recipe-card .tag-pill.tag-dessert::before,
-            .recipe-card .tag-pill.tag-side::before,
-            .recipe-card .tag-pill.tag-pantry::before {
-                content: "›";
-                font-weight: 900;
-                font-size: 0.75rem;
-                margin-right: 3px;
-                line-height: 0;
-                opacity: 0.75;
-            }
-
-            /* ==========================================================================
-               WARM EDITORIAL PALETTE (Strict Spec & Zero Fluff)
-               ========================================================================== */
-
-            /* --- TIME --- */
-            .recipe-card .tag-pill.tag-time {
-                background-color: #F2EEE6 !important;
-                color: #5C5549 !important;
-                border-color: #DED8CB !important;
-            }
-
-            /* --- STATIONS / COURSES --- */
-            .recipe-card .tag-pill.tag-mains {
-                background-color: #FBF0EA !important;
-                color: #9A3C1E !important;
-                border-color: #EDD1C4 !important;
-            }
-
-            .recipe-card .tag-pill.tag-bakes {
-                background-color: #FCF4E4 !important;
-                color: #8C5D14 !important;
-                border-color: #EDDCB8 !important;
-            }
-
-            .recipe-card .tag-pill.tag-soup {
-                background-color: #F6F1E8 !important;
-                color: #7B5329 !important;
-                border-color: #DFD3BF !important;
-            }
-
-            .recipe-card .tag-pill.tag-fresh {
-                background-color: #EDF1EC !important;
-                color: #38563C !important;
-                border-color: #C9D6C8 !important;
-            }
-
-            .recipe-card .tag-pill.tag-dessert {
-                background-color: #F7EEF2 !important;
-                color: #7D3356 !important;
-                border-color: #E4CCD8 !important;
-            }
-
-            .recipe-card .tag-pill.tag-side {
-                background-color: #EEEBE3 !important;
-                color: #4A463D !important;
-                border-color: #DED8CB !important;
-            }
-
-            .recipe-card .tag-pill.tag-pantry {
-                background-color: #F4EDF5 !important;
-                color: #63366C !important;
-                border-color: #DFCEE2 !important;
-            }
-
-            /* --- PROTEINS & DIETARY --- */
-            .recipe-card .tag-pill.tag-pork {
-                background-color: #FAECEA !important;
-                color: #9C3330 !important;
-                border-color: #EEC8C5 !important;
-            }
-
-            .recipe-card .tag-pill.tag-beef {
-                background-color: #F7E8E7 !important;
-                color: #7C2222 !important;
-                border-color: #E6BEBC !important;
-            }
-
-            .recipe-card .tag-pill.tag-poultry {
-                background-color: #FAF2E3 !important;
-                color: #8F5A19 !important;
-                border-color: #EDD9B5 !important;
-            }
-
-            .recipe-card .tag-pill.tag-fish {
-                background-color: #EDF2F5 !important;
-                color: #2F566B !important;
-                border-color: #CAD8DF !important;
-            }
-
-            .recipe-card .tag-pill.tag-mushrooms {
-                background-color: #EAE5DE !important;
-                color: #4D433B !important;
-                border-color: #CDC4BA !important;
-            }
-
-            .recipe-card .tag-pill.tag-plant {
-                background-color: #EFF3EC !important;
-                color: #3B5B37 !important;
-                border-color: #CCD7C7 !important;
-            }
-
-            /* --- SPECIAL MODIFIERS --- */
-            .recipe-card .tag-pill.tag-freezer {
-                background-color: #EBF3F7 !important;
-                color: #225173 !important;
-                border-color: #BCD4E3 !important;
-                box-shadow: inset 0 0 0 1px #D2E4EF !important;
-            }
-
-            .recipe-card .tag-pill.tag-overnight {
-                background-color: #2B2B36 !important;
-                color: #ECEBF2 !important;
-                border-color: #23232C !important;
-            }
-
-            .recipe-card .tag-pill.tag-ferment {
-                background-color: #54331A !important;
-                color: #FAEBD7 !important;
-                border-color: #412613 !important;
-            }
-
-            .recipe-card .tag-pill.tag-default {
-                background-color: #EEEBE3 !important;
-                color: #5C5549 !important;
-                border-color: #DED8CB !important;
-            }
-
-            /* Card Typography & Footer */
-            .recipe-card-title {
-                font-family: Georgia, serif;
-                font-size: 1.45rem;
-                line-height: 1.25;
-                font-weight: 700;
-                color: #1A1917;
-                margin: 0 0 0.85rem 0;
-            }
-
-            .recipe-card-desc {
-                font-size: 0.9rem;
-                line-height: 1.55;
-                color: #5A554E;
-                margin: 0;
-            }
-
-            .card-bottom-spacer {
-                flex-grow: 1;
-                min-height: 1.5rem;
-            }
-
-            .card-divider {
-                border: 0;
-                height: 1px;
-                background: #EAE6DE;
-                margin: 0 0 1rem 0;
-            }
-
-            .view-recipe-link {
-                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-                font-size: 0.78rem;
-                font-weight: 700;
-                color: #B24C24;
-                text-decoration: none;
-                letter-spacing: 0.04em;
-                align-self: flex-start;
-            }
-
-            .view-recipe-link:hover {
-                text-decoration: underline;
             }
 
             @media (max-width: 960px) {
