@@ -1,8 +1,9 @@
 ---
 title: "Bulharský Šalát"
-description: "Spicy deli-counter cold salad featuring razor-julienned bologna, sweet corn, gherkins, and pickled red kapia peppers bound in an emulsified chili-tomato dressing."
+image: "/recipes/bulharsky-salat.webp"
+description: "Zesty deli-counter cold salad featuring julienned artisan ham, fire-roasted red peppers, sweet corn, button mushrooms, and pickled hot peppers bound in a bright ketchup-sriracha dressing."
 pubDate: 2026-09-04
-tags: ["30 MINS", "DELI", "SALAD", "PORK", "OVERNIGHT"]
+tags: ["25 MINS", "DELI", "SALAD", "PORK", "OVERNIGHT"]
 course: "Deli / Cold Larder"
 yield: "6 Portions"
 prepTime: "25 mins"
@@ -15,22 +16,22 @@ author: "Tibor Markovič"
   
   <h3>Salad Base</h3>
   <ul>
-    <li><strong>400 g</strong> Parížska saláma (or fine unsmoked deli bologna / mortadella without nuts)</li>
-    <li><strong>150 g</strong> Pickled gherkins (kyslé uhorky), cut into fine matchsticks</li>
-    <li><strong>120 g</strong> Pickled red bell peppers (sterilizovaná kápia), drained and thinly sliced</li>
-    <li><strong>80 g</strong> Sweet canned corn, thoroughly drained</li>
+    <li><strong>400 g</strong> High-quality cooked ham (e.g. Prague ham, Black Forest, or Virginia baked ham), cut into matchsticks</li>
+    <li><strong>150 g</strong> Jarred fire-roasted red peppers, patted dry and cut into thin ribbons</li>
+    <li><strong>120 g</strong> Canned sliced button mushrooms, thoroughly drained and patted dry</li>
+    <li><strong>100 g</strong> Sweet canned corn, thoroughly drained</li>
+    <li><strong>40 g</strong> Pickled feferónky (or hot banana peppers / pickled cherry peppers), finely sliced</li>
     <li><strong>60 g</strong> Yellow onion, shaved paper-thin</li>
   </ul>
 
-  <h3>Spicy Emulsion Dressing</h3>
+  <h3>Spicy Tomato Glaze Dressing</h3>
   <ul>
-    <li><strong>120 g</strong> Heavy mayonnaise</li>
-    <li><strong>40 g</strong> Double-concentrated tomato paste (or rich ketchup)</li>
-    <li><strong>15 g</strong> Hot chili paste (Sambal Oelek, Erős Pista, or Harissa)</li>
-    <li><strong>15 ml</strong> Gherkin pickle brine (1 tbsp)</li>
-    <li><strong>5 ml</strong> Distilled white vinegar (1 tsp)</li>
+    <li><strong>120 g</strong> Rich tomato ketchup</li>
+    <li><strong>40 g</strong> Sriracha chili sauce (maintaining the 3:1 ratio)</li>
+    <li><strong>15 ml</strong> Hot sauce (Frank's RedHot, Tabasco, or Hungarian chili paste)</li>
+    <li><strong>15 ml</strong> Pepper pickling brine (1 tbsp)</li>
+    <li><strong>5 ml</strong> Distilled white vinegar or apple cider vinegar (1 tsp)</li>
     <li><strong>5 ml</strong> Worcestershire sauce (1 tsp)</li>
-    <li><strong>1 g</strong> Cayenne pepper or hot paprika (1/2 tsp)</li>
     <li><strong>Fine sea salt and freshly cracked black pepper</strong> to taste</li>
   </ul>
 </div>
@@ -39,17 +40,18 @@ author: "Tibor Markovič"
   <div class="print-content-block">
     <h2>Method</h2>
     <ol>
-      <li><strong>Precision Knife Work:</strong> Slice bologna into thin 2 mm discs, stack them, and slice into uniform 4 cm-long matchsticks (fine julienne). Match the julienne cut on the pickled gherkins. Pat drained pickled red peppers dry with paper towels to strip surface brine, then cut into neat ribbons.</li>
-      <li><strong>De-flame Onions:</strong> Submerge paper-thin shaved yellow onions in ice-cold water for 5 minutes to pull out harsh volatile sulfur compounds. Drain completely and press dry on clean lint-free kitchen towels.</li>
-      <li><strong>Whisk Dressing:</strong> In a wide stainless-steel bowl, whisk mayonnaise, tomato paste, chili paste, gherkin brine, white vinegar, Worcestershire sauce, cayenne pepper, black pepper, and salt until an emulsified, uniform reddish-orange dressing forms.</li>
-      <li><strong>Fold & Marinate:</strong> Add julienned bologna, gherkins, red peppers, corn, and tempered onions into the bowl. Using a rubber spatula, fold gently until every cut is coated. Cover airtight and refrigerate for a minimum of 3 hours (ideally overnight).</li>
-      <li><strong>Service:</strong> Stir lightly to reincorporate resting juices, adjust seasoning with a drop of vinegar or salt if needed, and serve chilled in cold enamel bowls alongside fresh, crisp rožky.</li>
+      <li><strong>Prep Vegetables:</strong> Thoroughly drain canned mushrooms and fire-roasted peppers. Press them firmly between paper towels to pull out surface moisture so the dressing doesn't dilute. Slice the roasted peppers into neat ribbons and mushrooms into uniform bite-sized pieces. Finely slice pickled feferónky into rings.</li>
+      <li><strong>Precision Knife Work:</strong> Cut quality ham into thin matchsticks (fine julienne, roughly 4 cm long) to ensure maximum surface area for coating.</li>
+      <li><strong>De-flame Onions:</strong> Submerge shaved yellow onions in ice-cold water for 5 minutes to remove sharp volatile compounds. Drain completely and pat dry.</li>
+      <li><strong>Whisk Dressing:</strong> In a wide mixing bowl, whisk together ketchup, sriracha, hot sauce, pepper brine, vinegar, Worcestershire sauce, salt, and freshly cracked black pepper until glossy and unified.</li>
+      <li><strong>Fold & Marinate:</strong> Add julienned ham, fire-roasted peppers, drained mushrooms, corn, feferónky, and tempered onions. Gently fold with a rubber spatula until evenly coated. Cover airtight and refrigerate for a minimum of 3 hours (ideally overnight).</li>
+      <li><strong>Service:</strong> Toss once more before serving cold in classic bowls alongside fresh, crisp rožky.</li>
     </ol>
   </div>
 
   <div class="tip-at-bottom">
     <blockquote>
-      <strong>Chef's Tip:</strong> Do not skip resting this salad overnight. Cold cuts and dense pickles need hours in contact with vinegar, salt, and capsaicin to trade moisture with the emulsion; serving it freshly mixed leaves the dressing disconnected from the meat.
+      <strong>Chef's Tip:</strong> Pressing the water out of canned mushrooms and roasted peppers is vital when skipping mayonnaise. Without mayo fats to coat the vegetables, excess brine will quickly thin out the ketchup-sriracha dressing into a runny pool instead of clinging to the ham. Additionally, keep in mind that the sharp kick of heat from the sriracha and feferónky mellows out quite a bit as the salad rests overnight, so don't be afraid to adjust the hot sauce levels upwards if you prefer a sharper punch upon serving.
     </blockquote>
   </div>
 </div>
