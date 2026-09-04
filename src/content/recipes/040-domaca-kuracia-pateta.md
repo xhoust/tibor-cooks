@@ -2,7 +2,7 @@
 title: "Domáca Paštéta z Kuracích Pečení"
 description: "Silk-smooth chicken liver parfait finished with caramelized shallots, garlic, port wine, butter, and thyme, sealed under a golden clarified butter lid."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "APPETIZER", "CHICKEN", "FREEZER-FRIENDLY ❄️"]
+tags: ["45 MINS", "DELI", "POULTRY", "OVERNIGHT", "FREEZER-FRIENDLY ❄️"]
 course: "Appetizer / Cold Starter"
 yield: "6–8 Portions (~650 g Pâté)"
 prepTime: "20 mins (+ 2 hrs chill)"

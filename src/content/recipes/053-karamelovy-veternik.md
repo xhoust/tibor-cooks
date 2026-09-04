@@ -2,7 +2,7 @@
 title: "Karamelový Veterník"
 description: "The crown jewel of Slovak cukráreň baking — golden choux pastry rings filled with rich vanilla diplomat cream and whipped caramel chantilly, crowned with a glossy caramel fondant glaze with crisp snap."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "DESSERT", "VEGETARIAN"]
+tags: ["2 HOURS", "PASTRY", "DESSERT", "VEGETARIAN"]
 course: "Dessert / Pastry"
 yield: "8 Large Veterníky (~10 cm diameter)"
 prepTime: "45 mins"

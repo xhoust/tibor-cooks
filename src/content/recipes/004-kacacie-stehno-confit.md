@@ -2,7 +2,7 @@
 title: "Kačacie Stehno Confit, Dusená Červená Kapusta a Borievkové Jus"
 description: "Slow stovetop confit duck legs paired with spiced sweet-tart red cabbage and rich juniper-infused pan jus."
 pubDate: 2026-08-25
-tags: ["3.5 HOURS", "Duck", "Main Courses", "Overnight"]
+tags: ["3 HOURS", "MAINS", "POULTRY", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course"
 yield: "4 Portions"
 prepTime: "25 mins"

@@ -2,7 +2,7 @@
 title: "Vajíčková Pomazánka"
 description: "The ultimate nostalgic egg spread made with hard-boiled eggs, whipped softened butter, quality mayonnaise, Dijon mustard, and a shower of fresh chives."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "APPETIZER", "VEGETARIAN"]
+tags: ["20 MINS", "DELI", "VEGETARIAN"]
 course: "Appetizer / Breakfast & Spread"
 yield: "4 Portions (~300 g Spread)"
 prepTime: "15 mins"

@@ -2,7 +2,7 @@
 title: "Ovocný Koláč s Posýpkou"
 description: "Classic everyday Slovak sheet cake topped with fresh or frozen fruit and a crisp, buttery crumble."
 pubDate: 2026-08-25
-tags: ["50 MINS", "Fruit", "Baking", "Desserts", "Vegetarian"]
+tags: ["45 MINS", "PASTRY", "DESSERT", "VEGETARIAN"]
 course: "Dessert"
 yield: "1 Sheet Pan (approx. 12–15 Slices)"
 prepTime: "15 mins"

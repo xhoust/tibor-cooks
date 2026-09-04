@@ -2,7 +2,7 @@
 title: "Domáce Rezance a Fliačky"
 description: "Traditional Slovak handcrafted egg pasta rolled paper-thin by hand, cut into wide ribbons (široké rezance), square fliačky, or fine soup vermicelli, dried on clean tablecloths for long-term pantry storage."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "MAIN COURSE", "SIDE", "PASTA", "VEGETARIAN", "PANTRY STAPLE 🏺"]
+tags: ["45 MINS", "SIDE", "VEGETARIAN"]
 course: "Pasta / Soup Garnish / Main Course Base"
 yield: "4–6 Portions (~600 g Fresh Pasta / ~450 g Dried)"
 prepTime: "35 mins (+ 20 mins rest + 24 hrs drying)"

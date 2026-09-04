@@ -2,7 +2,7 @@
 title: "Domáca Kyslá Kapusta (Tradičná Fermentácia)"
 description: "Traditional Slovak wild-fermented barrel sauerkraut crafted with salt, whole caraway seeds, black peppercorns, bay leaves, and sliced apples, creating crisp cabbage and potent probiotic juška."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "FERMENTATION", "PANTRY STAPLE 🏺", "VEGETARIAN", "VEGAN"]
+tags: ["45 MINS", "SIDE", "PANTRY", "VEGAN", "FERMENTATION"]
 course: "Pantry Staple / Fermentation"
 yield: "Approx. 5 kg Fermented Sauerkraut + Juška"
 prepTime: "45 mins (+ 3–4 weeks fermentation)"

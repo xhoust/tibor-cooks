@@ -2,7 +2,7 @@
 title: "Parené Buchty s Lekvárom"
 description: "Cloud-soft steamed yeast buns filled with thick spiced plum jam, drenched in melted browned butter, and coated in confectioner's ground poppy seeds or Granko."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "DESSERT", "VEGETARIAN"]
+tags: ["60 MINS", "MAINS", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
 course: "Dessert / Sweet Main"
 yield: "12 Buns"
 prepTime: "35 mins (+ 60 mins proofing)"

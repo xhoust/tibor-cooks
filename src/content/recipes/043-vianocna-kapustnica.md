@@ -2,7 +2,7 @@
 title: "Vianočná Kapustnica"
 description: "Our family's traditional Christmas sauerkraut soup. Dark, intense, and unashamedly sour—built on rich smoked meats, hand-picked dried forest mushrooms, and a heavy finishing pour of homemade juška."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "SOUP", "PORK", "FREEZER-FRIENDLY ❄️"]
+tags: ["2 HOURS", "SOUP", "PORK", "OVERNIGHT", "FREEZER-FRIENDLY ❄️"]
 course: "Soup / Main"
 yield: "8 Portions (~3 L Soup)"
 prepTime: "20 mins"

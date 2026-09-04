@@ -2,7 +2,7 @@
 title: "Vyprážaný Syr"
 description: "Crispy double-breaded fried provolone with an oozing molten core, featuring classic thick slabs or layered ham-and-cheese stacks."
 pubDate: 2026-08-25
-tags: [">>> 30 MINS", "MAIN COURSE", "CHEESE", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
+tags: ["20 MINS", "MAINS", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course"
 yield: "4 Portions (4 Slabs or Stacks)"
 prepTime: "20 mins (+ 20 mins freeze)"

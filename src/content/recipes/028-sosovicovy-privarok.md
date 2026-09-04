@@ -2,7 +2,7 @@
 title: "Šošovicový Prívarok"
 description: "Homestyle sweet-sour brown lentil stew simmered with caramelized onions, garlic, bay leaves, and sour cream, paired with blistered crosshatch knockwurst halves and crispy fašírka."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "MAIN COURSE", "SIDE", "PORK"]
+tags: ["45 MINS", "MAINS", "SIDE", "VEGETARIAN", "OVERNIGHT"]
 course: "Main Course / Prívarok"
 yield: "4 Portions (~1.2 kg Total Yield)"
 prepTime: "15 mins"

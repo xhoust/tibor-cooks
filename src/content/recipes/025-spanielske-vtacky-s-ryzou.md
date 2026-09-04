@@ -2,7 +2,7 @@
 title: "Španielske Vtáčky s Ryžou"
 description: "Tender beef top round rolls stuffed with bacon, pickled gherkins, boiled eggs, and sausages, braised on the stovetop in a rich mustard pan gravy."
 pubDate: 2026-08-25
-tags: ["> 90 MINS", "MAIN COURSE", "BEEF"]
+tags: ["90 MINS", "MAINS", "BEEF", "PORK"]
 course: "Main Course"
 yield: "4 Portions (4 Beef Birds + Rice)"
 prepTime: "30 mins"

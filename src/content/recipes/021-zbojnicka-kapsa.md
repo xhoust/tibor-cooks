@@ -2,7 +2,7 @@
 title: "Zbojnícka Kapsa (Kuracie Soté v Placke)"
 description: "Crispy raw potato pancake folded over spicy chicken sauté with sweet corn, peppers, onions, mushrooms, and garlic, topped with melted grated cheese and homemade tartar sauce."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "MAIN COURSE", "CHICKEN"]
+tags: ["60 MINS", "MAINS", "POULTRY"])
 course: "Main Course"
 yield: "4 Portions (4 Large Pockets)"
 prepTime: "25 mins"

@@ -2,7 +2,7 @@
 title: "Plnená Paprika v Paradajkovej Omáčke"
 description: "Sweet pale peppers stuffed with seasoned minced pork and rice, gently poached on the stovetop in a sweet-and-sour spiced tomato gravy."
 pubDate: 2026-08-25
-tags: ["> 60 MINS", "MAIN COURSE", "PORK", "FREEZER-FRIENDLY ❄️"]
+tags: ["90 MINS", "MAINS", "PORK", "BEEF", "OVERNIGHT", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course"
 yield: "4 Portions (6 Stuffed Peppers + Meatballs)"
 prepTime: "25 mins"

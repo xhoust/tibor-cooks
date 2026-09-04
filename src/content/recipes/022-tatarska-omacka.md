@@ -2,7 +2,7 @@
 title: "Domáca Tatárska Omáčka"
 description: "Classic Central European style cold tartar sauce with minced shallots, capers, sweet-sour pickled gherkins, and fresh parsley."
 pubDate: 2026-08-25
-tags: [">>> 30 MINS", "SIDE", "VEGETARIAN"]
+tags: ["15 MINS", "SIDE", "DELI", "VEGETARIAN", "PANTRY"]
 course: "Side / Condiment"
 yield: "4–6 Portions (~300 g Total Yield)"
 prepTime: "10 mins"

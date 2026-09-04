@@ -2,7 +2,7 @@
 title: "Vyprážaný Bravčový Rezeň"
 description: "Golden, crispy pan-fried pork cutlets in a classic three-step breading, fried in traditional pork lard."
 pubDate: 2026-08-25
-tags: [">>> 30 MINS", "MAIN COURSE", "PORK", "FREEZER-FRIENDLY ❄️"]
+tags: ["30 MINS", "MAINS", "PORK", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course"
 yield: "4 Portions"
 prepTime: "20 mins"

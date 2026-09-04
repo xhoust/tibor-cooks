@@ -2,7 +2,7 @@
 title: "Obložené Chlebíčky"
 description: "The ultimate Central European party and celebration staple — diagonal slices of soft white veka layered with rich parížsky šalát, classic zemiakový šalát, or whipped garlic butter, topped with fine cold cuts, hard-boiled egg, and deli garnishes."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "APPETIZER", "PORK"]
+tags: ["30 MINS", "DELI", "PORK"]
 course: "Appetizer / Cold Buffet"
 yield: "12–14 Open-Faced Sandwiches"
 prepTime: "25 mins"

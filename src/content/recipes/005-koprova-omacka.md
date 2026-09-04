@@ -1,48 +1,41 @@
 ---
-title: "Kôprová Omáčka s Vareným Hovädzím a Parenou Knedľou"
-description: "Simmered tender beef chuck served in a velvet sweet-sour fresh dill cream sauce with sliced steamed dumplings."
-pubDate: 2026-08-25
-tags: ["2.5 HOURS", "Beef", "Main Courses"]
-course: "Main Course"
-yield: "4–6 Portions"
-prepTime: "20 mins"
-cookTime: "2.5 hrs"
+title: "Kôprová Omáčka s Hovädzím Mäsom"
+description: "Braised beef eye of round sliced against the grain and served in a velvety, sweet-and-sour dill velouté enriched with heavy cream, finished with fresh dill fronds."
+pubDate: 2026-09-04
+tags: ["2 HOURS", "MAINS", "BEEF"]
+course: "Warm Mains / Classic"
+yield: "5–6 Portions"
+prepTime: "25 mins"
+cookTime: "1 hr 45 mins"
 author: "Tibor Markovič"
 ---
 
 <div class="print-page">
   <h2>Ingredients</h2>
   
-  <h3>Boiled Beef & Broth (Varené Hovädzie)</h3>
+  <h3>Braised Beef Eye of Round & Aromatic Stock</h3>
   <ul>
-    <li><strong>900 g–1000 g</strong> Beef chuck roast (or beef brisket/shank), trimmed <em>(or substitute with soft-poached eggs for a vegetarian version)</em></li>
-    <li><strong>1.8 L</strong> Cold water (or light vegetable stock if using eggs)</li>
-    <li><strong>1</strong> Large yellow onion, halved (skins on, charred on cut side)</li>
-    <li><strong>2</strong> Carrots, peeled and halved</li>
-    <li><strong>1</strong> Parsnip (or parsley root), peeled</li>
-    <li><strong>80 g</strong> Celeriac root, peeled</li>
-    <li><strong>3 cloves</strong> Garlic, crushed</li>
+    <li><strong>1 kg</strong> Beef eye of round (falošná sviečková / hovädzie zadné)</li>
+    <li><strong>1.2 L</strong> Cold water (or light unsalted beef broth)</li>
+    <li><strong>1</strong> Large yellow onion, halved (skin-on, charred cut-side down in a dry pan)</li>
+    <li><strong>1</strong> Large carrot, peeled and halved</li>
+    <li><strong>1</strong> Parsnip, peeled and halved</li>
     <li><strong>2</strong> Dried bay leaves</li>
-    <li><strong>6</strong> Whole black peppercorns</li>
-    <li><strong>3</strong> Whole allspice berries</li>
-    <li><strong>12 g</strong> Fine sea salt</li>
+    <li><strong>6</strong> Whole allspice berries</li>
+    <li><strong>10</strong> Whole black peppercorns</li>
+    <li><strong>15 g</strong> Fine sea salt</li>
   </ul>
 
-  <h3>Velvet Dill Sauce (Kôprová Omáčka)</h3>
+  <h3>Velvety Dill Velouté (Kôprovka)</h3>
   <ul>
-    <li><strong>45 g</strong> Unsalted butter</li>
-    <li><strong>40 g</strong> All-Purpose (AP) flour</li>
-    <li><strong>650 ml</strong> Strained hot broth (from the simmered meat or veg stock)</li>
-    <li><strong>150 ml</strong> Heavy cream (36% m.f.) or crème fraîche</li>
-    <li><strong>40 g</strong> Fresh dill, thick stems removed, leaves finely chopped</li>
-    <li><strong>20 g–30 g</strong> Granulated sugar (adjust to taste)</li>
-    <li><strong>25 ml–35 ml</strong> White wine vinegar or cider vinegar (adjust to taste)</li>
-    <li><strong>To taste:</strong> Fine sea salt & ground white pepper</li>
-  </ul>
-
-  <h3>To Serve</h3>
-  <ul>
-    <li><strong>Choice of Side:</strong> Warm sliced <a href="/recipes/003-parena-knedla">Parená Knedľa</a>, boiled buttered baby potatoes with parsley, or thick slices of fresh sourdough/crusty bread</li>
+    <li><strong>50 g</strong> Unsalted butter</li>
+    <li><strong>50 g</strong> All-Purpose flour</li>
+    <li><strong>750 ml</strong> Strained hot beef cooking stock (from the braise above)</li>
+    <li><strong>250 ml</strong> Heavy whipping cream (36% milkfat)</li>
+    <li><strong>60 g</strong> Fresh dill fronds and tender stems, finely chopped</li>
+    <li><strong>30 g</strong> Granulated sugar (2 tbsp, adjust to taste)</li>
+    <li><strong>30 ml</strong> Distilled white vinegar (2 tbsp, adjust to taste)</li>
+    <li><strong>Fine sea salt and finely ground white pepper</strong> to taste</li>
   </ul>
 </div>
 
@@ -50,19 +43,18 @@ author: "Tibor Markovič"
   <div class="print-content-block">
     <h2>Method</h2>
     <ol>
-      <li><strong>Simmer the Beef (or Prep Poached Eggs):</strong> Place beef in a deep stockpot, cover with cold water, and bring to a gentle boil, skimming off foam. Add charred onion, root vegetables, garlic, spices, and salt. Reduce heat to low, cover loosely, and simmer for 2 to 2.5 hours until fork-tender. <em>(If making the vegetarian version, simmer the aromatics in vegetable broth for 30 minutes, strain, and soft-poach eggs separately just before serving).</em></li>
-      <li><strong>Strain & Rest:</strong> Lift beef onto a cutting board, tent with foil, and strain the broth through a fine-mesh sieve. Measure 650 ml broth for the sauce (reserve leftover broth for starter soup).</li>
-      <li><strong>Make the Roux:</strong> Melt butter in a saucepan over medium-low heat. Whisk in AP flour for 2 minutes to cook out raw flour without browning (pale blond roux).</li>
-      <li><strong>Build the Velouté:</strong> Gradually pour in 650 ml hot broth in a steady stream while whisking vigorously. Simmer on low for 10–12 minutes until thickened and glossy.</li>
-      <li><strong>Enrich & Season:</strong> Whisk in heavy cream. Add sugar, vinegar, fine sea salt, and white pepper. Balance to taste—it should be distinctly sweet-tart and velvety.</li>
-      <li><strong>Finish with Dill:</strong> Take saucepan off the heat completely before folding in the fresh dill to preserve its vibrant green color and aromatics.</li>
-      <li><strong>Plate & Serve:</strong> Slice beef against the grain into medallions (or rest a runny poached egg in the plate). Ladle generous pools of hot dill sauce around, serving alongside steamed knedľa, buttered boiled potatoes, or thick slices of fresh crusty bread.</li>
+      <li><strong>Simmer Beef Eye of Round:</strong> Place beef in a heavy pot, cover with 1.2 L cold water, and bring slowly to a simmer over medium heat. Thoroughly skim all gray albumin foam off the surface. Add charred onion, carrot, parsnip, bay leaves, allspice, peppercorns, and salt. Reduce heat to low, partially cover, and simmer gently for 1.5 to 2 hours until tender when pierced with a paring knife.</li>
+      <li><strong>Rest Meat & Strain Stock:</strong> Transfer braised beef to a cutting board, wrap tightly in aluminum foil, and rest warm. Strain broth through a fine-mesh chinois, discarding spent vegetables and whole spices. Measure out 750 ml hot broth for the velouté.</li>
+      <li><strong>Make the Roux:</strong> In a heavy-bottomed saucepan over medium heat, melt butter until foaming. Whisk in flour and cook the blond roux for 2–3 minutes until bubbling and nutty, without letting it take on brown color.</li>
+      <li><strong>Build the Velouté:</strong> Gradually pour the 750 ml strained hot broth into the roux in thirds, whisking vigorously after each pour to prevent lumps. Bring to a gentle boil, drop heat to low, and cook for 15 minutes to cook out any raw flour taste.</li>
+      <li><strong>Enrich & Season:</strong> Whisk in heavy cream and simmer for 2 minutes. Season with salt, ground white pepper, sugar, and vinegar. Taste and adjust balance: traditional kôprovka demands a clear, sweet-and-sour interplay.</li>
+      <li><strong>Fold Dill & Plate:</strong> Pull saucepan completely off the flame. Immediately fold finely minced dill fronds into the residual heat so they preserve their bright green color and aromatic oils. Slice beef across the grain into 8 mm medallions, plate warmly, ladle generous coats of dill sauce over the meat, and serve with steamed yeast dumplings (knedľa) or boiled potatoes.</li>
     </ol>
   </div>
 
   <div class="tip-at-bottom">
     <blockquote>
-      <strong>Chef's Tip:</strong> Never boil the sauce after stirring in chopped fresh dill—residual heat alone preserves its vivid color and essential aromatic oils.
+      <strong>Chef's Tip:</strong> Never boil the sauce once fresh dill is stirred in. High heat destroys dill's delicate aroma and oxidizes bright chlorophyll into a muddy dull olive shade. Always add the herb off the burner just before serving.
     </blockquote>
   </div>
 </div>

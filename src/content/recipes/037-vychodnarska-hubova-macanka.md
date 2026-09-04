@@ -2,7 +2,7 @@
 title: "Východniarska Hubová Mačanka"
 description: "Pungent, deeply sour Eastern Slovak wild mushroom stew simmered in pure homemade sauerkraut juice (juška), thickened with a rich garlic-paprika roux and crowned with crispy pan-fried klobása for dipping."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "SOUP", "MAIN COURSE", "PORK"]
+tags: ["60 MINS", "MAINS", "PORK", "MUSHROOMS"]
 course: "Soup / Main Course"
 yield: "4–6 Portions (~1.5 L Stew)"
 prepTime: "20 mins (+ 30 mins mushroom soak)"

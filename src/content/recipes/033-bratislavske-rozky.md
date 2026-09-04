@@ -2,7 +2,7 @@
 title: "Bratislavské Rožky (Makové a Orechové)"
 description: "Traditional PDO-protected Pressburg pastry crescents filled with rich ground blue poppy seeds or sweetened walnuts, finished with an iconic glossy marbled egg-yolk crust."
 pubDate: 2026-08-25
-tags: ["> 90 MINS", "DESSERT", "BAKING", "FREEZER-FRIENDLY ❄️"]
+tags: ["2 HOURS", "BAKERY", "PASTRY", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
 course: "Dessert / Sweet Pastry"
 yield: "16 Pastries (8 Poppy Seed 'Horseshoes' + 8 Walnut 'C-Shapes')"
 prepTime: "45 mins (+ 30 mins chill)"

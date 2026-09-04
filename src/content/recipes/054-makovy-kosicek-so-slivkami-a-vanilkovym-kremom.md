@@ -2,7 +2,7 @@
 title: "Makový Košíček so Slivkami a Vanilkovým Krémom"
 description: "Plated modern dessert — delicate poppy seed tuile basket filled with silky pipeable vanilla crème pâtissière, glazed slivovica black plums, a dollop of salted labneh, and a golden drop of honey."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "DESSERT", "VEGETARIAN"]
+tags: ["60 MINS", "PASTRY", "DESSERT", "VEGETARIAN"]
 course: "Dessert / Plated Modern"
 yield: "4–5 Plated Baskets"
 prepTime: "30 mins"

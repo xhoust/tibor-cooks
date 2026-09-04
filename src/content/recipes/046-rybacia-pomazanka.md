@@ -2,7 +2,7 @@
 title: "Rybacia Pomazánka"
 description: "A beloved Slovak deli and grandma classic made with whole canned sardines in oil, whipped butter, mayonnaise, salted finely minced white onion, fresh chives, and lemon."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "APPETIZER", "FISH"]
+tags: ["20 MINS", "DELI", "FISH"]
 course: "Appetizer / Breakfast & Spread"
 yield: "4 Portions (~320 g Spread)"
 prepTime: "15 mins"

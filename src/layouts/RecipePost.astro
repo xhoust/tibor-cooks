@@ -12,6 +12,35 @@ const {
   prepTime = '',
   cookTime = '',
 } = data;
+
+// Semantic tag categorization for distinctive station styling
+function getTagCategory(tag: string): string {
+  const cleanTag = tag.trim().toUpperCase();
+
+  if (cleanTag.includes('MIN') || cleanTag.includes('HOUR')) return 'time';
+  if (cleanTag.includes('FREEZER')) return 'freezer';
+  if (cleanTag === 'OVERNIGHT') return 'overnight';
+  if (cleanTag === 'FERMENTATION') return 'ferment';
+
+  // Course / Station
+  if (['BAKERY', 'PASTRY'].includes(cleanTag)) return 'bakes';
+  if (cleanTag === 'SOUP') return 'soup';
+  if (cleanTag === 'MAINS') return 'mains';
+  if (cleanTag === 'SIDE') return 'side';
+  if (['DELI', 'SALAD'].includes(cleanTag)) return 'fresh';
+  if (cleanTag === 'DESSERT') return 'dessert';
+  if (cleanTag === 'PANTRY') return 'pantry';
+
+  // Protein & Diet
+  if (cleanTag === 'PORK') return 'pork';
+  if (cleanTag === 'BEEF') return 'beef';
+  if (cleanTag === 'POULTRY') return 'poultry';
+  if (cleanTag === 'FISH') return 'fish';
+  if (cleanTag === 'MUSHROOMS') return 'mushrooms';
+  if (['VEGETARIAN', 'VEGAN'].includes(cleanTag)) return 'plant';
+
+  return 'default';
+}
 ---
 
 <!doctype html>
@@ -57,9 +86,12 @@ const {
         <header class="recipe-top-section">
           {tags && tags.length > 0 && (
             <div class="tags-row">
-              {tags.map((tag: string) => (
-                <span class="tag-badge">{tag}</span>
-              ))}
+              {tags.map((tag: string) => {
+                const category = getTagCategory(tag);
+                return (
+                  <span class={`tag-badge tag-${category}`}>{tag}</span>
+                );
+              })}
             </div>
           )}
 
@@ -164,25 +196,159 @@ const {
     background-color: #e7e5e4;
   }
 
+  /* Tags Row & Base Badge */
   .tags-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
     margin-bottom: 0.75rem;
+    align-items: center;
   }
 
   .tag-badge {
-    font-size: 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.5rem;
-    background-color: #f5f5f4;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 4px;
     border: 1px solid #e7e5e4;
-    border-radius: 3px;
-    color: #57534e;
+    line-height: 1;
+    white-space: nowrap;
   }
 
+  /* Subtle directional chevron for Station/Course tags */
+  .tag-badge.tag-mains::before,
+  .tag-badge.tag-bakes::before,
+  .tag-badge.tag-soup::before,
+  .tag-badge.tag-fresh::before,
+  .tag-badge.tag-dessert::before,
+  .tag-badge.tag-side::before,
+  .tag-badge.tag-pantry::before {
+    content: "›";
+    font-weight: 900;
+    font-size: 0.85rem;
+    margin-right: 3px;
+    line-height: 0;
+    opacity: 0.75;
+  }
+
+  /* --- TIME --- */
+  .tag-badge.tag-time {
+    background-color: #f1f5f9;
+    color: #334155;
+    border-color: #cbd5e1;
+  }
+
+  /* --- STATIONS / COURSES --- */
+  .tag-badge.tag-mains {
+    background-color: #fff7ed;
+    color: #c2410c;
+    border-color: #fed7aa;
+  }
+
+  .tag-badge.tag-bakes {
+    background-color: #fefce8;
+    color: #a16207;
+    border-color: #fef08a;
+  }
+
+  .tag-badge.tag-soup {
+    background-color: #ecfeff;
+    color: #0e7490;
+    border-color: #a5f3fc;
+  }
+
+  .tag-badge.tag-fresh {
+    background-color: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+  }
+
+  .tag-badge.tag-dessert {
+    background-color: #fdf2f8;
+    color: #be185d;
+    border-color: #fbcfe8;
+  }
+
+  .tag-badge.tag-side {
+    background-color: #f8fafc;
+    color: #475569;
+    border-color: #e2e8f0;
+  }
+
+  .tag-badge.tag-pantry {
+    background-color: #faf5ff;
+    color: #7e22ce;
+    border-color: #e9d5ff;
+  }
+
+  /* --- PROTEIN & DIETARY BASE --- */
+  .tag-badge.tag-pork {
+    background-color: #fff1f2;
+    color: #be123c;
+    border-color: #fecdd3;
+  }
+
+  .tag-badge.tag-beef {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+  }
+
+  .tag-badge.tag-poultry {
+    background-color: #fffbeb;
+    color: #b45309;
+    border-color: #fde68a;
+  }
+
+  .tag-badge.tag-fish {
+    background-color: #f0f9ff;
+    color: #0369a1;
+    border-color: #bae6fd;
+  }
+
+  .tag-badge.tag-mushrooms {
+    background-color: #f5f5f4;
+    color: #57534e;
+    border-color: #d6d3d1;
+  }
+
+  .tag-badge.tag-plant {
+    background-color: #ecfdf5;
+    color: #047857;
+    border-color: #a7f3d0;
+  }
+
+  /* --- SPECIAL ATTRIBUTES --- */
+  .tag-badge.tag-freezer {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+    box-shadow: inset 0 0 0 1px #bfdbfe;
+  }
+
+  .tag-badge.tag-overnight {
+    background-color: #312e81;
+    color: #e0e7ff;
+    border-color: #4338ca;
+  }
+
+  .tag-badge.tag-ferment {
+    background-color: #78350f;
+    color: #fef3c7;
+    border-color: #92400e;
+  }
+
+  .tag-badge.tag-default {
+    background-color: #f5f5f4;
+    color: #57534e;
+    border-color: #e7e5e4;
+  }
+
+  /* Typography & Layout */
   .recipe-title {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2.25rem;
@@ -319,7 +485,6 @@ const {
       max-width: 100% !important;
     }
 
-    /* Keep Top Section firmly attached to Page 1 Ingredients */
     .recipe-top-section {
       break-after: avoid;
       page-break-after: avoid;
@@ -344,7 +509,18 @@ const {
       padding: 0.35rem 0.2rem !important;
     }
 
-    /* Page 1: Top section + Ingredients container */
+    .tag-badge {
+      background: #f5f5f4 !important;
+      color: #000000 !important;
+      border: 1px solid #cccccc !important;
+      box-shadow: none !important;
+    }
+
+    .tag-badge::before {
+      display: none !important;
+    }
+
+    /* Page 1: Top section + Ingredients */
     .print-page:not(.page-two) {
       break-inside: avoid;
       page-break-inside: avoid;

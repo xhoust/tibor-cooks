@@ -2,7 +2,7 @@
 title: "Viedenský Zemiakový Šalát"
 description: "Austro-Hungarian style warm potato salad dressed in rich hot beef stock, vinegar, sweet red onions, and grainy mustard."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "SIDE", "SALADS"]
+tags: ["45 MINS", "SIDE", "SALAD", "VEGAN", "OVERNIGHT"]
 course: "Side / Salad"
 yield: "4 Portions (~900 g Total Yield)"
 prepTime: "20 mins"

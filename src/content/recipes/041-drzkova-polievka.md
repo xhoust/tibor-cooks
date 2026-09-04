@@ -2,7 +2,7 @@
 title: "Držková Polievka"
 description: "Traditional spiced beef tripe soup simmered in rich beef broth with caramelized onions, sweet paprika, garlic, crushed caraway, and a fragrant cloud of dried marjoram."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "SOUP", "BEEF", "FREEZER-FRIENDLY ❄️"]
+tags: ["2 HOURS", "SOUP", "BEEF", "FREEZER-FRIENDLY ❄️"]
 course: "Soup / Main"
 yield: "6 Portions (~2.2 L Soup)"
 prepTime: "30 mins"

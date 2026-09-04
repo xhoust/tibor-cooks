@@ -6,376 +6,453 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('recipes')).sort(
-	(a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
+    (a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
 
-function formatTimeTag(tag: string): string {
-	const upper = tag.toUpperCase().trim();
-	
-	// Check for hours
-	const hrMatch = upper.match(/(\d+(\.\d+)?)\s*(HRS?|HOURS?)/);
-	if (hrMatch) {
-		const hours = parseFloat(hrMatch[1]);
-		if (hours >= 2) return `${tag} >`;
-		return `${tag} >>`;
-	}
-
-	// Check for minutes
-	const minMatch = upper.match(/(\d+)\s*(MINS?|MINUTES?)/);
-	if (minMatch) {
-		const mins = parseInt(minMatch[1], 10);
-		if (mins <= 30) return `${tag} >>>`;
-		if (mins < 120) return `${tag} >>`;
-		return `${tag} >`;
-	}
-
-	return tag;
-}
-
 function getTagType(tag: string): string {
-	const t = tag.toUpperCase();
-	if (t.includes('MIN') || t.includes('HR') || t.includes('HOUR')) return 'tag-time';
-	if (t.includes('OVERNIGHT')) return 'tag-overnight';
-	if (['ITALIAN', 'FRENCH', 'AUSTRIAN', 'AMERICAN', 'GLOBAL', 'MEDITERRANEAN', 'INTERNATIONAL', 'IRISH', 'ASIAN'].includes(t)) return 'tag-origin';
-	if (['PORK', 'BEEF', 'DUCK', 'POULTRY', 'CHICKEN', 'FISH', 'POTATO', 'CHEESE', 'BRYNDZA', 'FRUIT', 'MUSHROOM', 'BREADS'].includes(t)) return 'tag-element';
-	if (['MAIN COURSES', 'SIDES', 'DESSERTS', 'BAKING', 'SOUPS', 'SALADS'].includes(t)) return 'tag-course';
-	if (['VEGETARIAN', 'VEGAN', 'NUT-FREE', 'GF', 'DF'].includes(t)) return 'tag-diet';
-	return 'tag-default';
+    const t = tag.toUpperCase().trim();
+
+    // Time
+    if (t.includes('MIN') || t.includes('HR') || t.includes('HOUR')) return 'tag-time';
+
+    // Special Modifiers
+    if (t.includes('FREEZER')) return 'tag-freezer';
+    if (t === 'OVERNIGHT') return 'tag-overnight';
+    if (t === 'FERMENTATION') return 'tag-ferment';
+
+    // Courses / Stations
+    if (['BAKERY', 'PASTRY'].includes(t)) return 'tag-bakes';
+    if (t === 'SOUP') return 'tag-soup';
+    if (t === 'MAINS') return 'tag-mains';
+    if (t === 'SIDE') return 'tag-side';
+    if (['DELI', 'SALAD'].includes(t)) return 'tag-fresh';
+    if (t === 'DESSERT') return 'tag-dessert';
+    if (t === 'PANTRY') return 'tag-pantry';
+
+    // Core Proteins & Diets
+    if (t === 'PORK') return 'tag-pork';
+    if (t === 'BEEF') return 'tag-beef';
+    if (t === 'POULTRY') return 'tag-poultry';
+    if (t === 'FISH') return 'tag-fish';
+    if (t === 'MUSHROOMS') return 'tag-mushrooms';
+    if (['VEGETARIAN', 'VEGAN'].includes(t)) return 'tag-plant';
+
+    return 'tag-default';
 }
 
-function getProcessedTags(tags: string[], description: string = ''): string[] {
-	// Strip out 'TRADITIONAL' by default
-	let list = tags.filter(t => t.toUpperCase() !== 'TRADITIONAL');
+function getProcessedTags(tags: string[] = []): string[] {
+    let list = tags.filter(t => t.toUpperCase() !== 'TRADITIONAL');
 
-	const hasOvernight = list.some(t => t.toUpperCase().includes('OVERNIGHT')) || 
-	                     description.toLowerCase().includes('overnight');
+    // Rank: 1. Time -> 2. Course/Station -> 3. Protein/Diet -> 4. Special Modifiers
+    list.sort((a, b) => {
+        const score = (val: string) => {
+            const u = val.toUpperCase().trim();
+            if (u.includes('MIN') || u.includes('HR') || u.includes('HOUR')) return 4;
+            if (['BAKERY', 'PASTRY', 'DELI', 'SALAD', 'SOUP', 'MAINS', 'SIDE', 'DESSERT', 'PANTRY'].includes(u)) return 3;
+            if (['PORK', 'BEEF', 'POULTRY', 'FISH', 'MUSHROOMS', 'VEGETARIAN', 'VEGAN'].includes(u)) return 2;
+            return 1;
+        };
+        return score(b) - score(a);
+    });
 
-	// Prioritize: 1. Time, 2. Origin (if abroad), 3. Protein/Core Element, 4. Course / Diet
-	list.sort((a, b) => {
-		const score = (val: string) => {
-			const u = val.toUpperCase();
-			if (u.includes('MIN') || u.includes('HR')) return 4;
-			if (['ITALIAN', 'FRENCH', 'AUSTRIAN', 'AMERICAN', 'GLOBAL', 'MEDITERRANEAN', 'INTERNATIONAL', 'IRISH', 'ASIAN'].includes(u)) return 3;
-			if (['PORK', 'BEEF', 'DUCK', 'POULTRY', 'CHICKEN', 'FISH', 'POTATO', 'CHEESE', 'BRYNDZA', 'FRUIT', 'MUSHROOM', 'BREADS'].includes(u)) return 2;
-			return 1;
-		};
-		return score(b) - score(a);
-	});
-
-	if (hasOvernight && !list.some(t => t.toUpperCase() === 'OVERNIGHT')) {
-		list.splice(1, 0, 'OVERNIGHT');
-	}
-
-	return list;
+    return list;
 }
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={`Recipes & Notes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section class="archive-header">
-				<span class="eyebrow">RECIPE ARCHIVE</span>
-				<h1 class="archive-title">Recipes & Notes</h1>
-				<p class="archive-lead">
-					Traditional Slovak comfort food, embassy kitchen staples, and personal favorites.
-				</p>
+    <head>
+        <BaseHead title={`Recipes & Notes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="archive-header">
+                <span class="eyebrow">RECIPE ARCHIVE</span>
+                <h1 class="archive-title">Recipes & Notes</h1>
+                <p class="archive-lead">
+                    Traditional Slovak comfort food, embassy kitchen staples, and personal favorites.
+                </p>
 
-				<div class="search-wrap">
-					<input 
-						type="text" 
-						id="recipeSearch" 
-						placeholder="Search recipes (e.g. Sviečková, Halušky, Lokše)..." 
-						autocomplete="off"
-					/>
-				</div>
-			</section>
+                <div class="search-wrap">
+                    <input 
+                        type="text" 
+                        id="recipeSearch" 
+                        placeholder="Search recipes (e.g. Sviečková, Halušky, Lokše)..." 
+                        autocomplete="off"
+                    />
+                </div>
+            </section>
 
-			<section class="recipes-grid" id="recipeGrid">
-				{
-					posts.map((post) => {
-						const rawTags: string[] = post.data.tags || [];
-						const processedTags = getProcessedTags(rawTags, post.data.description);
+            <section class="recipes-grid" id="recipeGrid">
+                {
+                    posts.map((post) => {
+                        const rawTags: string[] = post.data.tags || [];
+                        const processedTags = getProcessedTags(rawTags);
 
-						return (
-							<article class="recipe-card" data-title={post.data.title.toLowerCase()} data-tags={processedTags.join(' ').toLowerCase()}>
-								{processedTags.length > 0 && (
-									<div class="tag-pills-row">
-										{processedTags.map((tag: string) => {
-											const isTime = tag.toUpperCase().includes('MIN') || tag.toUpperCase().includes('HR');
-											const displayLabel = isTime ? formatTimeTag(tag) : tag;
-											return (
-												<span class={`tag-pill ${getTagType(tag)}`}>{displayLabel}</span>
-											);
-										})}
-									</div>
-								)}
+                        return (
+                            <article class="recipe-card" data-title={post.data.title.toLowerCase()} data-tags={processedTags.join(' ').toLowerCase()}>
+                                {processedTags.length > 0 && (
+                                    <div class="tag-pills-row">
+                                        {processedTags.map((tag: string) => {
+                                            const tagClass = getTagType(tag);
+                                            return (
+                                                <span class={`tag-pill ${tagClass}`}>{tag}</span>
+                                            );
+                                        })}
+                                    </div>
+                                )}
 
-								<h2 class="recipe-card-title">{post.data.title}</h2>
-								
-								{post.data.description && (
-									<p class="recipe-card-desc">{post.data.description}</p>
-								)}
+                                <h2 class="recipe-card-title">{post.data.title}</h2>
+                                
+                                {post.data.description && (
+                                    <p class="recipe-card-desc">{post.data.description}</p>
+                                )}
 
-								<div class="card-bottom-spacer"></div>
+                                <div class="card-bottom-spacer"></div>
 
-								<hr class="card-divider" />
+                                <hr class="card-divider" />
 
-								<a href={`/recipes/${post.id}/`} class="view-recipe-link">
-									VIEW RECIPE &rarr;
-								</a>
-							</article>
-						);
-					})
-				}
-			</section>
-		</main>
-		<Footer />
+                                <a href={`/recipes/${post.id}/`} class="view-recipe-link">
+                                    VIEW RECIPE &rarr;
+                                </a>
+                            </article>
+                        );
+                    })
+                }
+            </section>
+        </main>
+        <Footer />
 
-		<!-- Client-side Instant Filter -->
-		<script is:inline>
-			document.addEventListener('DOMContentLoaded', () => {
-				const searchInput = document.getElementById('recipeSearch');
-				const grid = document.getElementById('recipeGrid');
-				if (!searchInput || !grid) return;
+        <!-- Client-side Instant Filter -->
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                const searchInput = document.getElementById('recipeSearch');
+                const grid = document.getElementById('recipeGrid');
+                if (!searchInput || !grid) return;
 
-				const cards = Array.from(grid.querySelectorAll('.recipe-card'));
+                const cards = Array.from(grid.querySelectorAll('.recipe-card'));
 
-				searchInput.addEventListener('input', (e) => {
-					const query = e.target.value.toLowerCase().trim();
-					cards.forEach((card) => {
-						const title = card.getAttribute('data-title') || '';
-						const tags = card.getAttribute('data-tags') || '';
-						if (title.includes(query) || tags.includes(query)) {
-							card.style.display = 'flex';
-						} else {
-							card.style.display = 'none';
-						}
-					});
-				});
-			});
-		</script>
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    cards.forEach((card) => {
+                        const title = card.getAttribute('data-title') || '';
+                        const tags = card.getAttribute('data-tags') || '';
+                        if (title.includes(query) || tags.includes(query)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        </script>
 
-		<style>
-			main {
-				max-width: 1140px;
-				margin: 0 auto;
-				padding: 3.5rem 1.5rem 6rem 1.5rem;
-			}
+        <style is:inline>
+            main {
+                max-width: 1140px;
+                margin: 0 auto;
+                padding: 3.5rem 1.5rem 6rem 1.5rem;
+            }
 
-			.archive-header {
-				margin-bottom: 3.5rem;
-			}
+            .archive-header {
+                margin-bottom: 3.5rem;
+            }
 
-			.eyebrow {
-				display: block;
-				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-				font-size: 0.72rem;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
-				color: #7A746B;
-				font-weight: 600;
-				margin-bottom: 0.75rem;
-			}
+            .eyebrow {
+                display: block;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: #7A746B;
+                font-weight: 600;
+                margin-bottom: 0.75rem;
+            }
 
-			.archive-title {
-				font-family: Georgia, serif;
-				font-size: 3.2rem;
-				line-height: 1.1;
-				font-weight: 700;
-				color: #1A1917;
-				margin: 0 0 0.85rem 0;
-				letter-spacing: -0.02em;
-			}
+            .archive-title {
+                font-family: Georgia, serif;
+                font-size: 3.2rem;
+                line-height: 1.1;
+                font-weight: 700;
+                color: #1A1917;
+                margin: 0 0 0.85rem 0;
+                letter-spacing: -0.02em;
+            }
 
-			.archive-lead {
-				font-family: Georgia, serif;
-				font-style: italic;
-				font-size: 1.15rem;
-				color: #5A554E;
-				line-height: 1.5;
-				margin: 0 0 2rem 0;
-			}
+            .archive-lead {
+                font-family: Georgia, serif;
+                font-style: italic;
+                font-size: 1.15rem;
+                color: #5A554E;
+                line-height: 1.5;
+                margin: 0 0 2rem 0;
+            }
 
-			.search-wrap {
-				max-width: 440px;
-			}
+            .search-wrap {
+                max-width: 440px;
+            }
 
-			.search-wrap input {
-				width: 100%;
-				padding: 0.75rem 1rem;
-				font-size: 0.88rem;
-				font-family: inherit;
-				border: 1px solid #D8D2C4;
-				border-radius: 6px;
-				background: #FFFFFF;
-				color: #1A1917;
-				outline: none;
-				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-				transition: border-color 0.15s ease;
-			}
+            .search-wrap input {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                font-size: 0.88rem;
+                font-family: inherit;
+                border: 1px solid #D8D2C4;
+                border-radius: 6px;
+                background: #FFFFFF;
+                color: #1A1917;
+                outline: none;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+                transition: border-color 0.15s ease;
+            }
 
-			.search-wrap input:focus {
-				border-color: #23372B;
-			}
+            .search-wrap input:focus {
+                border-color: #23372B;
+            }
 
-			/* Grid Layout */
-			.recipes-grid {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 1.5rem;
-			}
+            /* Grid Layout */
+            .recipes-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
 
-			.recipe-card {
-				background: #FFFFFF;
-				border: 1px solid #DFD9CE;
-				border-radius: 10px;
-				padding: 1.75rem 1.6rem 1.4rem 1.6rem;
-				display: flex;
-				flex-direction: column;
-				box-shadow: 
-					0 1px 0 rgba(255, 255, 255, 0.9) inset,
-					0 2px 8px rgba(0, 0, 0, 0.03);
-				transition: transform 0.2s ease, box-shadow 0.2s ease;
-			}
+            .recipe-card {
+                background: #FFFFFF;
+                border: 1px solid #DFD9CE;
+                border-radius: 10px;
+                padding: 1.75rem 1.6rem 1.4rem 1.6rem;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 
+                    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+                    0 2px 8px rgba(0, 0, 0, 0.03);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
 
-			.recipe-card:hover {
-				transform: translateY(-2px);
-				box-shadow: 
-					0 1px 0 rgba(255, 255, 255, 0.9) inset,
-					0 6px 18px rgba(0, 0, 0, 0.06);
-			}
+            .recipe-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 
+                    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+                    0 6px 18px rgba(0, 0, 0, 0.06);
+            }
 
-			/* Color-Coded Tag Pills */
-			.tag-pills-row {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.4rem;
-				margin-bottom: 1.25rem;
-			}
+            /* Base Tag Pills Container & Rules */
+            .tag-pills-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.35rem;
+                margin-bottom: 1.15rem;
+                align-items: center;
+            }
 
-			.tag-pill {
-				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-				font-size: 0.65rem;
-				font-weight: 700;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-				padding: 0.22rem 0.55rem;
-				border-radius: 4px;
-				border: 1px solid transparent;
-				white-space: nowrap;
-			}
+            .recipe-card .tag-pill {
+                display: inline-flex;
+                align-items: center;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-size: 0.65rem;
+                font-weight: 700;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                padding: 0.22rem 0.55rem;
+                border-radius: 4px;
+                line-height: 1;
+                white-space: nowrap;
+                border-style: solid;
+                border-width: 1px;
+            }
 
-			/* Time: Warm Amber / Ochre with Speed Indicators */
-			.tag-pill.tag-time {
-				background: #FBF4E8;
-				border-color: #EBDEC5;
-				color: #935B16;
-				letter-spacing: 0.08em;
-			}
+            /* Station & Course Chevrons */
+            .recipe-card .tag-pill.tag-mains::before,
+            .recipe-card .tag-pill.tag-bakes::before,
+            .recipe-card .tag-pill.tag-soup::before,
+            .recipe-card .tag-pill.tag-fresh::before,
+            .recipe-card .tag-pill.tag-dessert::before,
+            .recipe-card .tag-pill.tag-side::before,
+            .recipe-card .tag-pill.tag-pantry::before {
+                content: "›";
+                font-weight: 900;
+                font-size: 0.75rem;
+                margin-right: 3px;
+                line-height: 0;
+                opacity: 0.75;
+            }
 
-			/* Overnight Prep: Deep Plum / Wine Accent */
-			.tag-pill.tag-overnight {
-				background: #F4EEF7;
-				border-color: #E2D3E8;
-				color: #6D3B7D;
-			}
+            /* ==========================================================================
+               WARM EDITORIAL PALETTE (Strict Spec & Zero Fluff)
+               ========================================================================== */
 
-			/* Origin / Abroad: Terracotta Red */
-			.tag-pill.tag-origin {
-				background: #FBEFEF;
-				border-color: #E8CDCD;
-				color: #A33838;
-			}
+            /* --- TIME --- */
+            .recipe-card .tag-pill.tag-time {
+                background-color: #F2EEE6 !important;
+                color: #5C5549 !important;
+                border-color: #DED8CB !important;
+            }
 
-			/* Protein / Core Element: Warm Rust / Caramel */
-			.tag-pill.tag-element {
-				background: #F8EFEA;
-				border-color: #EAD3C6;
-				color: #964821;
-			}
+            /* --- STATIONS / COURSES --- */
+            .recipe-card .tag-pill.tag-mains {
+                background-color: #FBF0EA !important;
+                color: #9A3C1E !important;
+                border-color: #EDD1C4 !important;
+            }
 
-			/* Course: Forest Olive */
-			.tag-pill.tag-course {
-				background: #EAEFEA;
-				border-color: #CADBCB;
-				color: #2D4A34;
-			}
+            .recipe-card .tag-pill.tag-bakes {
+                background-color: #FCF4E4 !important;
+                color: #8C5D14 !important;
+                border-color: #EDDCB8 !important;
+            }
 
-			/* Dietary: Earthy Slate / Soft Blue */
-			.tag-pill.tag-diet {
-				background: #EFF3F7;
-				border-color: #D3DEE8;
-				color: #3B6180;
-			}
+            .recipe-card .tag-pill.tag-soup {
+                background-color: #F6F1E8 !important;
+                color: #7B5329 !important;
+                border-color: #DFD3BF !important;
+            }
 
-			/* Default / Fallback: Parchment */
-			.tag-pill.tag-default {
-				background: #F4F1EA;
-				border-color: #E2DBD0;
-				color: #6B635B;
-			}
+            .recipe-card .tag-pill.tag-fresh {
+                background-color: #EDF1EC !important;
+                color: #38563C !important;
+                border-color: #C9D6C8 !important;
+            }
 
-			.recipe-card-title {
-				font-family: Georgia, serif;
-				font-size: 1.45rem;
-				line-height: 1.25;
-				font-weight: 700;
-				color: #1A1917;
-				margin: 0 0 0.85rem 0;
-			}
+            .recipe-card .tag-pill.tag-dessert {
+                background-color: #F7EEF2 !important;
+                color: #7D3356 !important;
+                border-color: #E4CCD8 !important;
+            }
 
-			.recipe-card-desc {
-				font-size: 0.9rem;
-				line-height: 1.55;
-				color: #5A554E;
-				margin: 0;
-			}
+            .recipe-card .tag-pill.tag-side {
+                background-color: #EEEBE3 !important;
+                color: #4A463D !important;
+                border-color: #DED8CB !important;
+            }
 
-			.card-bottom-spacer {
-				flex-grow: 1;
-				min-height: 1.5rem;
-			}
+            .recipe-card .tag-pill.tag-pantry {
+                background-color: #F4EDF5 !important;
+                color: #63366C !important;
+                border-color: #DFCEE2 !important;
+            }
 
-			.card-divider {
-				border: 0;
-				height: 1px;
-				background: #EAE6DE;
-				margin: 0 0 1rem 0;
-			}
+            /* --- PROTEINS & DIETARY --- */
+            .recipe-card .tag-pill.tag-pork {
+                background-color: #FAECEA !important;
+                color: #9C3330 !important;
+                border-color: #EEC8C5 !important;
+            }
 
-			.view-recipe-link {
-				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-				font-size: 0.78rem;
-				font-weight: 700;
-				color: #B24C24;
-				text-decoration: none;
-				letter-spacing: 0.04em;
-				align-self: flex-start;
-			}
+            .recipe-card .tag-pill.tag-beef {
+                background-color: #F7E8E7 !important;
+                color: #7C2222 !important;
+                border-color: #E6BEBC !important;
+            }
 
-			.view-recipe-link:hover {
-				text-decoration: underline;
-			}
+            .recipe-card .tag-pill.tag-poultry {
+                background-color: #FAF2E3 !important;
+                color: #8F5A19 !important;
+                border-color: #EDD9B5 !important;
+            }
 
-			@media (max-width: 960px) {
-				.recipes-grid {
-					grid-template-columns: repeat(2, 1fr);
-				}
-			}
+            .recipe-card .tag-pill.tag-fish {
+                background-color: #EDF2F5 !important;
+                color: #2F566B !important;
+                border-color: #CAD8DF !important;
+            }
 
-			@media (max-width: 620px) {
-				.recipes-grid {
-					grid-template-columns: 1fr;
-				}
-				.archive-title {
-					font-size: 2.5rem;
-				}
-			}
-		</style>
-	</body>
+            .recipe-card .tag-pill.tag-mushrooms {
+                background-color: #EAE5DE !important;
+                color: #4D433B !important;
+                border-color: #CDC4BA !important;
+            }
+
+            .recipe-card .tag-pill.tag-plant {
+                background-color: #EFF3EC !important;
+                color: #3B5B37 !important;
+                border-color: #CCD7C7 !important;
+            }
+
+            /* --- SPECIAL MODIFIERS --- */
+            .recipe-card .tag-pill.tag-freezer {
+                background-color: #EBF3F7 !important;
+                color: #225173 !important;
+                border-color: #BCD4E3 !important;
+                box-shadow: inset 0 0 0 1px #D2E4EF !important;
+            }
+
+            .recipe-card .tag-pill.tag-overnight {
+                background-color: #2B2B36 !important;
+                color: #ECEBF2 !important;
+                border-color: #23232C !important;
+            }
+
+            .recipe-card .tag-pill.tag-ferment {
+                background-color: #54331A !important;
+                color: #FAEBD7 !important;
+                border-color: #412613 !important;
+            }
+
+            .recipe-card .tag-pill.tag-default {
+                background-color: #EEEBE3 !important;
+                color: #5C5549 !important;
+                border-color: #DED8CB !important;
+            }
+
+            /* Card Typography & Footer */
+            .recipe-card-title {
+                font-family: Georgia, serif;
+                font-size: 1.45rem;
+                line-height: 1.25;
+                font-weight: 700;
+                color: #1A1917;
+                margin: 0 0 0.85rem 0;
+            }
+
+            .recipe-card-desc {
+                font-size: 0.9rem;
+                line-height: 1.55;
+                color: #5A554E;
+                margin: 0;
+            }
+
+            .card-bottom-spacer {
+                flex-grow: 1;
+                min-height: 1.5rem;
+            }
+
+            .card-divider {
+                border: 0;
+                height: 1px;
+                background: #EAE6DE;
+                margin: 0 0 1rem 0;
+            }
+
+            .view-recipe-link {
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-size: 0.78rem;
+                font-weight: 700;
+                color: #B24C24;
+                text-decoration: none;
+                letter-spacing: 0.04em;
+                align-self: flex-start;
+            }
+
+            .view-recipe-link:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 960px) {
+                .recipes-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 620px) {
+                .recipes-grid {
+                    grid-template-columns: 1fr;
+                }
+                .archive-title {
+                    font-size: 2.5rem;
+                }
+            }
+        </style>
+    </body>
 </html>

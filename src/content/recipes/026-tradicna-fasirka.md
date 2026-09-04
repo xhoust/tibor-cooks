@@ -2,7 +2,7 @@
 title: "Tradičná Fašírka"
 description: "Golden, crispy pan-fried spiced pork patties with garlic, marjoram, and milk-soaked breadcrumbs, perfect served hot or cold over traditional prívarok."
 pubDate: 2026-08-25
-tags: [">>> 30 MINS", "MAIN COURSE", "PORK", "FREEZER-FRIENDLY ❄️"]
+tags: ["60 MINS", "MAINS", "PORK", "BEEF", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course"
 yield: "4 Portions (8 Patties)"
 prepTime: "20 mins"

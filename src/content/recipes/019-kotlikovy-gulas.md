@@ -2,7 +2,7 @@
 title: "Kotlíkový Guláš"
 description: "Hearty outdoor kettle-style stew with hard-seared meats slow-braised over deeply caramelized onions, rested overnight, and gently reheated for maximum depth."
 pubDate: 2026-08-25
-tags: ["> 120 MINS", "OVERNIGHT", "MAIN COURSE", "BEEF", "PORK", "STEW"]
+tags: ["2 HOURS", "MAINS", "BEEF", "PORK", "OVERNIGHT"]
 course: "Main Course"
 yield: "6–8 Portions (~2.5 kg Total Yield)"
 prepTime: "30 mins"

@@ -2,7 +2,7 @@
 title: "Nočná Focaccia (No-Knead)"
 description: "High-hydration, no-knead overnight focaccia with cold fermentation, dimpled with rosemary, flaky sea salt, and extra virgin olive oil."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "OVERNIGHT", "SIDE", "BREAD", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
+tags: ["45 MINS", "BAKERY", "VEGAN", "OVERNIGHT", "FREEZER-FRIENDLY ❄️"]
 course: "Bread / Side"
 yield: "8–10 Portions (1 Standard Sheet Pan ~30x40 cm)"
 prepTime: "15 mins (+ 18–24 hrs cold ferment)"

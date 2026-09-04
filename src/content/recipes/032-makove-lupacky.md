@@ -2,7 +2,7 @@
 title: "Makovky (Sladké Makové Lúpačky)"
 description: "Classic Central European crescent rolls rolled from rich sweet yeast dough, egg-washed, showered with whole blue poppy seeds, and baked until glossy and golden."
 pubDate: 2026-08-25
-tags: ["> 90 MINS", "DESSERT", "BAKING", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
+tags: ["2 HOURS", "BAKERY", "PASTRY", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
 course: "Breakfast / Sweet Pastry"
 yield: "8 Crescent Rolls (~85 g each)"
 prepTime: "30 mins (+ 60 mins proof)"

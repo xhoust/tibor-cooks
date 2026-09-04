@@ -2,7 +2,7 @@
 title: "Bryndzová Nátierka"
 description: "The definitive Slovak sheep cheese spread — authentic bryndza whipped with softened butter, sweet paprika, whole caraway seeds, and salted spring scallions."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "APPETIZER", "VEGETARIAN"]
+tags: ["15 MINS", "DELI", "VEGETARIAN"]
 course: "Appetizer / Breakfast & Spread"
 yield: "4–6 Portions (~350 g Spread)"
 prepTime: "15 mins"

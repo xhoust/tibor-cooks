@@ -2,7 +2,7 @@
 title: "Parížsky Šalát"
 description: "Classic Slovak deli salad made with finely julienned cooked ham, tender sweet peas, pickles, and a balanced mustard-mayo dressing (best when rested)."
 pubDate: 2026-08-25
-tags: ["20 MINS", "Pork", "Salads", "Overnight"]
+tags: ["25 MINS", "DELI", "SALAD", "PORK", "OVERNIGHT"]
 course: "Cold Salad / Snack"
 yield: "4 Portions (~650 g Total Yield)"
 prepTime: "20 mins"

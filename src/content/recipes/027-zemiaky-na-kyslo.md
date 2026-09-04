@@ -2,7 +2,7 @@
 title: "Zemiaky na Kyslo (Zemiakový Prívarok)"
 description: "Traditional Slovak creamy sweet-sour potato stew slow-simmered with bay leaves, allspice, and sour cream, finished with fresh dill, vinegar, and pan-seared crosshatch knockwurst halves."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "MAIN COURSE", "SIDE", "PORK"]
+tags: ["35 MINS", "SIDE", "MAINS", "VEGETARIAN"]
 course: "Main Course / Prívarok"
 yield: "4 Portions (~1.2 kg Total Yield)"
 prepTime: "15 mins"

@@ -2,7 +2,7 @@
 title: "Živánska v Alobale"
 description: "Rustic Slovak campfire parcels packed with marinated pork neck, smoked bacon, sausages, potatoes, onions, and garlic, braised in foil on the stovetop with chilled homemade tartar sauce."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "MAIN COURSE", "PORK"]
+tags: ["90 MINS", "MAINS", "PORK"]
 course: "Main Course"
 yield: "4 Portions (4 Foil Parcels)"
 prepTime: "25 mins (+ 20 mins marinate)"

@@ -1,77 +1,261 @@
 :root {
-	--font-serif: 'Newsreader', Georgia, serif;
-	--font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	--font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-	--bg-canvas: #F4F1EA;
-	--card-bg: #FFFFFF;
-	--text-main: #1A1A1A;
-	--text-muted: #6B6864;
-	--border-subtle: #E8E5DF;
-	--border-card: #DFDBD3;
-	
-	/* Editorial Accents */
-	--accent-green: #2C3E35;
-	--accent-copper: #9E472A;
-	--accent-hover: #7D351D;
+  --bg-canvas: #F4F1EA;
+  --card-bg: #FFFFFF;
+  --text-main: #1A1A1A;
+  --text-muted: #6B6864;
+  --border-subtle: #E8E5DF;
+  --border-card: #DFDBD3;
+  
+  /* Editorial Accents */
+  --accent-green: #2C3E35;
+  --accent-copper: #9E472A;
+  --accent-hover: #7D351D;
 
-	/* Tag Color System */
-	--tag-easy-bg: #EEF4EE;
-	--tag-easy-text: #2D5836;
-	--tag-inter-bg: #FAF2E3;
-	--tag-inter-text: #7C5211;
-	--tag-adv-bg: #F9EBE8;
-	--tag-adv-text: #8A2B22;
-	--tag-time-bg: #EAE6DE;
-	--tag-time-text: #45423E;
-	--tag-diet-bg: #E4EEF8;
-	--tag-diet-text: #1E4670;
-}
+  /* --- WARM EDITORIAL TAG TOKENS --- */
+  /* Time */
+  --tag-time-bg: #F2EEE6;
+  --tag-time-text: #5C5549;
+  --tag-time-border: #DED8CB;
 
-/* Freezer Friendly Badge */
-[class*="freezer"],
-.tag-freezer {
-  background-color: #e0f2fe;
-  color: #0369a1;
-  border: 1px solid #bae6fd;
+  /* Stations & Courses */
+  --tag-mains-bg: #FBF0EA;
+  --tag-mains-text: #9A3C1E;
+  --tag-mains-border: #EDD1C4;
+
+  --tag-bakes-bg: #FCF4E4;
+  --tag-bakes-text: #8C5D14;
+  --tag-bakes-border: #EDDCB8;
+
+  --tag-soup-bg: #F6F1E8;
+  --tag-soup-text: #7B5329;
+  --tag-soup-border: #DFD3BF;
+
+  --tag-fresh-bg: #EDF1EC;
+  --tag-fresh-text: #38563C;
+  --tag-fresh-border: #C9D6C8;
+
+  --tag-dessert-bg: #F7EEF2;
+  --tag-dessert-text: #7D3356;
+  --tag-dessert-border: #E4CCD8;
+
+  --tag-side-bg: #EEEBE3;
+  --tag-side-text: #4A463D;
+  --tag-side-border: #DED8CB;
+
+  --tag-pantry-bg: #F4EDF5;
+  --tag-pantry-text: #63366C;
+  --tag-pantry-border: #DFCEE2;
+
+  /* Protein & Diet */
+  --tag-pork-bg: #FAECEA;
+  --tag-pork-text: #9C3330;
+  --tag-pork-border: #EEC8C5;
+
+  --tag-beef-bg: #F7E8E7;
+  --tag-beef-text: #7C2222;
+  --tag-beef-border: #E6BEBC;
+
+  --tag-poultry-bg: #FAF2E3;
+  --tag-poultry-text: #8F5A19;
+  --tag-poultry-border: #EDD9B5;
+
+  --tag-fish-bg: #EDF2F5;
+  --tag-fish-text: #2F566B;
+  --tag-fish-border: #CAD8DF;
+
+  --tag-mushrooms-bg: #EAE5DE;
+  --tag-mushrooms-text: #4D433B;
+  --tag-mushrooms-border: #CDC4BA;
+
+  --tag-plant-bg: #EFF3EC;
+  --tag-plant-text: #3B5B37;
+  --tag-plant-border: #CCD7C7;
+
+  /* Modifiers */
+  --tag-freezer-bg: #EBF3F7;
+  --tag-freezer-text: #225173;
+  --tag-freezer-border: #BCD4E3;
+
+  --tag-overnight-bg: #2B2B36;
+  --tag-overnight-text: #ECEBF2;
+  --tag-overnight-border: #23232C;
+
+  --tag-ferment-bg: #54331A;
+  --tag-ferment-text: #FAEBD7;
+  --tag-ferment-border: #412613;
 }
 
 *, *::before, *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
-	background-color: var(--bg-canvas);
-	color: var(--text-main);
-	font-family: var(--font-sans);
-	margin: 0;
-	padding: 0;
-	-webkit-font-smoothing: antialiased;
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, .serif-font {
-	font-family: var(--font-serif);
-	font-weight: 600;
-	color: var(--text-main);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--text-main);
 }
 
 p, li, span, input, button {
-	font-family: var(--font-sans);
+  font-family: var(--font-sans);
 }
 
+/* Base Badge Style */
+.tag-pill,
+.tag-badge,
 .mono-tag {
-	font-family: var(--font-mono);
-	font-size: 0.68rem;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	font-weight: 600;
-	padding: 0.22rem 0.55rem;
-	border-radius: 4px;
-	display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  padding: 0.22rem 0.55rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  border: 1px solid transparent;
+  white-space: nowrap;
 }
 
-.tag-easy { background-color: var(--tag-easy-bg); color: var(--tag-easy-text); }
-.tag-intermediate { background-color: var(--tag-inter-bg); color: var(--tag-inter-text); }
-.tag-advanced { background-color: var(--tag-adv-bg); color: var(--tag-adv-text); }
-.tag-time { background-color: var(--tag-time-bg); color: var(--tag-time-text); }
-.tag-diet { background-color: var(--tag-diet-bg); color: var(--tag-diet-text); }
+/* Chevron Hierarchy for Stations/Courses */
+.tag-mains::before,
+.tag-bakes::before,
+.tag-soup::before,
+.tag-fresh::before,
+.tag-dessert::before,
+.tag-side::before,
+.tag-pantry::before {
+  content: "›";
+  font-weight: 900;
+  font-size: 0.75rem;
+  margin-right: 3px;
+  line-height: 0;
+  opacity: 0.75;
+}
+
+/* Time */
+.tag-time {
+  background-color: var(--tag-time-bg);
+  color: var(--tag-time-text);
+  border-color: var(--tag-time-border);
+}
+
+/* Stations */
+.tag-mains {
+  background-color: var(--tag-mains-bg);
+  color: var(--tag-mains-text);
+  border-color: var(--tag-mains-border);
+}
+
+.tag-bakes {
+  background-color: var(--tag-bakes-bg);
+  color: var(--tag-bakes-text);
+  border-color: var(--tag-bakes-border);
+}
+
+.tag-soup {
+  background-color: var(--tag-soup-bg);
+  color: var(--tag-soup-text);
+  border-color: var(--tag-soup-border);
+}
+
+.tag-fresh {
+  background-color: var(--tag-fresh-bg);
+  color: var(--tag-fresh-text);
+  border-color: var(--tag-fresh-border);
+}
+
+.tag-dessert {
+  background-color: var(--tag-dessert-bg);
+  color: var(--tag-dessert-text);
+  border-color: var(--tag-dessert-border);
+}
+
+.tag-side {
+  background-color: var(--tag-side-bg);
+  color: var(--tag-side-text);
+  border-color: var(--tag-side-border);
+}
+
+.tag-pantry {
+  background-color: var(--tag-pantry-bg);
+  color: var(--tag-pantry-text);
+  border-color: var(--tag-pantry-border);
+}
+
+/* Proteins & Diets */
+.tag-pork {
+  background-color: var(--tag-pork-bg);
+  color: var(--tag-pork-text);
+  border-color: var(--tag-pork-border);
+}
+
+.tag-beef {
+  background-color: var(--tag-beef-bg);
+  color: var(--tag-beef-text);
+  border-color: var(--tag-beef-border);
+}
+
+.tag-poultry {
+  background-color: var(--tag-poultry-bg);
+  color: var(--tag-poultry-text);
+  border-color: var(--tag-poultry-border);
+}
+
+.tag-fish {
+  background-color: var(--tag-fish-bg);
+  color: var(--tag-fish-text);
+  border-color: var(--tag-fish-border);
+}
+
+.tag-mushrooms {
+  background-color: var(--tag-mushrooms-bg);
+  color: var(--tag-mushrooms-text);
+  border-color: var(--tag-mushrooms-border);
+}
+
+.tag-plant {
+  background-color: var(--tag-plant-bg);
+  color: var(--tag-plant-text);
+  border-color: var(--tag-plant-border);
+}
+
+/* Modifiers */
+.tag-freezer,
+[class*="freezer"] {
+  background-color: var(--tag-freezer-bg);
+  color: var(--tag-freezer-text);
+  border-color: var(--tag-freezer-border);
+  box-shadow: inset 0 0 0 1px #D2E4EF;
+}
+
+.tag-overnight {
+  background-color: var(--tag-overnight-bg);
+  color: var(--tag-overnight-text);
+  border-color: var(--tag-overnight-border);
+}
+
+.tag-ferment {
+  background-color: var(--tag-ferment-bg);
+  color: var(--tag-ferment-text);
+  border-color: var(--tag-ferment-border);
+}
+
+.tag-default {
+  background-color: #EEEBE3;
+  color: #5C5549;
+  border-color: #DED8CB;
+}

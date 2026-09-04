@@ -2,7 +2,7 @@
 title: "Domáce Čevapčiči s Maslovými Zemiakmi"
 description: "Pan-seared spiced beef and pork rolls served in the classic Slovak cafeteria style with parsley-buttered boiled potatoes, hand-pressed seasoned onion salad, traditional yellow mustard, and ajvar."
 pubDate: 2026-08-25
-tags: [">>> 30 MINS", "MAIN COURSE", "BEEF", "PORK", "FREEZER-FRIENDLY ❄️"]
+tags: ["45 MINS", "MAINS", "BEEF", "PORK", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course"
 yield: "4 Portions (16 Meat Rolls)"
 prepTime: "20 mins (+ 30 mins chill)"

@@ -2,7 +2,7 @@
 title: "Šunková Pena"
 description: "Silk-smooth, airy whipped ham mousse blended from quality cooked ham, softened butter, mayonnaise, and Dijon mustard, crowned with fresh snipped chives."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "APPETIZER", "PORK"]
+tags: ["20 MINS", "DELI", "PORK"]
 course: "Appetizer / Breakfast & Spread"
 yield: "4–6 Portions (~350 g Mousse)"
 prepTime: "15 mins"

@@ -2,7 +2,7 @@
 title: "Figovo-Datľové Chutney"
 description: "Sweet, sticky, and tangy spiced fig and date chutney slow-simmered with balsamic vinegar, port wine, shallots, and warm spices, tailored for pairing with farmhouse cheeses and rich poultry liver pâté."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "PANTRY STAPLE 🏺", "CONDIMENT", "VEGETARIAN", "VEGAN"]
+tags: ["45 MINS", "SIDE", "DELI", "VEGAN", "OVERNIGHT", "PANTRY"]
 course: "Condiment / Pantry Staple"
 yield: "Approx. 500 g (2 x 250 ml Jars)"
 prepTime: "15 mins"

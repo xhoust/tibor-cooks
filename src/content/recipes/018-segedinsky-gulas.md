@@ -2,7 +2,7 @@
 title: "Segedínsky Guláš"
 description: "Tender pork shoulder slow-braised with sour cabbage, onions, sweet paprika, caraway, and finished with sour cream."
 pubDate: 2026-08-25
-tags: ["> 90 MINS", "MAIN COURSE", "PORK", "STEW"]
+tags: ["90 MINS", "MAINS", "PORK", "OVERNIGHT"]
 course: "Main Course"
 yield: "6 Portions (~2 kg Total Yield)"
 prepTime: "25 mins"

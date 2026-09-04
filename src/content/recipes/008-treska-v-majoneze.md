@@ -2,7 +2,7 @@
 title: "Treska v Majonéze"
 description: "Traditional Slovak poached cod & carrot salad in mustard mayonnaise—served chilled with fresh rožky (absolutely best when rested overnight)."
 pubDate: 2026-08-25
-tags: ["35 MINS", "Fish", "Salads", "Overnight"]
+tags: ["30 MINS", "DELI", "SALAD", "FISH", "OVERNIGHT"]
 course: "Cold Salad / Snack"
 yield: "4 Portions (~650 g Total Yield)"
 prepTime: "20 mins"

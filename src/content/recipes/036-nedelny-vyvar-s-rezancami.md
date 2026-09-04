@@ -2,7 +2,7 @@
 title: "Nedeľný Vývar s Rezancami (Kurací, Morčací alebo Hovädzí)"
 description: "Clear, golden Slovak Sunday broth slow-simmered on the stovetop with charred aromatics, root vegetables, lovage, and whole spices, served piping hot with fine handcrafted soup noodles."
 pubDate: 2026-08-25
-tags: ["> 90 MINS", "SOUP", "CHICKEN", "BEEF", "FREEZER-FRIENDLY ❄️"]
+tags: ["3 HOURS", "SOUP", "POULTRY", "BEEF"]
 course: "Soup"
 yield: "6–8 Portions (~3.5 L Broth)"
 prepTime: "25 mins"

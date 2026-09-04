@@ -2,7 +2,7 @@
 title: "Punčové Rezy"
 description: "The classic Slovak patisserie staple — alternating golden sponge layers sandwiching a rum-infused punch center, finished with an ultra-glossy pink fondant topping fortified with glucose syrup for a firm, clean snap."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "DESSERT", "VEGETARIAN"]
+tags: ["90 MINS", "PASTRY", "DESSERT", "VEGETARIAN", "OVERNIGHT"]
 course: "Dessert / Cake"
 yield: "20–24 Slices"
 prepTime: "45 mins"

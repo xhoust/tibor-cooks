@@ -1,0 +1,308 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  tags?: string[];
+  yield?: string;
+  prepTime?: string;
+  cookTime?: string;
+  slug: string;
+}
+
+const {
+  title,
+  description = '',
+  tags = [],
+  yield: recipeYield = '—',
+  prepTime = '—',
+  cookTime = '—',
+  slug,
+} = Astro.props;
+
+function getTagCategory(tag: string): string {
+  const cleanTag = tag.trim().toUpperCase();
+
+  if (cleanTag.includes('MIN') || cleanTag.includes('HOUR')) return 'time';
+  if (cleanTag.includes('FREEZER')) return 'freezer';
+  if (cleanTag === 'OVERNIGHT') return 'overnight';
+  if (cleanTag === 'FERMENTATION') return 'ferment';
+
+  // Course / Station
+  if (['BAKERY', 'PASTRY'].includes(cleanTag)) return 'bakes';
+  if (cleanTag === 'SOUP') return 'soup';
+  if (cleanTag === 'MAINS') return 'mains';
+  if (cleanTag === 'SIDE') return 'side';
+  if (['DELI', 'SALAD'].includes(cleanTag)) return 'fresh';
+  if (cleanTag === 'DESSERT') return 'dessert';
+  if (cleanTag === 'PANTRY') return 'pantry';
+
+  // Protein & Diet
+  if (cleanTag === 'PORK') return 'pork';
+  if (cleanTag === 'BEEF') return 'beef';
+  if (cleanTag === 'POULTRY') return 'poultry';
+  if (cleanTag === 'FISH') return 'fish';
+  if (cleanTag === 'MUSHROOMS') return 'mushrooms';
+  if (['VEGETARIAN', 'VEGAN'].includes(cleanTag)) return 'plant';
+
+  return 'default';
+}
+---
+
+<div class="card-scene">
+  <div class="card-inner">
+    <!-- FRONT OF CARD -->
+    <div class="card-face card-front">
+      <div class="card-top">
+        <div class="tags-row">
+          {tags.map((tag) => {
+            const category = getTagCategory(tag);
+            return <span class={`tag-badge tag-${category}`}>{tag}</span>;
+          })}
+        </div>
+        <h3 class="card-title">{title}</h3>
+        {description && <p class="card-desc">{description}</p>}
+      </div>
+
+      <div class="card-footer">
+        <span class="flip-hint">Hover / Tap to view details ↻</span>
+      </div>
+    </div>
+
+    <!-- BACK OF CARD -->
+    <div class="card-face card-back">
+      <div class="card-top">
+        <span class="back-category-label">RECIPE SPECS</span>
+        <h4 class="back-title">{title}</h4>
+
+        <div class="meta-row-grid">
+          <div class="meta-item">
+            <span class="meta-item-label">YIELD</span>
+            <span class="meta-item-value">{recipeYield}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-item-label">PREP</span>
+            <span class="meta-item-value">{prepTime}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-item-label">COOK</span>
+            <span class="meta-item-value">{cookTime}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <a href={`/recipes/${slug}`} class="view-recipe-btn">
+          View Recipe →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 3D Scene setup */
+  .card-scene {
+    perspective: 1000px;
+    width: 100%;
+    min-height: 260px;
+  }
+
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 8px;
+  }
+
+  /* Flip action on hover and focus */
+  .card-scene:hover .card-inner,
+  .card-scene:focus-within .card-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Card Faces */
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e7e5e4;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  }
+
+  .card-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+    background-color: #fafaf9;
+    border-color: #d6d3d1;
+  }
+
+  /* Titles & Typography */
+  .card-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1c1917;
+    margin: 0.5rem 0 0.4rem 0;
+    line-height: 1.25;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: #57534e;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .back-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1c1917;
+    margin-bottom: 0.75rem;
+  }
+
+  .back-category-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #8b261e;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Front/Back Bottom Controls */
+  .flip-hint {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #a8a29e;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .view-recipe-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background-color: #1c1917;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .view-recipe-btn:hover {
+    background-color: #8b261e;
+  }
+
+  /* Meta Items Grid on Back */
+  .meta-row-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .meta-item {
+    background: #ffffff;
+    border: 1px solid #e7e5e4;
+    border-radius: 4px;
+    padding: 0.4rem 0.2rem;
+    text-align: center;
+  }
+
+  .meta-item-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #78716c;
+    letter-spacing: 0.06em;
+  }
+
+  .meta-item-value {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1c1917;
+  }
+
+  /* Tag Badges styling */
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .tag-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.45rem;
+    border-radius: 3px;
+    border: 1px solid #e7e5e4;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .tag-badge.tag-mains::before,
+  .tag-badge.tag-bakes::before,
+  .tag-badge.tag-soup::before,
+  .tag-badge.tag-fresh::before,
+  .tag-badge.tag-dessert::before,
+  .tag-badge.tag-side::before,
+  .tag-badge.tag-pantry::before {
+    content: "›";
+    font-weight: 900;
+    font-size: 0.75rem;
+    margin-right: 2px;
+    line-height: 0;
+  }
+
+  /* Palette */
+  .tag-badge.tag-time { background: #f1f5f9; color: #334155; border-color: #cbd5e1; }
+  .tag-badge.tag-mains { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+  .tag-badge.tag-bakes { background: #fefce8; color: #a16207; border-color: #fef08a; }
+  .tag-badge.tag-soup { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+  .tag-badge.tag-fresh { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+  .tag-badge.tag-dessert { background: #fdf2f8; color: #be185d; border-color: #fbcfe8; }
+  .tag-badge.tag-side { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+  .tag-badge.tag-pantry { background: #faf5ff; color: #7e22ce; border-color: #e9d5ff; }
+
+  .tag-badge.tag-pork { background: #fff1f2; color: #be123c; border-color: #fecdd3; }
+  .tag-badge.tag-beef { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+  .tag-badge.tag-poultry { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+  .tag-badge.tag-fish { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
+  .tag-badge.tag-mushrooms { background: #f5f5f4; color: #57534e; border-color: #d6d3d1; }
+  .tag-badge.tag-plant { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+
+  .tag-badge.tag-freezer { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+  .tag-badge.tag-overnight { background: #312e81; color: #e0e7ff; border-color: #4338ca; }
+  .tag-badge.tag-ferment { background: #78350f; color: #fef3c7; border-color: #92400e; }
+  .tag-badge.tag-default { background: #f5f5f4; color: #57534e; border-color: #e7e5e4; }
+</style>

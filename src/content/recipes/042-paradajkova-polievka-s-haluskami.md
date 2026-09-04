@@ -2,7 +2,7 @@
 title: "Paradajková Polievka s Haluškami"
 description: "Nostalgic sweet and savory Slovak tomato soup built on a buttery roux and rich passata, spiced with whole allspice and cloves, and filled with tender homemade drop dumplings."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "SOUP", "VEGETARIAN"]
+tags: ["35 MINS", "SOUP", "VEGETARIAN"]
 course: "Soup"
 yield: "4–6 Portions (~1.8 L Soup)"
 prepTime: "15 mins"

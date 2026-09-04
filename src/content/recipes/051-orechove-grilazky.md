@@ -2,7 +2,7 @@
 title: "Orechové Grilážky"
 description: "Iconic Slovak festive wafer bars layered with caramelized sugar, roasted walnuts, butter, and condensed milk, weighted down for a clean, snappy crunch."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "DESSERT", "VEGETARIAN"]
+tags: ["45 MINS", "DESSERT", "VEGETARIAN", "OVERNIGHT"]
 course: "Dessert / Holiday Confectionery"
 yield: "approx. 40 Cut Bars"
 prepTime: "20 mins"

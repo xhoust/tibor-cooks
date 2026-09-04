@@ -2,7 +2,7 @@
 title: "Bryndzové Halušky so Slaninou"
 description: "Traditional Slovak potato dumplings with sheep's milk cheese and crispy fatty bacon lardons."
 pubDate: 2026-08-25
-tags: ["25 MINS", "Pork", "Bryndza", "Main Courses"]
+tags: ["30 MINS", "MAINS", "VEGETARIAN"]
 course: "Main Course"
 yield: "4 Portions"
 prepTime: "15 mins"

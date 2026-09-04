@@ -2,7 +2,7 @@
 title: "Tradičný Zemiakový Šalát (Majonézový)"
 description: "Classic Central European cold holiday potato salad with root vegetables, sweet peas, pickled gherkins, boiled eggs, and seasoned mayonnaise."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "OVERNIGHT", "SIDE", "SALADS"]
+tags: ["45 MINS", "SIDE", "SALAD", "VEGETARIAN", "OVERNIGHT"]
 course: "Side / Salad"
 yield: "6–8 Portions (~1.6 kg Total Yield)"
 prepTime: "30 mins"

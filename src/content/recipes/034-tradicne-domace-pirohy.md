@@ -2,7 +2,7 @@
 title: "Tradičné Domáce Pirohy (Zemiakové, Bryndzové a Slivkové)"
 description: "Handcrafted thin potato dough dumplings filled with savory bryndza-potato mash or spiced plum jam (slivkový lekvár), served with fried onions, bacon lardons, sour cream, or melted butter."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "MAIN COURSE", "DESSERT", "PASTA", "FREEZER-FRIENDLY ❄️"]
+tags: ["60 MINS", "MAINS", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course / Dessert"
 yield: "4–6 Portions (~40–45 Pirohy)"
 prepTime: "40 mins"

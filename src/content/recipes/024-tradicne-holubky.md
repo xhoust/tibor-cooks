@@ -2,7 +2,7 @@
 title: "Tradičné Holúbky (Plnené Kapustné Listy)"
 description: "Eastern Slovakian style stuffed cabbage rolls packed with seasoned minced pork, smoked lardons, and rice, slow-braised on the stovetop over a bed of sauerkraut with tomato reduction."
 pubDate: 2026-08-25
-tags: ["> 90 MINS", "MAIN COURSE", "PORK", "FREEZER-FRIENDLY ❄️"]
+tags: ["2 HOURS", "MAINS", "PORK", "BEEF", "OVERNIGHT", "FREEZER-FRIENDLY ❄️"]
 course: "Main Course"
 yield: "6–8 Portions (~16–18 Rolls)"
 prepTime: "40 mins"

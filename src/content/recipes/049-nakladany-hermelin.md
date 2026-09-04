@@ -2,7 +2,7 @@
 title: "Nakladaný Hermelín"
 description: "Central European pub-style marinated soft cheese — wheels of Camembert stuffed with crushed garlic, sweet paprika, and chili, submerged in oil with onions, bay leaves, and peppercorns."
 pubDate: 2026-08-25
-tags: ["<< 45 MINS", "APPETIZER", "VEGETARIAN"]
+tags: ["25 MINS", "DELI", "VEGETARIAN", "PANTRY"]
 course: "Appetizer / Pub Snack"
 yield: "4 Portions (4 Cheese Wheels)"
 prepTime: "25 mins (+ 5–7 days marinate)"

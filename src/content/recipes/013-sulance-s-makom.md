@@ -2,7 +2,7 @@
 title: "Šúľance s Makom (alebo Orechmi a Strúhankou)"
 description: "Hand-rolled potato dumplings tossed in melted butter and coated with sweetened ground blue poppy seeds, toasted walnuts, or golden breadcrumbs."
 pubDate: 2026-08-25
-tags: [">> 45 MINS", "OVERNIGHT", "DESSERT", "PASTA", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
+tags: ["45 MINS", "MAINS", "PASTRY", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
 course: "Dessert / Sweet Main"
 yield: "4 Portions (~850 g Total Yield)"
 prepTime: "25 mins"

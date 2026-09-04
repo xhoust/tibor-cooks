@@ -2,7 +2,7 @@
 title: "Sviečková na Smotane"
 description: "Braised larded beef roast cooked in caramelized root vegetables, blended and passed through a chinois with cream, steamed dumplings, and cranberries."
 pubDate: 2026-08-25
-tags: ["3 HOURS", "Beef", "Main Courses", "Overnight"]
+tags: ["2 HOURS", "MAINS", "BEEF", "OVERNIGHT"]
 course: "Main Course"
 yield: "6 Portions"
 prepTime: "35 mins"
