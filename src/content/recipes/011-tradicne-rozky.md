@@ -1,5 +1,6 @@
 ---
 title: "Tradičné Slovenské Rožky"
+image: "/recipes/tradicne-rozky.webp"
 description: "Iconic crisp, golden crescent bread rolls with a soft, airy crumb—classic bakery style with plant-based options."
 pubDate: 2026-08-25
 tags: ["90 MINS", "BAKERY", "VEGAN", "FREEZER-FRIENDLY ❄️"]

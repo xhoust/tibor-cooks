@@ -1,5 +1,6 @@
 ---
 title: "Parená Knedľa"
+image: "/recipes/parena-knedla.webp"
 description: "Traditional Slovak steamed yeast bread dumpling for rich braises and velvet cream sauces."
 pubDate: 2026-08-25
 tags: ["60 MINS", "SIDE", "BAKERY", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]

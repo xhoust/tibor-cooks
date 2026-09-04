@@ -1,5 +1,6 @@
 ---
 title: "Zemplínsky Šalát"
+image: "/recipes/zemplinsky-salat.webp"
 description: "A birthday tradition I asked my mom to make every single year—tangy pickled red cabbage folded with sweet peas, dill pickles, and creamy pink mustard mayonnaise."
 pubDate: 2026-08-25
 tags: ["30 MINS", "DELI", "SALAD", "PORK", "OVERNIGHT"]

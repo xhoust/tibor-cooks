@@ -1,5 +1,6 @@
 ---
 title: "Moravské Koláče"
+image: "/recipes/moravske-kolace.webp"
 description: "Traditional dual-layer Moravian yeast buns filled with a hidden pocket of sweet citrus-scented ricotta cheese, topped with dark Polish plum lekvar, and coated with a crisp butter streusel."
 pubDate: 2026-09-04
 tags: ["60 MINS", "BAKERY", "PASTRY", "VEGETARIAN", "FREEZER-FRIENDLY ❄️"]
