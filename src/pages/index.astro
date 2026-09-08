@@ -10,17 +10,13 @@ const posts = (await getCollection('recipes')).sort(
   (a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
 
-// Calculate day of the year (1–365) to deterministically select 3 featured recipes daily
-const dayOfYear = Math.floor(
-  (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000
-);
-
-const total = posts.length;
-const featuredPosts = total >= 3 ? [
-  posts[dayOfYear % total],
-  posts[(dayOfYear + 1) % total],
-  posts[(dayOfYear + 2) % total],
-] : posts.slice(0, 3);
+// Serialize recipes so client-side script can pick daily items dynamically
+const serializedRecipes = posts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+  description: post.data.description,
+  course: post.data.course || 'RECIPE'
+}));
 
 // Dynamically fetch journal entries (sorted by latest)
 const journalEntries = (await getCollection('journal'))
@@ -109,23 +105,8 @@ const journalEntries = (await getCollection('journal'))
           <a href="/recipes" class="view-all-link">View All Recipes &rarr;</a>
         </div>
 
-        <div class="recipes-grid">
-          {
-            featuredPosts.map((post) => (
-              <article class="recipe-two-tone-card">
-                <a href={`/recipes/${post.id}/`} class="recipe-card-link">
-                  <div class="card-top-banner">
-                    <span class="recipe-badge">{(post.data.course || 'RECIPE').toUpperCase()}</span>
-                  </div>
-                  <div class="card-body-content">
-                    <h3 class="recipe-heading">{post.data.title}</h3>
-                    {post.data.description && <p class="recipe-text">{post.data.description}</p>}
-                    <span class="card-action-link">View Recipe &rarr;</span>
-                  </div>
-                </a>
-              </article>
-            ))
-          }
+        <div class="recipes-grid" id="dynamic-featured-grid">
+          <!-- Dynamically populated via client-side date calculation to rotate daily -->
         </div>
       </section>
 
@@ -137,6 +118,46 @@ const journalEntries = (await getCollection('journal'))
       </section>
     </main>
     <Footer />
+
+    <!-- Script to calculate daily rotation based on local visitor day-of-year -->
+    <script define:vars={{ serializedRecipes }}>
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const diff = now - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      const dayOfYear = Math.floor(diff / oneDay);
+
+      const total = serializedRecipes.length;
+      let selected = [];
+
+      if (total >= 3) {
+        selected = [
+          serializedRecipes[dayOfYear % total],
+          serializedRecipes[(dayOfYear + 1) % total],
+          serializedRecipes[(dayOfYear + 2) % total]
+        ];
+      } else {
+        selected = serializedRecipes.slice(0, 3);
+      }
+
+      const grid = document.getElementById('dynamic-featured-grid');
+      if (grid && selected.length > 0) {
+        grid.innerHTML = selected.map(post => `
+          <article class="recipe-two-tone-card">
+            <a href="/recipes/${post.id}/" class="recipe-card-link">
+              <div class="card-top-banner">
+                <span class="recipe-badge">${post.course.toUpperCase()}</span>
+              </div>
+              <div class="card-body-content">
+                <h3 class="recipe-heading">${post.title}</h3>
+                ${post.description ? `<p class="recipe-text">${post.description}</p>` : ''}
+                <span class="card-action-link">View Recipe &rarr;</span>
+              </div>
+            </a>
+          </article>
+        `).join('');
+      }
+    </script>
 
     <style>
       main {
@@ -395,7 +416,7 @@ const journalEntries = (await getCollection('journal'))
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
       }
-      .recipe-two-tone-card {
+      :global(.recipe-two-tone-card) {
         background: #FFFFFF;
         border: 1px solid #DFD9CE;
         border-radius: 8px;
@@ -405,25 +426,25 @@ const journalEntries = (await getCollection('journal'))
           0 2px 8px rgba(0, 0, 0, 0.03);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
-      .recipe-two-tone-card:hover {
+      :global(.recipe-two-tone-card:hover) {
         transform: translateY(-2px);
         box-shadow: 
           0 1px 0 rgba(255, 255, 255, 0.9) inset,
           0 6px 18px rgba(0, 0, 0, 0.06);
       }
-      .recipe-card-link {
+      :global(.recipe-card-link) {
         text-decoration: none;
         color: inherit;
         display: flex;
         flex-direction: column;
         height: 100%;
       }
-      .card-top-banner {
+      :global(.card-top-banner) {
         background: #E8E2D7;
         padding: 1.25rem 1.6rem;
         border-bottom: 1px solid #DFD9CE;
       }
-      .recipe-badge {
+      :global(.recipe-badge) {
         display: inline-block;
         background: #23372B;
         color: #FDFBF7;
@@ -436,13 +457,13 @@ const journalEntries = (await getCollection('journal'))
         border: 1px solid #1B2C22;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
       }
-      .card-body-content {
+      :global(.card-body-content) {
         padding: 1.75rem 1.6rem;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
       }
-      .recipe-heading {
+      :global(.recipe-heading) {
         font-family: Georgia, serif;
         font-size: 1.35rem;
         line-height: 1.25;
@@ -450,7 +471,7 @@ const journalEntries = (await getCollection('journal'))
         margin: 0 0 0.85rem 0;
         color: #1A1917;
       }
-      .recipe-text {
+      :global(.recipe-text) {
         font-size: 0.92rem;
         line-height: 1.55;
         color: #5A554E;
