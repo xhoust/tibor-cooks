@@ -4,19 +4,32 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 const posts = (await getCollection('recipes')).sort(
   (a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
 
-// Serialize recipes so client-side script can pick daily items dynamically
-const serializedRecipes = posts.map(post => ({
-  id: post.id,
-  title: post.data.title,
-  description: post.data.description,
-  course: post.data.course || 'RECIPE'
-}));
+// Calculate daily rotation server-side based on days elapsed since an epoch anchor
+const totalRecipes = posts.length;
+let featuredRecipes: CollectionEntry<'recipes'>[] = [];
+
+if (totalRecipes > 0) {
+  const now = new Date();
+  const epoch = new Date('2026-01-01T00:00:00Z');
+  const daysElapsed = Math.floor((now.getTime() - epoch.getTime()) / (1000 * 60 * 60 * 24));
+  const startIndex = Math.abs(daysElapsed) % totalRecipes;
+
+  if (totalRecipes >= 3) {
+    featuredRecipes = [
+      posts[startIndex % totalRecipes],
+      posts[(startIndex + 1) % totalRecipes],
+      posts[(startIndex + 2) % totalRecipes]
+    ];
+  } else {
+    featuredRecipes = posts.slice(0, 3);
+  }
+}
 
 // Dynamically fetch journal entries (sorted by latest)
 const journalEntries = (await getCollection('journal'))
@@ -105,8 +118,27 @@ const journalEntries = (await getCollection('journal'))
           <a href="/recipes" class="view-all-link">View All Recipes &rarr;</a>
         </div>
 
-        <div class="recipes-grid" id="dynamic-featured-grid">
-          <!-- Dynamically populated via client-side date calculation to rotate daily -->
+        <div class="recipes-grid">
+          {
+            featuredRecipes.length === 0 ? (
+              <p class="empty-state">No recipes available.</p>
+            ) : (
+              featuredRecipes.map((post) => (
+                <article class="recipe-two-tone-card">
+                  <a href={`/recipes/${post.id}/`} class="recipe-card-link">
+                    <div class="card-top-banner">
+                      <span class="recipe-badge">{(post.data.course || 'RECIPE').toUpperCase()}</span>
+                    </div>
+                    <div class="card-body-content">
+                      <h3 class="recipe-heading">{post.data.title}</h3>
+                      {post.data.description && <p class="recipe-text">{post.data.description}</p>}
+                      <span class="card-action-link">View Recipe &rarr;</span>
+                    </div>
+                  </a>
+                </article>
+              ))
+            )
+          }
         </div>
       </section>
 
@@ -118,46 +150,6 @@ const journalEntries = (await getCollection('journal'))
       </section>
     </main>
     <Footer />
-
-    <!-- Script to calculate daily rotation based on local visitor day-of-year -->
-    <script define:vars={{ serializedRecipes }}>
-      const now = new Date();
-      const start = new Date(now.getFullYear(), 0, 0);
-      const diff = now - start;
-      const oneDay = 1000 * 60 * 60 * 24;
-      const dayOfYear = Math.floor(diff / oneDay);
-
-      const total = serializedRecipes.length;
-      let selected = [];
-
-      if (total >= 3) {
-        selected = [
-          serializedRecipes[dayOfYear % total],
-          serializedRecipes[(dayOfYear + 1) % total],
-          serializedRecipes[(dayOfYear + 2) % total]
-        ];
-      } else {
-        selected = serializedRecipes.slice(0, 3);
-      }
-
-      const grid = document.getElementById('dynamic-featured-grid');
-      if (grid && selected.length > 0) {
-        grid.innerHTML = selected.map(post => `
-          <article class="recipe-two-tone-card">
-            <a href="/recipes/${post.id}/" class="recipe-card-link">
-              <div class="card-top-banner">
-                <span class="recipe-badge">${post.course.toUpperCase()}</span>
-              </div>
-              <div class="card-body-content">
-                <h3 class="recipe-heading">${post.title}</h3>
-                ${post.description ? `<p class="recipe-text">${post.description}</p>` : ''}
-                <span class="card-action-link">View Recipe &rarr;</span>
-              </div>
-            </a>
-          </article>
-        `).join('');
-      }
-    </script>
 
     <style>
       main {
