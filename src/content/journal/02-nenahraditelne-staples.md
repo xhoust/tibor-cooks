@@ -2,7 +2,7 @@
 chapter: "DISPATCH"
 title: "Nenahraditeľné: Five Irreplaceable Slovakian Staples"
 pubDate: 2026-09-11T12:00:00-04:00
-description: "Foundational products from home that simply cannot be substituted when cooking authentic Central European food abroad."
+description: "Foundational products from home that simply cannot be substituted when cooking authentic Slovakian food abroad."
 heroImage: "/journal/01-staples-mosaic.webp"
 ---
 
