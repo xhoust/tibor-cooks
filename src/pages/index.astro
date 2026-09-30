@@ -10,19 +10,21 @@ const posts = (await getCollection('recipes')).sort(
   (a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
 
-// Calculate daily rotation server-side based on days elapsed since an epoch anchor
+// Calculate daily rotation based on day of year
 const totalRecipes = posts.length;
 let featuredRecipes: CollectionEntry<'recipes'>[] = [];
 
 if (totalRecipes > 0) {
   const now = new Date();
-  const epoch = new Date('2026-01-01T00:00:00Z');
-  const daysElapsed = Math.floor((now.getTime() - epoch.getTime()) / (1000 * 60 * 60 * 24));
-  const startIndex = Math.abs(daysElapsed) % totalRecipes;
+  const startOfYear = new Date(now.getFullYear(), 0, 0);
+  const diff = now.getTime() - startOfYear.getTime();
+  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
 
   if (totalRecipes >= 3) {
+    // Jump by 3 so all 3 recipes change completely every 24 hours
+    const startIndex = (dayOfYear * 3) % totalRecipes;
     featuredRecipes = [
-      posts[startIndex % totalRecipes],
+      posts[startIndex],
       posts[(startIndex + 1) % totalRecipes],
       posts[(startIndex + 2) % totalRecipes]
     ];
