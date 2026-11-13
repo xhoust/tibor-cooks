@@ -1,5 +1,6 @@
 ---
 title: "Domáci Kváskový Chlieb (Home Oven)"
+image: "/recipes/domaci-kvaskovy-chlieb.webp"
 description: "Traditional Slovak sourdough loaf with caraway seeds, baked in a home oven with options for dense (58%) or fluffy (65%) crumb, plus optional škvarky and crispy onion fold-ins."
 pubDate: 2026-09-30
 tags: ["45 MINS", "BAKERY", "OVERNIGHT", "FREEZER-FRIENDLY ❄️"]

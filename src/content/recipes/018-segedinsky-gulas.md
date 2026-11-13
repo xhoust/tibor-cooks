@@ -1,5 +1,6 @@
 ---
 title: "Segedínsky Guláš"
+image: "/recipes/segedinsky-gulas.webp"
 description: "Tender pork shoulder slow-braised with sour cabbage, onions, sweet paprika, caraway, and finished with sour cream."
 pubDate: 2026-08-25
 tags: ["90 MINS", "MAINS", "PORK", "OVERNIGHT"]

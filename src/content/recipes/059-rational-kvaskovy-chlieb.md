@@ -1,5 +1,6 @@
 ---
 title: "Rational iCombi Kváskový Chlieb (Professional Oven)"
+image: "/recipes/rational-kvaskovy-chlieb.webp"
 description: "High-precision commercial 1 kg sourdough loaf infused with whole caraway and customizable with škvarky or crispy onion inclusions."
 pubDate: 2026-09-30
 tags: ["45 MINS", "BAKERY", "OVERNIGHT", "FREEZER-FRIENDLY ❄️"]

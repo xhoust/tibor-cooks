@@ -1,5 +1,6 @@
 ---
 title: "Strapačky s Kyslou Kapustou"
+image: "/recipes/strapacky-s-kyslou-kapustou.webp"
 description: "Fresh grated potato halušky tossed with slowly caramelized sauerkraut and fragrant caraway, finished with crisp smoked lardons or kept vegetarian/vegan with rich plant oils."
 pubDate: 2026-08-25
 tags: ["45 MINS", "MAINS", "PORK", "VEGETARIAN", "VEGAN"]

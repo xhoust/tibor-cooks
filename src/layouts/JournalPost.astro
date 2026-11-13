@@ -22,21 +22,21 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 			<article class="journal-article">
 				<header class="journal-header">
 					<div class="meta-row">
-	<a href="/journal" class="back-link">&larr; Back to Journal</a>
-	<div class="meta-right">
-		{chapter && <span class="chapter-badge">{chapter}.</span>}
-		<span class="date-badge">
-			<FormattedDate date={pubDate} />
-			{
-				updatedDate && (
-					<span class="updated-date">
-						(Updated <FormattedDate date={updatedDate} />)
-					</span>
-				)
-			}
-		</span>
-	</div>
-</div>
+						<a href="/journal" class="back-link">&larr; Back to Journal</a>
+						<div class="meta-right">
+							{chapter && <span class="chapter-badge">{chapter}.</span>}
+							<span class="date-badge">
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<span class="updated-date">
+											(Updated <FormattedDate date={updatedDate} />)
+										</span>
+									)
+								}
+							</span>
+						</div>
+					</div>
 					<h1>{title}</h1>
 					{description && <p class="lead-description">{description}</p>}
 				</header>
@@ -56,7 +56,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				<ShareButtons title={title} description={description} />
 			</article>
 		</main>
-    
+	
 		<!-- Lightbox Modal Dialog -->
 		<dialog id="photoModal" class="photo-modal">
 			<div class="modal-backdrop"></div>
@@ -101,33 +101,36 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 		</script>
 
 		<style>
-            .meta-right {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-}
+			.meta-right {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
 
-.chapter-badge {
-	font-family: var(--font-mono, monospace);
-	font-size: 0.74rem;
-	font-weight: 700;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	color: var(--accent-green, #23372B);
-	background: rgba(35, 55, 43, 0.06);
-	padding: 0.2rem 0.5rem;
-	border-radius: 4px;
-}
+			.chapter-badge {
+				font-family: var(--font-mono, monospace);
+				font-size: 0.74rem;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--accent-green, #23372B);
+				background: rgba(35, 55, 43, 0.06);
+				padding: 0.2rem 0.5rem;
+				border-radius: 4px;
+			}
+
 			.journal-entry-container {
 				max-width: 780px;
 				margin: 0 auto;
 				padding: 4rem 1.5rem;
 			}
+
 			.journal-header {
 				margin-bottom: 2.5rem;
 				border-bottom: 1px solid var(--border-card, #DFD9CE);
 				padding-bottom: 2rem;
 			}
+
 			.meta-row {
 				display: flex;
 				justify-content: space-between;
@@ -136,20 +139,24 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				font-size: 0.78rem;
 			}
+
 			.back-link {
 				color: var(--accent-green, #23372B);
 				text-decoration: none;
 				font-weight: 600;
 			}
+
 			.back-link:hover {
 				text-decoration: underline;
 			}
+
 			.date-badge {
 				color: var(--accent-copper, #B24C24);
 				font-weight: 600;
 				letter-spacing: 0.05em;
 				text-transform: uppercase;
 			}
+
 			h1 {
 				font-size: 3rem;
 				font-weight: 500;
@@ -158,6 +165,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				margin: 0 0 1rem 0;
 				color: #1A1917;
 			}
+
 			.lead-description {
 				font-family: var(--font-serif, Georgia, serif);
 				font-style: italic;
@@ -166,34 +174,44 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				color: #55514B;
 				margin: 0;
 			}
+
 			.hero-image-wrap {
-				margin: 0 0 3rem 0;
+				width: fit-content;
+				max-width: 100%;
+				margin: 0 auto 3rem auto;
 				border-radius: 8px;
 				overflow: hidden;
 				border: 1px solid var(--border-card, #DFD9CE);
 				box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 				cursor: pointer;
 			}
+
 			.hero-image-wrap img {
-				width: 100%;
+				width: auto;
+				max-width: 100%;
 				height: auto;
-				max-height: 480px;
-				object-fit: cover;
+				max-height: 540px;
+				object-fit: contain;
 				display: block;
+				margin: 0 auto;
 			}
+
 			.prose-content {
 				font-size: 1.12rem;
 				line-height: 1.85;
 				color: #2C2A26;
 			}
+
 			.prose-content :global(p) {
 				margin-bottom: 1.8rem;
 			}
+
 			.prose-content :global(h2) {
 				font-size: 1.8rem;
 				margin: 2.5rem 0 1rem 0;
 				color: #1A1917;
 			}
+
 			.prose-content :global(strong) {
 				color: #111;
 			}
@@ -205,6 +223,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				text-align: center;
 				cursor: pointer;
 			}
+
 			.prose-content :global(.journal-figure img) {
 				width: 100%;
 				height: auto;
@@ -217,9 +236,11 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				margin: 0 auto;
 				transition: transform 0.2s ease;
 			}
+
 			.prose-content :global(.journal-figure:hover img) {
 				transform: scale(1.015);
 			}
+
 			.prose-content :global(.journal-figure figcaption) {
 				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				font-size: 0.78rem;
@@ -228,13 +249,14 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				text-align: center;
 			}
 
-			/* Centered 9-Photo Bottom Grid (3x3) */
+			/* Centered Bottom Grid */
 			.prose-content :global(.journal-photo-grid) {
 				margin-top: 4.5rem;
 				border-top: 1px solid var(--border-card, #DFD9CE);
 				padding-top: 2.5rem;
 				text-align: center;
 			}
+
 			.prose-content :global(.journal-photo-grid h3) {
 				font-size: 1.5rem;
 				font-weight: 500;
@@ -243,12 +265,14 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				color: #1A1917;
 				text-align: center;
 			}
+
 			.prose-content :global(.grid-layout) {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 				gap: 2rem 1.25rem;
 				align-items: start;
 			}
+
 			.prose-content :global(.grid-layout figure) {
 				margin: 0;
 				display: flex;
@@ -257,6 +281,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				text-align: center;
 				cursor: pointer;
 			}
+
 			.prose-content :global(.grid-layout img) {
 				width: 100%;
 				aspect-ratio: 1 / 1;
@@ -267,10 +292,12 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				display: block;
 				transition: transform 0.25s ease, box-shadow 0.25s ease;
 			}
+
 			.prose-content :global(.grid-layout figure:hover img) {
 				transform: translateY(-3px) scale(1.02);
 				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 			}
+
 			.prose-content :global(.grid-layout figcaption) {
 				font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
 				font-size: 0.74rem;
@@ -290,10 +317,12 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				max-height: 90vh;
 				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 			}
+
 			.photo-modal::backdrop {
 				background: rgba(18, 17, 16, 0.85);
 				backdrop-filter: blur(4px);
 			}
+
 			.modal-content {
 				position: relative;
 				background: #1A1917;
@@ -303,6 +332,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				flex-direction: column;
 				align-items: center;
 			}
+
 			.modal-content img {
 				max-width: 82vw;
 				max-height: 75vh;
@@ -310,6 +340,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				border-radius: 6px;
 				display: block;
 			}
+
 			.modal-content p {
 				color: #DFD9CE;
 				font-family: var(--font-mono, monospace);
@@ -317,6 +348,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				margin: 0.9rem 0 0.25rem 0;
 				text-align: center;
 			}
+
 			.modal-close {
 				position: absolute;
 				top: 0.5rem;
@@ -335,6 +367,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 				line-height: 1;
 				transition: background 0.15s ease;
 			}
+
 			.modal-close:hover {
 				background: rgba(178, 76, 36, 0.9);
 			}
@@ -357,6 +390,7 @@ const { title, description, pubDate, updatedDate, heroImage, chapter } = Astro.p
 					gap: 1.5rem 1rem;
 				}
 			}
+
 			@media (max-width: 480px) {
 				.prose-content :global(.grid-layout) {
 					grid-template-columns: 1fr;
