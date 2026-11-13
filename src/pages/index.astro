@@ -7,537 +7,620 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 const posts = (await getCollection('recipes')).sort(
-  (a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
+	(a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
 );
 
-// Calculate daily rotation based on day of year
+// Build-time initial 3 recipes (for instant static render & SEO)
 const totalRecipes = posts.length;
 let featuredRecipes: CollectionEntry<'recipes'>[] = [];
 
 if (totalRecipes > 0) {
-  const now = new Date();
-  const startOfYear = new Date(now.getFullYear(), 0, 0);
-  const diff = now.getTime() - startOfYear.getTime();
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+	const now = new Date();
+	const startOfYear = new Date(now.getFullYear(), 0, 0);
+	const diff = now.getTime() - startOfYear.getTime();
+	const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-  if (totalRecipes >= 3) {
-    // Jump by 3 so all 3 recipes change completely every 24 hours
-    const startIndex = (dayOfYear * 3) % totalRecipes;
-    featuredRecipes = [
-      posts[startIndex],
-      posts[(startIndex + 1) % totalRecipes],
-      posts[(startIndex + 2) % totalRecipes]
-    ];
-  } else {
-    featuredRecipes = posts.slice(0, 3);
-  }
+	if (totalRecipes >= 3) {
+		const startIndex = (dayOfYear * 3) % totalRecipes;
+		featuredRecipes = [
+			posts[startIndex],
+			posts[(startIndex + 1) % totalRecipes],
+			posts[(startIndex + 2) % totalRecipes]
+		];
+	} else {
+		featuredRecipes = posts.slice(0, 3);
+	}
 }
+
+// Slim payload for client-side midnight rotation
+const allRecipesPayload = posts.map((post) => ({
+	id: post.id,
+	title: post.data.title,
+	description: post.data.description || '',
+	course: (post.data.course || 'RECIPE').toUpperCase()
+}));
 
 // Dynamically fetch journal entries (sorted by latest)
 const journalEntries = (await getCollection('journal'))
-  .sort((a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0))
-  .slice(0, 3);
+	.sort((a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0))
+	.slice(0, 3);
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead title={`${SITE_TITLE} | Heritage Recipes & Journal`} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <main>
-      <!-- Two-Column Editorial Hero -->
-      <section class="hero-section">
-        <div class="hero-left">
-          <span class="eyebrow">WASHINGTON, D.C. &bull; KITCHEN NOTES &amp; STORIES</span>
-          <h1 class="hero-title">Slovak cooking in D.C.</h1>
-          <p class="hero-lead">
-            My collection of traditional and nostalgic Slovak recipes, alongside other personal favorites, embassy kitchen notes, and bits of life across the USA.
-          </p>
-          <div class="hero-actions">
-            <a href="/recipes" class="btn btn-primary">Browse Recipes</a>
-            <a href="/about" class="btn btn-secondary">About Me &amp; Gallery</a>
-          </div>
-        </div>
+	<head>
+		<BaseHead title={`${SITE_TITLE} | Heritage Recipes & Journal`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<!-- Two-Column Editorial Hero -->
+			<section class="hero-section">
+				<div class="hero-left">
+					<span class="eyebrow">WASHINGTON, D.C. &bull; KITCHEN NOTES &amp; STORIES</span>
+					<h1 class="hero-title">Slovak cooking in D.C.</h1>
+					<p class="hero-lead">
+						My collection of traditional and nostalgic Slovak recipes, alongside other personal favorites, embassy kitchen notes, and bits of life across the USA.
+					</p>
+					<div class="hero-actions">
+						<a href="/recipes" class="btn btn-primary">Browse Recipes</a>
+						<a href="/about" class="btn btn-secondary">About Me &amp; Gallery</a>
+					</div>
+				</div>
 
-        <div class="hero-right">
-          <div class="portrait-card">
-            <div class="portrait-img-wrap">
-              <img src="/reel/tibor.webp" alt="Tibor Markovič - Resident Chef" width="440" height="520" />
-            </div>
-            <div class="portrait-caption">
-              <span>Resident Chef &bull; Embassy of Slovakia</span>
-            </div>
-          </div>
-        </div>
-      </section>
+				<div class="hero-right">
+					<div class="portrait-card">
+						<div class="portrait-img-wrap">
+							<img src="/reel/tibor.webp" alt="Tibor Markovič - Resident Chef" width="440" height="520" />
+						</div>
+						<div class="portrait-caption">
+							<span>Resident Chef &bull; Embassy of Slovakia</span>
+						</div>
+					</div>
+				</div>
+			</section>
 
-      <hr class="section-divider" />
+			<hr class="section-divider" />
 
-      <!-- Latest Stories / Journal Section -->
-      <section class="journal-section">
-        <div class="section-header">
-          <div>
-            <span class="eyebrow">JOURNAL &amp; FIELD NOTES</span>
-            <h2 class="section-title">Latest Stories</h2>
-          </div>
-          <a href="/journal" class="view-all-link">View All Entries &rarr;</a>
-        </div>
+			<!-- Latest Stories / Journal Section -->
+			<section class="journal-section">
+				<div class="section-header">
+					<div>
+						<span class="eyebrow">JOURNAL &amp; FIELD NOTES</span>
+						<h2 class="section-title">Latest Stories</h2>
+					</div>
+					<a href="/journal" class="view-all-link">View All Entries &rarr;</a>
+				</div>
 
-        <div class="journal-grid">
-          {
-            journalEntries.length === 0 ? (
-              <p class="empty-state">No journal entries published yet.</p>
-            ) : (
-              journalEntries.map((item) => (
-                <article class="journal-preview-card">
-                  <div class="journal-meta">
-                    <span class="journal-tag">{item.data.chapter || 'DISPATCH'}</span>
-                    <span class="journal-date">
-                      <FormattedDate date={item.data.pubDate} />
-                    </span>
-                  </div>
-                  <h3 class="journal-card-title">{item.data.title}</h3>
-                  <p class="journal-excerpt">{item.data.description}</p>
-                  <a href={`/journal/${item.id}/`} class="card-action-link">Read Entry &rarr;</a>
-                </article>
-              ))
-            )
-          }
-        </div>
-      </section>
+				<div class="journal-grid">
+					{
+						journalEntries.length === 0 ? (
+							<p class="empty-state">No journal entries published yet.</p>
+						) : (
+							journalEntries.map((item) => (
+								<article class="journal-preview-card">
+									<div class="journal-meta">
+										<span class="journal-tag">{item.data.chapter || 'DISPATCH'}</span>
+										<span class="journal-date">
+											<FormattedDate date={item.data.pubDate} />
+										</span>
+									</div>
+									<h3 class="journal-card-title">{item.data.title}</h3>
+									<p class="journal-excerpt">{item.data.description}</p>
+									<a href={`/journal/${item.id}/`} class="card-action-link">Read Entry &rarr;</a>
+								</article>
+							))
+						)
+					}
+				</div>
+			</section>
 
-      <hr class="section-divider" />
+			<hr class="section-divider" />
 
-      <!-- Featured Recipes Section -->
-      <section class="recipes-section">
-        <div class="section-header">
-          <div>
-            <span class="eyebrow">HANDPICKED SELECTION</span>
-            <h2 class="section-title">Featured Recipes</h2>
-          </div>
-          <a href="/recipes" class="view-all-link">View All Recipes &rarr;</a>
-        </div>
+			<!-- Featured Recipes Section -->
+			<section class="recipes-section">
+				<div class="section-header">
+					<div>
+						<span class="eyebrow">HANDPICKED SELECTION</span>
+						<h2 class="section-title">Featured Recipes</h2>
+					</div>
+					<a href="/recipes" class="view-all-link">View All Recipes &rarr;</a>
+				</div>
 
-        <div class="recipes-grid">
-          {
-            featuredRecipes.length === 0 ? (
-              <p class="empty-state">No recipes available.</p>
-            ) : (
-              featuredRecipes.map((post) => (
-                <article class="recipe-two-tone-card">
-                  <a href={`/recipes/${post.id}/`} class="recipe-card-link">
-                    <div class="card-top-banner">
-                      <span class="recipe-badge">{(post.data.course || 'RECIPE').toUpperCase()}</span>
-                    </div>
-                    <div class="card-body-content">
-                      <h3 class="recipe-heading">{post.data.title}</h3>
-                      {post.data.description && <p class="recipe-text">{post.data.description}</p>}
-                      <span class="card-action-link">View Recipe &rarr;</span>
-                    </div>
-                  </a>
-                </article>
-              ))
-            )
-          }
-        </div>
-      </section>
+				<div class="recipes-grid" id="featured-recipes-grid">
+					{
+						featuredRecipes.length === 0 ? (
+							<p class="empty-state">No recipes available.</p>
+						) : (
+							featuredRecipes.map((post) => (
+								<article class="recipe-two-tone-card">
+									<a href={`/recipes/${post.id}/`} class="recipe-card-link">
+										<div class="card-top-banner">
+											<span class="recipe-badge">{(post.data.course || 'RECIPE').toUpperCase()}</span>
+										</div>
+										<div class="card-body-content">
+											<h3 class="recipe-heading">{post.data.title}</h3>
+											{post.data.description && <p class="recipe-text">{post.data.description}</p>}
+											<span class="card-action-link">View Recipe &rarr;</span>
+										</div>
+									</a>
+								</article>
+							))
+						)
+					}
+				</div>
+			</section>
 
-      <!-- Inquiries & Contact Banner -->
-      <section class="inquiries-card">
-        <h2>Inquiries & Say Hello</h2>
-        <p>For questions about recipes, collaborations, or catering inquiries.</p>
-        <a href="mailto:hello@tiborcooks.com" class="btn btn-email">hello@tiborcooks.com</a>
-      </section>
-    </main>
-    <Footer />
+			<!-- Inquiries & Contact Banner -->
+			<section class="inquiries-card">
+				<h2>Inquiries & Say Hello</h2>
+				<p>For questions about recipes, collaborations, or catering inquiries.</p>
+				<a href="mailto:hello@tiborcooks.com" class="btn btn-email">hello@tiborcooks.com</a>
+			</section>
+		</main>
+		<Footer />
 
-    <style>
-      main {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 2.5rem 1.5rem 5rem 1.5rem;
-      }
+		<script type="application/json" id="all-recipes-data" set:html={JSON.stringify(allRecipesPayload)} />
 
-      .eyebrow {
-        display: block;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #7A746B;
-        font-weight: 600;
-        margin-bottom: 0.85rem;
-      }
+		<script>
+			interface RecipeItem {
+				id: string;
+				title: string;
+				description: string;
+				course: string;
+			}
 
-      /* Hero Section */
-      .hero-section {
-        display: grid;
-        grid-template-columns: 1.35fr 0.65fr;
-        gap: 2.5rem;
-        align-items: center;
-        padding: 1rem 0 1.25rem 0;
-      }
-      .hero-title {
-        font-family: Georgia, serif;
-        font-size: 3.4rem;
-        line-height: 1.1;
-        font-weight: 700;
-        margin: 0 0 1.25rem 0;
-        color: #1A1917;
-        letter-spacing: -0.025em;
-      }
-      .hero-lead {
-        font-size: 1.12rem;
-        line-height: 1.65;
-        color: #5A554E;
-        margin: 0 0 1.75rem 0;
-      }
-      .hero-actions {
-        display: flex;
-        gap: 0.85rem;
-        align-items: center;
-      }
+			function escapeHtml(str: string): string {
+				return str
+					.replace(/&/g, '&amp;')
+					.replace(/</g, '&lt;')
+					.replace(/>/g, '&gt;')
+					.replace(/"/g, '&quot;')
+					.replace(/'/g, '&#39;');
+			}
 
-      /* Tactile Buttons */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.65rem 1.35rem;
-        border-radius: 6px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-weight: 600;
-        font-size: 0.88rem;
-        letter-spacing: 0.02em;
-        text-decoration: none;
-        user-select: none;
-        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      }
+			function renderDailyRecipes() {
+				const dataEl = document.getElementById('all-recipes-data');
+				const gridEl = document.getElementById('featured-recipes-grid');
+				if (!dataEl || !gridEl) return;
 
-      .btn:active {
-        transform: translateY(1px);
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
-      }
+				const allRecipes: RecipeItem[] = JSON.parse(dataEl.textContent || '[]');
+				const total = allRecipes.length;
+				if (total === 0) return;
 
-      .btn-primary {
-        background: #23372B;
-        color: #FDFBF7;
-        border: 1px solid #1A2A21;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.15) inset,
-          0 2px 4px rgba(35, 55, 43, 0.18),
-          0 1px 2px rgba(0, 0, 0, 0.08);
-      }
-      .btn-primary:hover {
-        background: #1B2C22;
-        border-color: #121E18;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.2) inset,
-          0 4px 10px rgba(35, 55, 43, 0.25);
-      }
+				const now = new Date();
+				const startOfYear = new Date(now.getFullYear(), 0, 0);
+				const diff = now.getTime() - startOfYear.getTime();
+				const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-      .btn-secondary {
-        background: #FFFFFF;
-        color: #1A1917;
-        border: 1px solid #D3CCC0;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.9) inset,
-          0 2px 4px rgba(0, 0, 0, 0.05);
-      }
-      .btn-secondary:hover {
-        background: #F9F7F2;
-        border-color: #BEB6A8;
-        color: #000000;
-      }
+				let selected: RecipeItem[] = [];
+				if (total >= 3) {
+					const startIndex = (dayOfYear * 3) % total;
+					selected = [
+						allRecipes[startIndex],
+						allRecipes[(startIndex + 1) % total],
+						allRecipes[(startIndex + 2) % total]
+					];
+				} else {
+					selected = allRecipes.slice(0, 3);
+				}
 
-      /* Portrait Card */
-      .hero-right {
-        display: flex;
-        justify-content: flex-end;
-      }
-      .portrait-card {
-        background: #FFFFFF;
-        border: 1px solid #DFD9CE;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.9) inset,
-          0 4px 14px rgba(0, 0, 0, 0.04);
-        max-width: 280px;
-        width: 100%;
-      }
-      .portrait-img-wrap {
-        width: 100%;
-        aspect-ratio: 4 / 4.6;
-        overflow: hidden;
-        background: #F4F1EA;
-      }
-      .portrait-img-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .portrait-caption {
-        padding: 0.65rem 0.85rem;
-        text-align: center;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.68rem;
-        color: #7A746B;
-        letter-spacing: 0.04em;
-        border-top: 1px solid #EAE6DE;
-        background: #FCFAF6;
-      }
+				gridEl.innerHTML = selected
+					.map(
+						(recipe) => `
+						<article class="recipe-two-tone-card">
+							<a href="/recipes/${escapeHtml(recipe.id)}/" class="recipe-card-link">
+								<div class="card-top-banner">
+									<span class="recipe-badge">${escapeHtml(recipe.course)}</span>
+								</div>
+								<div class="card-body-content">
+									<h3 class="recipe-heading">${escapeHtml(recipe.title)}</h3>
+									${recipe.description ? `<p class="recipe-text">${escapeHtml(recipe.description)}</p>` : ''}
+									<span class="card-action-link">View Recipe &rarr;</span>
+								</div>
+							</a>
+						</article>
+					`
+					)
+					.join('');
+			}
 
-      /* Tightened Dividers */
-      .section-divider {
-        border: 0;
-        height: 1px;
-        background: #EAE6DE;
-        margin: 1.75rem 0;
-      }
+			// Rotate immediately on page load using the visitor's current date
+			renderDailyRecipes();
 
-      /* Section Headers */
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin-bottom: 1.25rem;
-      }
-      .section-title {
-        font-family: Georgia, serif;
-        font-size: 2.1rem;
-        margin: 0;
-        color: #1A1917;
-        font-weight: 700;
-        letter-spacing: -0.015em;
-      }
-      .view-all-link {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.82rem;
-        color: #1A1917;
-        text-decoration: none;
-        font-weight: 600;
-      }
-      .view-all-link:hover {
-        color: #B24C24;
-      }
+			// Also schedule a live swap at local midnight if the tab stays open
+			const now = new Date();
+			const msUntilMidnight =
+				new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 1).getTime() -
+				now.getTime();
+			setTimeout(renderDailyRecipes, msUntilMidnight);
+		</script>
 
-      /* Journal Section */
-      .journal-section {
-        margin-bottom: 0;
-      }
-      .journal-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-      }
-      .journal-preview-card {
-        background: #FFFFFF;
-        border: 1px solid #DFD9CE;
-        border-radius: 8px;
-        padding: 1.75rem 1.6rem;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.9) inset,
-          0 2px 8px rgba(0, 0, 0, 0.03);
-      }
-      .journal-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.25rem;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.72rem;
-      }
-      .journal-tag {
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-weight: 700;
-        color: #23372B;
-        background: rgba(35, 55, 43, 0.06);
-        padding: 0.2rem 0.5rem;
-        border-radius: 4px;
-      }
-      .journal-date {
-        color: #B24C24;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-      .journal-card-title {
-        font-family: Georgia, serif;
-        font-size: 1.35rem;
-        line-height: 1.25;
-        font-weight: 700;
-        margin: 0 0 0.85rem 0;
-        color: #1A1917;
-      }
-      .journal-excerpt {
-        font-size: 0.92rem;
-        line-height: 1.6;
-        color: #5A554E;
-        margin: 0 0 1.5rem 0;
-        flex-grow: 1;
-      }
-      .empty-state {
-        font-family: ui-monospace, monospace;
-        color: #7A746B;
-        padding: 1.5rem 0;
-      }
+		<style>
+			main {
+				max-width: 1080px;
+				margin: 0 auto;
+				padding: 2.5rem 1.5rem 5rem 1.5rem;
+			}
 
-      /* Action Links */
-      .card-action-link {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.82rem;
-        color: #B24C24;
-        text-decoration: none;
-        font-weight: 600;
-        display: inline-block;
-      }
-      .card-action-link:hover {
-        text-decoration: underline;
-      }
+			.eyebrow {
+				display: block;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.72rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: #7A746B;
+				font-weight: 600;
+				margin-bottom: 0.85rem;
+			}
 
-      /* Featured Recipes Section */
-      .recipes-section {
-        margin-bottom: 3.5rem;
-      }
-      .recipes-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-      }
-      :global(.recipe-two-tone-card) {
-        background: #FFFFFF;
-        border: 1px solid #DFD9CE;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.9) inset,
-          0 2px 8px rgba(0, 0, 0, 0.03);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-      :global(.recipe-two-tone-card:hover) {
-        transform: translateY(-2px);
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.9) inset,
-          0 6px 18px rgba(0, 0, 0, 0.06);
-      }
-      :global(.recipe-card-link) {
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-      :global(.card-top-banner) {
-        background: #E8E2D7;
-        padding: 1.25rem 1.6rem;
-        border-bottom: 1px solid #DFD9CE;
-      }
-      :global(.recipe-badge) {
-        display: inline-block;
-        background: #23372B;
-        color: #FDFBF7;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.65rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        padding: 0.3rem 0.55rem;
-        border-radius: 4px;
-        border: 1px solid #1B2C22;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-      }
-      :global(.card-body-content) {
-        padding: 1.75rem 1.6rem;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-      }
-      :global(.recipe-heading) {
-        font-family: Georgia, serif;
-        font-size: 1.35rem;
-        line-height: 1.25;
-        font-weight: 700;
-        margin: 0 0 0.85rem 0;
-        color: #1A1917;
-      }
-      :global(.recipe-text) {
-        font-size: 0.92rem;
-        line-height: 1.55;
-        color: #5A554E;
-        margin: 0 0 1.5rem 0;
-        flex-grow: 1;
-      }
+			/* Hero Section */
+			.hero-section {
+				display: grid;
+				grid-template-columns: 1.35fr 0.65fr;
+				gap: 2.5rem;
+				align-items: center;
+				padding: 1rem 0 1.25rem 0;
+			}
+			.hero-title {
+				font-family: Georgia, serif;
+				font-size: 3.4rem;
+				line-height: 1.1;
+				font-weight: 700;
+				margin: 0 0 1.25rem 0;
+				color: #1A1917;
+				letter-spacing: -0.025em;
+			}
+			.hero-lead {
+				font-size: 1.12rem;
+				line-height: 1.65;
+				color: #5A554E;
+				margin: 0 0 1.75rem 0;
+			}
+			.hero-actions {
+				display: flex;
+				gap: 0.85rem;
+				align-items: center;
+			}
 
-      /* Inquiries Bottom Card */
-      .inquiries-card {
-        background: #EBE7DF;
-        border: 1px solid #D8D2C4;
-        border-radius: 8px;
-        padding: 3rem 2rem;
-        text-align: center;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.7) inset,
-          0 2px 8px rgba(0, 0, 0, 0.03);
-      }
-      .inquiries-card h2 {
-        font-family: Georgia, serif;
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin: 0 0 0.75rem 0;
-        color: #1A1917;
-        letter-spacing: -0.015em;
-      }
-      .inquiries-card p {
-        font-size: 1rem;
-        color: #5A554E;
-        margin: 0 0 1.75rem 0;
-      }
-      .btn-email {
-        background: #23372B;
-        color: #FDFBF7;
-        padding: 0.7rem 1.6rem;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.88rem;
-        border: 1px solid #1A2A21;
-        box-shadow: 
-          0 1px 0 rgba(255, 255, 255, 0.15) inset,
-          0 2px 4px rgba(35, 55, 43, 0.2);
-      }
-      .btn-email:hover {
-        background: #1B2C22;
-        border-color: #121E18;
-      }
+			/* Tactile Buttons */
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.65rem 1.35rem;
+				border-radius: 6px;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-weight: 600;
+				font-size: 0.88rem;
+				letter-spacing: 0.02em;
+				text-decoration: none;
+				user-select: none;
+				transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+			}
 
-      @media (max-width: 900px) {
-        .hero-section {
-          grid-template-columns: 1fr;
-          gap: 2.5rem;
-        }
-        .hero-right {
-          justify-content: flex-start;
-        }
-        .portrait-card {
-          max-width: 280px;
-        }
-        .recipes-grid {
-          grid-template-columns: 1fr;
-        }
-      }
+			.btn:active {
+				transform: translateY(1px);
+				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+			}
 
-      @media (max-width: 600px) {
-        .hero-title {
-          font-size: 2.4rem;
-        }
-        .hero-actions {
-          flex-direction: column;
-          align-items: stretch;
-        }
-      }
-    </style>
-  </body>
+			.btn-primary {
+				background: #23372B;
+				color: #FDFBF7;
+				border: 1px solid #1A2A21;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.15) inset,
+					0 2px 4px rgba(35, 55, 43, 0.18),
+					0 1px 2px rgba(0, 0, 0, 0.08);
+			}
+			.btn-primary:hover {
+				background: #1B2C22;
+				border-color: #121E18;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.2) inset,
+					0 4px 10px rgba(35, 55, 43, 0.25);
+			}
+
+			.btn-secondary {
+				background: #FFFFFF;
+				color: #1A1917;
+				border: 1px solid #D3CCC0;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 4px rgba(0, 0, 0, 0.05);
+			}
+			.btn-secondary:hover {
+				background: #F9F7F2;
+				border-color: #BEB6A8;
+				color: #000000;
+			}
+
+			/* Portrait Card */
+			.hero-right {
+				display: flex;
+				justify-content: flex-end;
+			}
+			.portrait-card {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
+				border-radius: 8px;
+				overflow: hidden;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 4px 14px rgba(0, 0, 0, 0.04);
+				max-width: 280px;
+				width: 100%;
+			}
+			.portrait-img-wrap {
+				width: 100%;
+				aspect-ratio: 4 / 4.6;
+				overflow: hidden;
+				background: #F4F1EA;
+			}
+			.portrait-img-wrap img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.portrait-caption {
+				padding: 0.65rem 0.85rem;
+				text-align: center;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.68rem;
+				color: #7A746B;
+				letter-spacing: 0.04em;
+				border-top: 1px solid #EAE6DE;
+				background: #FCFAF6;
+			}
+
+			/* Tightened Dividers */
+			.section-divider {
+				border: 0;
+				height: 1px;
+				background: #EAE6DE;
+				margin: 1.75rem 0;
+			}
+
+			/* Section Headers */
+			.section-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				margin-bottom: 1.25rem;
+			}
+			.section-title {
+				font-family: Georgia, serif;
+				font-size: 2.1rem;
+				margin: 0;
+				color: #1A1917;
+				font-weight: 700;
+				letter-spacing: -0.015em;
+			}
+			.view-all-link {
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.82rem;
+				color: #1A1917;
+				text-decoration: none;
+				font-weight: 600;
+			}
+			.view-all-link:hover {
+				color: #B24C24;
+			}
+
+			/* Journal Section */
+			.journal-section {
+				margin-bottom: 0;
+			}
+			.journal-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 1.5rem;
+			}
+			.journal-preview-card {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
+				border-radius: 8px;
+				padding: 1.75rem 1.6rem;
+				display: flex;
+				flex-direction: column;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
+			}
+			.journal-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1.25rem;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.72rem;
+			}
+			.journal-tag {
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				font-weight: 700;
+				color: #23372B;
+				background: rgba(35, 55, 43, 0.06);
+				padding: 0.2rem 0.5rem;
+				border-radius: 4px;
+			}
+			.journal-date {
+				color: #B24C24;
+				font-weight: 600;
+				text-transform: uppercase;
+			}
+			.journal-card-title {
+				font-family: Georgia, serif;
+				font-size: 1.35rem;
+				line-height: 1.25;
+				font-weight: 700;
+				margin: 0 0 0.85rem 0;
+				color: #1A1917;
+			}
+			.journal-excerpt {
+				font-size: 0.92rem;
+				line-height: 1.6;
+				color: #5A554E;
+				margin: 0 0 1.5rem 0;
+				flex-grow: 1;
+			}
+			.empty-state {
+				font-family: ui-monospace, monospace;
+				color: #7A746B;
+				padding: 1.5rem 0;
+			}
+
+			/* Action Links */
+			:global(.card-action-link) {
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.82rem;
+				color: #B24C24;
+				text-decoration: none;
+				font-weight: 600;
+				display: inline-block;
+			}
+			:global(.card-action-link:hover) {
+				text-decoration: underline;
+			}
+
+			/* Featured Recipes Section */
+			.recipes-section {
+				margin-bottom: 3.5rem;
+			}
+			.recipes-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+			}
+			:global(.recipe-two-tone-card) {
+				background: #FFFFFF;
+				border: 1px solid #DFD9CE;
+				border-radius: 8px;
+				overflow: hidden;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			:global(.recipe-two-tone-card:hover) {
+				transform: translateY(-2px);
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.9) inset,
+					0 6px 18px rgba(0, 0, 0, 0.06);
+			}
+			:global(.recipe-card-link) {
+				text-decoration: none;
+				color: inherit;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+			:global(.card-top-banner) {
+				background: #E8E2D7;
+				padding: 1.25rem 1.6rem;
+				border-bottom: 1px solid #DFD9CE;
+			}
+			:global(.recipe-badge) {
+				display: inline-block;
+				background: #23372B;
+				color: #FDFBF7;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.65rem;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				padding: 0.3rem 0.55rem;
+				border-radius: 4px;
+				border: 1px solid #1B2C22;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+			}
+			:global(.card-body-content) {
+				padding: 1.75rem 1.6rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+			:global(.recipe-heading) {
+				font-family: Georgia, serif;
+				font-size: 1.35rem;
+				line-height: 1.25;
+				font-weight: 700;
+				margin: 0 0 0.85rem 0;
+				color: #1A1917;
+			}
+			:global(.recipe-text) {
+				font-size: 0.92rem;
+				line-height: 1.55;
+				color: #5A554E;
+				margin: 0 0 1.5rem 0;
+				flex-grow: 1;
+			}
+
+			/* Inquiries Bottom Card */
+			.inquiries-card {
+				background: #EBE7DF;
+				border: 1px solid #D8D2C4;
+				border-radius: 8px;
+				padding: 3rem 2rem;
+				text-align: center;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.7) inset,
+					0 2px 8px rgba(0, 0, 0, 0.03);
+			}
+			.inquiries-card h2 {
+				font-family: Georgia, serif;
+				font-size: 2.2rem;
+				font-weight: 700;
+				margin: 0 0 0.75rem 0;
+				color: #1A1917;
+				letter-spacing: -0.015em;
+			}
+			.inquiries-card p {
+				font-size: 1rem;
+				color: #5A554E;
+				margin: 0 0 1.75rem 0;
+			}
+			.btn-email {
+				background: #23372B;
+				color: #FDFBF7;
+				padding: 0.7rem 1.6rem;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+				font-size: 0.88rem;
+				border: 1px solid #1A2A21;
+				box-shadow: 
+					0 1px 0 rgba(255, 255, 255, 0.15) inset,
+					0 2px 4px rgba(35, 55, 43, 0.2);
+			}
+			.btn-email:hover {
+				background: #1B2C22;
+				border-color: #121E18;
+			}
+
+			@media (max-width: 900px) {
+				.hero-section {
+					grid-template-columns: 1fr;
+					gap: 2.5rem;
+				}
+				.hero-right {
+					justify-content: flex-start;
+				}
+				.portrait-card {
+					max-width: 280px;
+				}
+				.recipes-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			@media (max-width: 600px) {
+				.hero-title {
+					font-size: 2.4rem;
+				}
+				.hero-actions {
+					flex-direction: column;
+					align-items: stretch;
+				}
+			}
+		</style>
+	</body>
 </html>
